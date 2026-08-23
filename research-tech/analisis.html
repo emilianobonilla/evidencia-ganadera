@@ -1,0 +1,781 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Análisis técnico de tecnologías para estimar peso vivo de bovinos sin balanza (visión 2D/3D, LiDAR, drones) y asociarlo a la caravana RFID del SNIG en Uruguay y Argentina.">
+  <title>Peso sin balanza · Análisis técnico</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="analisis.html" aria-current="page"><span class="brand__mark">kg</span><span class="brand__text">Peso sin balanza</span></a>
+      <nav class="nav" aria-label="Documentos">
+        <a href="analisis.html" aria-current="page">Análisis</a>
+        <a href="supuestos.html">Supuestos</a>
+        <a href="preguntas.html">Preguntas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Análisis tecnológico · Uruguay y Argentina</p>
+        <h1>Estimar peso sin balanza, con identidad.</h1>
+        <p class="lede">Qué sensores existen hoy para inferir peso vivo de Angus, Hereford y cruzas en cría, recría y terminación; qué exactitud entregan realmente; y cómo se ata cada medición a la caravana electrónica del SNIG sin romper la trazabilidad.</p>
+      </div>
+      <aside class="meta-card" aria-label="Metadatos del documento">
+        <dl>
+          <dt>Versión</dt><dd>1.0</dd>
+          <dt>Alcance</dt><dd>Solo tecnología</dd>
+          <dt>Fecha</dt><dd>23 ago 2026</dd>
+          <dt>Razas objetivo</dt><dd>Angus · Hereford · cruzas</dd>
+          <dt>Categorías</dt><dd>Cría · recría · gordos</dd>
+        </dl>
+      </aside>
+    </section>
+
+    <div class="layout">
+      <aside class="toc">
+        <strong>Contenido</strong>
+        <a href="#alcance">1 · Variable y métricas</a>
+        <a href="#fisica">2 · Física del problema</a>
+        <a href="#modalidades">3 · Modalidades de sensado</a>
+        <a href="#luz">4 · Luz, pelaje y clima</a>
+        <a href="#algoritmos">5 · Pipelines algorítmicos</a>
+        <a href="#evidencia">6 · Exactitud publicada</a>
+        <a href="#raza">7 · Raza y categoría</a>
+        <a href="#rfid">8 · RFID SNIG</a>
+        <a href="#asociacion">9 · Asociación peso↔ID</a>
+        <a href="#topologias">10 · Topologías</a>
+        <a href="#edge">11 · Edge, energía, red</a>
+        <a href="#calibracion">12 · Calibración y validación</a>
+        <a href="#fallas">13 · Modos de falla</a>
+        <a href="#matriz">14 · Matriz de decisión</a>
+        <a href="#fuentes">Fuentes</a>
+      </aside>
+
+      <div class="content">
+
+        <!-- 1 -->
+        <section class="section" id="alcance">
+          <p class="eyebrow">01 · Definición</p>
+          <h2>Antes de elegir sensor: qué peso, y contra qué se compara</h2>
+          <p class="section-intro">La mayor parte de las discusiones sobre “pesar con cámara” fracasan porque no se declara qué magnitud se estima ni contra qué referencia se mide el error. Ambas cosas fijan el techo alcanzable.</p>
+
+          <h3>Las cuatro magnitudes que se confunden</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Magnitud</th><th>Definición</th><th>Quién la usa</th><th>Relevancia para sensado remoto</th></tr></thead>
+              <tbody>
+                <tr><td>Peso vivo lleno</td><td>Animal tal como está, con contenido digestivo</td><td>Pesada de rutina, ganancia diaria</td><td>Es lo que cualquier sensor “ve”, pero incluye ruido de llenado ruminal</td></tr>
+                <tr><td>Peso vivo desbastado</td><td>Tras 12–16 h sin agua ni alimento</td><td>Comercialización, remates</td><td>No observable ópticamente; requiere modelo de corrección o protocolo de ayuno</td></tr>
+                <tr><td>Peso vacío (empty body)</td><td>Descontado el contenido gastrointestinal</td><td>Investigación, modelos de crecimiento</td><td>Es el que mejor correlaciona con volumen corporal externo</td></tr>
+                <tr><td>Peso de carcasa</td><td>Res tras faena</td><td>Frigorífico, liquidación</td><td>Destino final del interés económico; se predice desde peso vivo + rendimiento</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout callout--warning">
+            <strong>Consecuencia de diseño:</strong> el contenido digestivo representa una fracción de dos dígitos del peso vivo en bovinos a pasto — del orden del 10–18 % según la literatura general, valor a confirmar para dietas locales — y las pérdidas por desbaste varían con la calidad del forraje. Un sistema óptico estima volumen corporal, que se correlaciona mejor con peso vacío que con peso lleno. Parte del “error” que se le atribuirá al sensor es, en rigor, variabilidad biológica del referente.
+          </div>
+
+          <h3>Métricas obligatorias en cualquier evaluación</h3>
+          <ul class="clean">
+            <li><strong>MAE (kg)</strong> — error absoluto medio. Es la métrica más honesta para el productor: “cuántos kilos me equivoco por animal”.</li>
+            <li><strong>MAPE (%)</strong> — error porcentual medio. Permite comparar entre categorías con rangos de peso muy distintos (ternero de 160 kg vs. novillo de 520 kg). <em>Ojo:</em> un MAPE bajo en un lote homogéneo y pesado puede ocultar un MAE inaceptable.</li>
+            <li><strong>RMSE (kg)</strong> — penaliza outliers; es la métrica que revela las asociaciones erróneas y las poses malas.</li>
+            <li><strong>R²</strong> — <em>no sirve solo</em>. Un R² de 0,95 sobre un lote con 300 kg de dispersión sigue admitiendo errores de ±25 kg por animal. Es la métrica más citada por proveedores y la menos informativa.</li>
+            <li><strong>Sesgo (bias) y límites de concordancia de Bland–Altman</strong> — detectan si el sistema subestima sistemáticamente a los animales pesados (efecto de compresión típico de modelos entrenados con rango angosto).</li>
+            <li><strong>Repetibilidad intra-día</strong> — dos pasadas del mismo animal en la misma hora deberían diferir menos que la ganancia diaria esperada (~1,0–1,4 kg/día en recría a corral). Si no, el sistema no puede medir tendencia.</li>
+            <li><strong>Tasa de cobertura</strong> — porcentaje de animales del lote con estimación válida por evento. Un MAE excelente sobre el 40 % del rodeo es un producto distinto a un MAE mediocre sobre el 98 %.</li>
+          </ul>
+
+          <div class="kpi-row">
+            <div class="kpi"><b>±19 kg</b><span>Error típico entre pesadas de balanza en días consecutivos, misma manga (referencia de Vytelle)</span></div>
+            <div class="kpi"><b>3–6 %</b><span>Variación intra-día del peso vivo lleno atribuible a llenado ruminal y agua</span></div>
+            <div class="kpi"><b>~1,2 kg/d</b><span>Ganancia diaria típica en recría; define la resolución útil mínima del sistema</span></div>
+            <div class="kpi"><b>≥1 s</b><span>Ventana de asociación RFID–imagen realista en paso individual</span></div>
+          </div>
+
+          <div class="callout">
+            <strong>El listón real:</strong> si la balanza misma tiene ~19 kg de dispersión día a día por llenado, exigirle a un sistema óptico un MAE de 5 kg contra una única pesada de referencia es exigirle que prediga el ruido. El objetivo técnico defendible es <em>MAE por animal comparable al ruido de la balanza, con muestreo mucho más frecuente</em>: la ventaja no está en la exactitud puntual sino en la densidad temporal de la serie.
+          </div>
+        </section>
+
+        <!-- 2 -->
+        <section class="section" id="fisica">
+          <p class="eyebrow">02 · Fundamento</p>
+          <h2>Todo sensor remoto estima volumen; el peso es una inferencia</h2>
+          <p class="section-intro">Ningún sensor óptico mide masa. Mide geometría. La cadena de inferencia tiene tres eslabones, y cada uno aporta error propio.</p>
+
+          <span class="formula">peso ≈ ρ_corporal × V_corporal   →   V se estima desde geometría observada   →   ρ varía con condición corporal, preñez, llenado y raza</span>
+
+          <div class="grid grid--3">
+            <div class="card card--cool">
+              <span class="tag tag--verified">Verificado</span>
+              <h3 style="margin-top:.8rem">Predictores morfométricos clásicos</h3>
+              <p>Perímetro torácico es el mejor predictor univariado de peso vivo. En un estudio de 140 animales de tres grupos raciales, el perímetro torácico solo explicó entre 60,7 % y 91,1 % de la varianza del peso <em>según el grupo</em>. La precisión cae al aumentar el tamaño de estructura del animal.</p>
+            </div>
+            <div class="card">
+              <span class="tag tag--inference">Inferencia</span>
+              <h3 style="margin-top:.8rem">Por qué 3D supera a 2D</h3>
+              <p>Una imagen RGB monocular no puede medir perímetro torácico, profundidad de pecho ni volumen abdominal: solo áreas proyectadas. La reconstrucción 3D permite volumen directo, que es la magnitud físicamente ligada a la masa.</p>
+            </div>
+            <div class="card card--warm">
+              <span class="tag tag--open">Abierto</span>
+              <h3 style="margin-top:.8rem">La densidad no es constante</h3>
+              <p>Un novillo terminado grado 4 y un novillo del mismo volumen grado 2 no pesan lo mismo. La condición corporal cambia la relación volumen–peso. Por eso los sistemas serios estiman <em>condición corporal y peso conjuntamente</em>, o segmentan modelos por categoría.</p>
+            </div>
+          </div>
+
+          <h3>Rasgos geométricos usados en la literatura</h3>
+          <div class="table-wrap">
+            <table class="spec-table">
+              <thead><tr><th>Rasgo</th><th>Se obtiene de</th><th>Sensibilidad a postura</th><th>Aporte</th></tr></thead>
+              <tbody>
+                <tr><td>Perímetro torácico</td><td>Nube 3D lateral o corte transversal</td><td class="matrix matrix--partial">Media</td><td>Predictor univariado más fuerte</td></tr>
+                <tr><td>Largo corporal</td><td>2D dorsal o lateral, con escala</td><td class="matrix matrix--no">Alta</td><td>Depende del estiramiento del cuello y del arqueo del lomo</td></tr>
+                <tr><td>Altura a la cruz / cadera</td><td>3D dorsal o lateral</td><td class="matrix matrix--yes">Baja</td><td>Estable; buen indicador de estructura, débil de peso</td></tr>
+                <tr><td>Ancho de cadera / grupa</td><td>3D o 2D dorsal calibrado</td><td class="matrix matrix--yes">Baja</td><td>Buen complemento; sensible a condición corporal</td></tr>
+                <tr><td>Área dorsal proyectada</td><td>2D cenital calibrado</td><td class="matrix matrix--partial">Media</td><td>Barato de obtener; base de la mayoría de sistemas cenitales</td></tr>
+                <tr><td>Volumen 2.5D / rebanadas</td><td>Nube 3D (cenital o multivista)</td><td class="matrix matrix--partial">Media</td><td>El rasgo más predictivo reportado en LiDAR aéreo</td></tr>
+                <tr><td>Curvatura de lomo y anca</td><td>Nube 3D de alta densidad</td><td class="matrix matrix--yes">Baja</td><td>Base del <em>body condition score</em> automático</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 3 -->
+        <section class="section" id="modalidades">
+          <p class="eyebrow">03 · Sensores</p>
+          <h2>Nueve modalidades, tres que sobreviven al campo</h2>
+          <p class="section-intro">El criterio de descarte no es la exactitud de laboratorio, sino la combinación de sol directo, polvo, barro, animales en movimiento y mantenimiento por personal no técnico.</p>
+
+          <div class="table-wrap">
+            <table class="spec-table">
+              <thead><tr><th>Modalidad</th><th>Cómo obtiene profundidad</th><th>Rango útil</th><th>Sol directo</th><th>Pelaje negro</th><th>Costo por punto</th><th>Madurez en bovinos</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>RGB monocular 2D</td><td>No la obtiene; áreas proyectadas + escala conocida</td><td>1–15 m</td>
+                  <td class="matrix matrix--yes">Bueno</td><td class="matrix matrix--partial">Segmentación difícil sobre sombra</td><td class="matrix matrix--yes">Muy bajo</td><td>Alta (BCS comercial)</td>
+                </tr>
+                <tr>
+                  <td>RGB + profundidad monocular estimada (redes tipo Depth Anything)</td><td>Inferida por red neuronal</td><td>1–20 m</td>
+                  <td class="matrix matrix--yes">Bueno</td><td class="matrix matrix--partial">Media</td><td class="matrix matrix--yes">Muy bajo</td><td>Emergente / investigación</td>
+                </tr>
+                <tr>
+                  <td>Estéreo pasivo (ZED, OAK-D)</td><td>Triangulación entre dos cámaras</td><td>0,5–20 m</td>
+                  <td class="matrix matrix--yes">Bueno</td><td class="matrix matrix--no">Malo: pelaje negro uniforme = sin textura para correspondencia</td><td class="matrix matrix--partial">Bajo</td><td>Media</td>
+                </tr>
+                <tr>
+                  <td>Estéreo activo IR (RealSense D4xx)</td><td>Proyector IR + estéreo</td><td>0,4–6 m</td>
+                  <td class="matrix matrix--no">Degrada fuerte: el sol satura el patrón IR</td><td class="matrix matrix--partial">Media</td><td class="matrix matrix--partial">Bajo</td><td>Alta en investigación, baja en campo abierto</td>
+                </tr>
+                <tr>
+                  <td>Luz estructurada (Kinect v1, escáneres)</td><td>Patrón proyectado deformado</td><td>0,5–4 m</td>
+                  <td class="matrix matrix--no">Inviable a cielo abierto</td><td class="matrix matrix--partial">Media</td><td class="matrix matrix--partial">Bajo</td><td>Alta en interiores</td>
+                </tr>
+                <tr>
+                  <td>ToF (Kinect v2, Azure Kinect, LiDAR de iPhone)</td><td>Tiempo de vuelo de pulso IR</td><td>0,5–6 m</td>
+                  <td class="matrix matrix--partial">Parcial: requiere sombra o filtros</td><td class="matrix matrix--partial">Media; superficies oscuras devuelven menos señal</td><td class="matrix matrix--partial">Medio</td><td>Alta en investigación</td>
+                </tr>
+                <tr>
+                  <td>LiDAR terrestre (mecánico o estado sólido)</td><td>Tiempo de vuelo láser, barrido</td><td>1–100 m</td>
+                  <td class="matrix matrix--yes">Indiferente a la luz visible</td><td class="matrix matrix--partial">Retorno reducido en pelo negro mojado</td><td class="matrix matrix--no">Alto</td><td>Media</td>
+                </tr>
+                <tr>
+                  <td>LiDAR aéreo en dron</td><td>ToF láser desde plataforma móvil + RTK</td><td>8–20 m de altura</td>
+                  <td class="matrix matrix--yes">Indiferente</td><td class="matrix matrix--partial">Media</td><td class="matrix matrix--no">Muy alto</td><td>Demostrada en investigación</td>
+                </tr>
+                <tr>
+                  <td>Fotogrametría SfM desde dron (RGB)</td><td>Multivista + <em>structure from motion</em></td><td>5–30 m</td>
+                  <td class="matrix matrix--partial">Buena con luz difusa; sombras duras rompen el matching</td><td class="matrix matrix--no">Malo: superficie negra sin textura</td><td class="matrix matrix--yes">Bajo</td><td>Investigación</td>
+                </tr>
+                <tr>
+                  <td>Térmica LWIR</td><td>No mide geometría</td><td>1–50 m</td>
+                  <td class="matrix matrix--yes">Bueno</td><td class="matrix matrix--yes">Indiferente al color</td><td class="matrix matrix--partial">Medio</td><td>Baja para peso; útil para detección y salud</td>
+                </tr>
+                <tr>
+                  <td>Radar mmWave (60/77 GHz)</td><td>ToF de radiofrecuencia</td><td>0,5–20 m</td>
+                  <td class="matrix matrix--yes">Indiferente</td><td class="matrix matrix--yes">Indiferente</td><td class="matrix matrix--partial">Medio</td><td>Muy baja: resolución angular insuficiente para morfometría</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="legend matrix-legend">
+            <span><b class="cap--yes">Verde</b> apto</span>
+            <span><b class="cap--partial">Ámbar</b> condicionado</span>
+            <span><b class="cap--no">Rojo</b> limitante</span>
+          </div>
+
+          <div class="callout">
+            <strong>Lectura corta:</strong> para bovinos a cielo abierto en Uruguay y Argentina, las tres modalidades que sobreviven son <strong>(a) RGB 2D calibrado con geometría de escena fija</strong>, <strong>(b) ToF/estéreo bajo techo o media sombra en un punto de paso</strong> y <strong>(c) LiDAR</strong>, terrestre para punto fijo o aéreo para muestreo extensivo. El resto son excelentes en tambos y galpones y frágiles en corral abierto.
+          </div>
+
+          <h3>Referentes comerciales por modalidad</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Sistema</th><th>Modalidad</th><th>Topología</th><th>Identidad individual</th><th>Nota técnica</th></tr></thead>
+              <tbody>
+                <tr><td>Olho do Dono (BR)</td><td>Cámara 3D + visión artificial</td><td>Portátil / punto de paso</td><td class="matrix matrix--partial">Parcial</td><td>Pionero regional en peso por imagen sobre razas índicas; morfología distinta a Angus/Hereford</td></tr>
+                <tr><td>GanaderIA (UY)</td><td>Video de dron comercial DJI, sin sensor adicional</td><td>Sobrevuelo de potrero</td><td class="matrix matrix--no">No documentada</td><td>Reconoce explícitamente que el modelo debe reentrenarse por raza</td></tr>
+                <tr><td>Vytelle SENSE</td><td>Plataforma de pesaje parcial en bebedero + algoritmo de extrapolación</td><td>Estación fija en corral</td><td class="matrix matrix--yes">Sí</td><td>No es óptico: mide peso parcial delantero y extrapola. RMSE 10,47 kg sobre 4.109 registros, 18 razas, 142–630 kg</td></tr>
+                <tr><td>Optiweigh</td><td>Plataforma parcial móvil con atrayente + EID</td><td>Estación autónoma en potrero</td><td class="matrix matrix--yes">Sí, por EID</td><td>Muestreo voluntario; cobertura parcial del rodeo pero serie temporal densa</td></tr>
+                <tr><td>CattleEye</td><td>Cámara 2D cenital sobre salida de sala</td><td>Portal fijo, lechería</td><td class="matrix matrix--partial">Por visión, con errores documentados</td><td>Producto maduro en BCS y locomoción; el caso muestra que la re-identificación visual pura genera errores de asignación</td></tr>
+                <tr><td>Scanabull / Beefie / apps con LiDAR de iPhone</td><td>ToF de teléfono + modelo</td><td>Manual, operador junto al animal</td><td class="matrix matrix--no">Manual</td><td>Muy bajo CAPEX; depende del operador y no resuelve identidad automática</td></tr>
+                <tr><td>Tru-Test WoW</td><td>Balanza de paso (no es sin balanza)</td><td>Callejón a aguada</td><td class="matrix matrix--yes">Sí, por EID</td><td>Referencia obligada de comparación: es el sustituto directo del sistema óptico</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 4 -->
+        <section class="section" id="luz">
+          <p class="eyebrow">04 · Restricción regional</p>
+          <h2>Sol de verano, pelo negro y barro de invierno</h2>
+          <p class="section-intro">Tres condiciones del Río de la Plata invalidan buena parte de la literatura, que fue producida en tambos europeos y asiáticos bajo techo.</p>
+
+          <div class="grid grid--3">
+            <div class="card card--risk">
+              <h3>Irradiancia solar</h3>
+              <p>A mediodía de verano en latitud 33° S se superan holgadamente los 100.000 lux. Todos los sensores de profundidad basados en IR activo (luz estructurada, estéreo activo, ToF) pierden señal porque el fondo infrarrojo solar satura el detector. Bajo techo o media sombra el problema desaparece.</p>
+              <p><strong>Mitigación:</strong> techar el punto de captura, o migrar a estéreo pasivo / LiDAR.</p>
+            </div>
+            <div class="card card--risk">
+              <h3>Pelaje Angus negro</h3>
+              <p>Es el problema menos discutido y el más específico de este rodeo. Un Angus negro presenta baja reflectancia y muy baja textura visual: el estéreo pasivo y la fotogrametría SfM fallan porque no hay rasgos para hacer correspondencia entre vistas. El LiDAR sufre menor retorno de energía, especialmente con pelo mojado.</p>
+              <p><strong>Mitigación:</strong> iluminación estructurada de bajo costo, proyección de patrón, o LiDAR con mayor potencia de emisión. Hereford, con su cara blanca y manchas, es notablemente más fácil.</p>
+            </div>
+            <div class="card card--warm">
+              <h3>Barro, pelo largo y agua</h3>
+              <p>En invierno el pelo largo aumenta el volumen aparente sin aumentar la masa: sesgo positivo estacional. El barro adherido agrega volumen y masa reales pero no comercializables. El pelo mojado cambia la reflectancia y colapsa el contraste.</p>
+              <p><strong>Mitigación:</strong> variable estacional explícita en el modelo, y recalibración por estación en lugar de un modelo único anual.</p>
+            </div>
+          </div>
+
+          <div class="callout callout--warning">
+            <strong>Implicancia directa:</strong> un modelo entrenado con Nelore blanco en Brasil o con Holstein bajo techo en Europa no transfiere a un lote de Angus negro en un corral barroso de Durazno. El costo dominante del proyecto no será el sensor: será construir el conjunto de datos etiquetado local, por raza, categoría y estación.
+          </div>
+        </section>
+
+        <!-- 5 -->
+        <section class="section" id="algoritmos">
+          <p class="eyebrow">05 · Software</p>
+          <h2>Del píxel al kilo: cinco etapas</h2>
+
+          <figure class="diagram">
+            <svg viewBox="0 0 980 210" role="img" aria-label="Pipeline de estimación de peso en cinco etapas">
+              <defs>
+                <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                  <path d="M 0 0 L 10 5 L 0 10 z" fill="#1d5a43"/>
+                </marker>
+                <style>
+                  .bx { fill: #ffffff; stroke: #d9ddd5; }
+                  .bx-h { fill: #e2eee7; stroke: #1d5a43; }
+                  .t1 { font: 700 13px Inter, system-ui, sans-serif; fill: #1f2a24; }
+                  .t2 { font: 400 11px Inter, system-ui, sans-serif; fill: #657168; }
+                  .tn { font: 800 10px Inter, system-ui, sans-serif; fill: #1d5a43; letter-spacing: .08em; }
+                  .ln { stroke: #1d5a43; stroke-width: 1.6; fill: none; }
+                </style>
+              </defs>
+              <g>
+                <rect class="bx" x="4" y="45" width="168" height="110" rx="12"/>
+                <text class="tn" x="20" y="70">01 · CAPTURA</text>
+                <text class="t1" x="20" y="92">Adquisición</text>
+                <text class="t2" x="20" y="112">RGB / RGB-D / nube</text>
+                <text class="t2" x="20" y="128">sincronizada y sellada</text>
+                <text class="t2" x="20" y="144">con hora y dispositivo</text>
+
+                <rect class="bx" x="204" y="45" width="168" height="110" rx="12"/>
+                <text class="tn" x="220" y="70">02 · SEGMENTA</text>
+                <text class="t1" x="220" y="92">Detección</text>
+                <text class="t2" x="220" y="112">YOLOv8/v11-seg,</text>
+                <text class="t2" x="220" y="128">Mask R-CNN o SAM;</text>
+                <text class="t2" x="220" y="144">un animal por instancia</text>
+
+                <rect class="bx" x="404" y="45" width="168" height="110" rx="12"/>
+                <text class="tn" x="420" y="70">03 · POSE</text>
+                <text class="t1" x="420" y="92">Puntos clave</text>
+                <text class="t2" x="420" y="112">18 landmarks anatómicos;</text>
+                <text class="t2" x="420" y="128">filtro de postura válida</text>
+                <text class="t2" x="420" y="144">y de oclusión</text>
+
+                <rect class="bx" x="604" y="45" width="168" height="110" rx="12"/>
+                <text class="tn" x="620" y="70">04 · GEOMETRÍA</text>
+                <text class="t1" x="620" y="92">Morfometría</text>
+                <text class="t2" x="620" y="112">perímetro, largo, altura,</text>
+                <text class="t2" x="620" y="128">volumen por rebanadas</text>
+                <text class="t2" x="620" y="144">o área proyectada</text>
+
+                <rect class="bx-h" x="804" y="45" width="172" height="110" rx="12"/>
+                <text class="tn" x="820" y="70">05 · REGRESIÓN</text>
+                <text class="t1" x="820" y="92">Peso + confianza</text>
+                <text class="t2" x="820" y="112">RF / LightGBM / SVR</text>
+                <text class="t2" x="820" y="128">o PointNet++ directo;</text>
+                <text class="t2" x="820" y="144">salida con incertidumbre</text>
+
+                <path class="ln" d="M176 100 H198" marker-end="url(#ar)"/>
+                <path class="ln" d="M376 100 H398" marker-end="url(#ar)"/>
+                <path class="ln" d="M576 100 H598" marker-end="url(#ar)"/>
+                <path class="ln" d="M776 100 H798" marker-end="url(#ar)"/>
+                <text class="t2" x="4" y="185">Etapas 2–4 pueden colapsarse en un modelo extremo a extremo, a cambio de perder interpretabilidad y capacidad de diagnóstico.</text>
+              </g>
+            </svg>
+            <figcaption>Pipeline canónico. El filtro de postura de la etapa 3 es el que más impacto tiene en el error final: descartar el 30 % de los cuadros con pose inválida suele mejorar más el MAE que cambiar de regresor.</figcaption>
+          </figure>
+
+          <h3>Dos familias de modelo</h3>
+          <div class="grid grid--2">
+            <div class="card card--strong">
+              <h3>Morfometría explícita + regresión</h3>
+              <p>Se extraen medidas anatómicas interpretables y se ajusta un regresor tabular (lineal, Random Forest, LightGBM, SVR).</p>
+              <ul>
+                <li><strong>A favor:</strong> auditable, se puede explicar por qué dio ese peso; poco dato de entrenamiento; se recalibra por raza cambiando solo el regresor.</li>
+                <li><strong>En contra:</strong> depende de la calidad de la detección de puntos clave; pierde información de forma sutil.</li>
+              </ul>
+            </div>
+            <div class="card card--cool">
+              <h3>Extremo a extremo sobre nube o RGB-D</h3>
+              <p>PointNet++, DGCNN o CNN multimodal predicen peso directamente desde la nube de puntos o el par RGB-D.</p>
+              <ul>
+                <li><strong>A favor:</strong> mejores métricas cuando hay mucho dato; captura forma que la morfometría descarta.</li>
+                <li><strong>En contra:</strong> exige miles de pares imagen–peso reales por raza y categoría; opaco frente a un productor que discute un resultado; se degrada silenciosamente fuera de distribución.</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="callout">
+            <strong>Recomendación de arquitectura:</strong> arrancar con morfometría explícita, porque el cuello de botella inicial no es el modelo sino el dataset local. Reservar el extremo a extremo para cuando existan varios miles de pares verificados contra balanza en Angus y Hereford del Río de la Plata. Mantener siempre el rasgo morfométrico como <em>feature</em> de respaldo y como señal de diagnóstico.
+          </div>
+        </section>
+
+        <!-- 6 -->
+        <section class="section" id="evidencia">
+          <p class="eyebrow">06 · Evidencia</p>
+          <h2>Exactitud publicada, con su letra chica</h2>
+          <p class="section-intro">Estas cifras provienen de estudios revisados. Ninguna fue obtenida en Angus o Hereford del Río de la Plata; se listan como techo optimista, no como pronóstico.</p>
+
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Estudio / sistema</th><th>Sensor</th><th>Animales</th><th>Resultado</th><th>Letra chica</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>LiDAR aéreo, DJI M300 RTK + Zenmuse L1</td><td>LiDAR aéreo, 8–15 m de altura, 240 kHz</td><td>96 machos Simmental cruza, media 225 kg (σ 20 kg)</td>
+                  <td><span class="score score--high">Parado:</span> R² 0,94 · RMSE 6,33 kg · MAE 4,72 kg<br><span class="score score--mid">Echado:</span> R² 0,71 · RMSE 9,56 kg</td>
+                  <td>Rango de peso muy angosto (σ 20 kg): el R² alto es en parte artefacto del rango. En test, el mejor RMSE fue 7,91 kg.</td>
+                </tr>
+                <tr>
+                  <td>Regresión ML sobre nube de puntos (revisión)</td><td>3D genérico</td><td>—</td><td><span class="score score--high">MAPE 4,72 %</span></td><td>Sobre un novillo de 450 kg equivale a ±21 kg</td>
+                </tr>
+                <tr>
+                  <td>CNN sobre RGB-D (revisión)</td><td>RGB-D</td><td>—</td><td><span class="score score--mid">MAPE 8,4 %</span></td><td>±38 kg sobre 450 kg: insuficiente para decisión individual de venta</td>
+                </tr>
+                <tr>
+                  <td>Mask R-CNN + CNN sobre RGB</td><td>2D</td><td>Vacas</td><td>R² 0,96 · <span class="score score--mid">RMSE 20 kg</span></td><td>Ilustra el punto: R² excelente, RMSE de 20 kg</td>
+                </tr>
+                <tr>
+                  <td>PickAMoo, LiDAR de iPhone + Mask R-CNN</td><td>ToF de smartphone a ~2,0 m</td><td>248 vacas lecheras suecas, 2.847 imágenes</td><td>F1 de segmentación 0,98 · clasificación en 9 clases de peso: 95,8 %</td><td>Clasifica en bandas, no regresa kilos. Los autores advierten sobre transferencia entre razas y sobre casos límite de reflectancia.</td>
+                </tr>
+                <tr>
+                  <td>Vytelle SENSE (pesaje parcial en corral)</td><td>Plataforma física, no óptica</td><td>4.109 registros, 18 razas, 142–630 kg</td><td><span class="score score--high">RMSE 10,47 kg</span> · sesgo 0,26 kg</td><td>Es la vara comercial a superar. No es sin balanza: usa celdas de carga parciales.</td>
+                </tr>
+                <tr>
+                  <td>Perímetro torácico como predictor único</td><td>Cinta / morfometría manual</td><td>140 animales, tres grupos raciales</td><td>R² entre 0,607 y 0,911 <em>según raza</em></td><td>La dispersión entre razas del mismo estudio es la advertencia central de todo el documento</td>
+                </tr>
+                <tr>
+                  <td>Seguimiento multicámara con identidad preservada</td><td>YOLOv11x-pose + ByteTrack + reconocimiento facial bovino</td><td>&gt;600.000 imágenes</td><td><span class="score score--low">Precisión de asociación 84,5 %</span></td><td>Dato clave: la identificación puramente visual falla en ~1 de cada 6 asociaciones. Insuficiente para trazabilidad oficial.</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout callout--risk">
+            <strong>Conclusión de la evidencia:</strong> el estado del arte en condiciones favorables ronda un MAPE de 4–8 %, es decir <strong>20–40 kg de error en un novillo terminado</strong>. Eso es útil para seguir tendencia de lote y para decidir cuándo mirar un corral, y es insuficiente para liquidar una venta individual. Cualquier propuesta comercial que prometa exactitud de balanza debe considerarse afirmación de proveedor no validada.
+          </div>
+        </section>
+
+        <!-- 7 -->
+        <section class="section" id="raza">
+          <p class="eyebrow">07 · Rodeo objetivo</p>
+          <h2>Angus, Hereford y cruzas en tres categorías: seis modelos, no uno</h2>
+
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Categoría</th><th>Rango de peso</th><th>Dificultad dominante</th><th>Modalidad más apta</th><th>Frecuencia útil</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td><strong>Cría</strong> (vacas, vaquillonas de reposición)</td><td>320–560 kg</td>
+                  <td>Preñez altera volumen abdominal sin correspondencia lineal con peso comercial; animal disperso en campo extensivo; manejo poco frecuente</td>
+                  <td>Estación autónoma en aguada, o dron para muestreo de condición corporal</td><td>Mensual o por evento de manejo</td>
+                </tr>
+                <tr>
+                  <td><strong>Recría</strong> (terneros y terneras)</td><td>140–320 kg</td>
+                  <td>Crecimiento rápido: el modelo debe seguir cambio de proporciones corporales; alta sensibilidad relativa al error absoluto</td>
+                  <td>Portal fijo en manga o callejón a aguada</td><td>Semanal a quincenal</td>
+                </tr>
+                <tr>
+                  <td><strong>Terminación</strong> (novillos, vaquillonas gordas)</td><td>380–650 kg</td>
+                  <td>Condición corporal cambia la densidad; decisión económica exige exactitud individual; animales confinados y accesibles</td>
+                  <td>Portal fijo instrumentado en corral, con techo</td><td>Semanal o continua</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3>Efecto de la raza sobre el modelo</h3>
+          <div class="grid grid--3">
+            <div class="card">
+              <h4>Angus</h4>
+              <p>Estructura compacta, buena condición corporal temprana. <strong>Riesgo técnico:</strong> pelaje negro uniforme rompe estéreo pasivo y SfM; requiere ToF, LiDAR o iluminación controlada. Un Angus colorado se comporta mejor ópticamente que uno negro.</p>
+            </div>
+            <div class="card">
+              <h4>Hereford</h4>
+              <p>Cara blanca y manchas ofrecen textura natural: el mejor caso para estéreo pasivo y para re-identificación visual. <strong>Riesgo:</strong> estructura más grande, y la literatura indica que la predicción por perímetro torácico se degrada al aumentar el tamaño de estructura.</p>
+            </div>
+            <div class="card">
+              <h4>Cruzas (Braford, Brangus, F1)</h4>
+              <p>Morfología intermedia y variable. <strong>Riesgo:</strong> es donde un modelo por raza no aplica. Exige o bien un modelo general con la raza como variable, o bien un clasificador previo de tipo racial, con su propio error.</p>
+            </div>
+          </div>
+
+          <div class="callout callout--warning">
+            <strong>Implicancia de dataset:</strong> 3 categorías × 3 grupos raciales × 2 condiciones estacionales = <strong>18 estratos</strong>. Con un mínimo razonable de 150–300 pares imagen–balanza por estrato, el conjunto de validación mínimo se ubica entre 2.700 y 5.400 animales pesados con balanza certificada. Esa cifra, y no el precio del sensor, es el verdadero costo de entrada.
+          </div>
+        </section>
+
+        <!-- 8 -->
+        <section class="section" id="rfid">
+          <p class="eyebrow">08 · Identidad</p>
+          <h2>Qué es y qué no es la caravana del SNIG</h2>
+          <p class="section-intro">La restricción más subestimada del proyecto es física: la tecnología de radiofrecuencia que impone el sistema oficial uruguayo determina la arquitectura completa de captura.</p>
+
+          <div class="table-wrap">
+            <table class="spec-table">
+              <thead><tr><th>Atributo</th><th>Valor</th><th>Consecuencia técnica</th></tr></thead>
+              <tbody>
+                <tr><td>Estándar</td><td>ISO 11784 / 11785</td><td>Interoperabilidad garantizada entre lectores de distintos fabricantes</td></tr>
+                <tr><td>Tecnología</td><td>HDX (half duplex), banda LF 134,2 kHz</td><td>Acoplamiento inductivo de campo cercano: el alcance depende del tamaño de la antena, no de la potencia</td></tr>
+                <tr><td>Dispositivo</td><td>Caravana botón electrónica (Allflex, color salmón con leyenda MGAP) + caravana visual complementaria</td><td>Dos dispositivos independientes: la vía visual es una segunda ruta de identificación aprovechable por OCR</td></tr>
+                <tr><td>Contenido del chip</td><td>Únicamente el número de 12 dígitos</td><td><strong>No hay memoria de usuario:</strong> el peso jamás vive en la caravana. Vive en una base propia indexada por ese número</td></tr>
+                <tr><td>Estructura del número</td><td>3 dígitos de país (858 = Uruguay, rotulado “UY”) + 9 dígitos de animal</td><td>Clave primaria natural del sistema; estable durante toda la vida del animal</td></tr>
+                <tr><td>Alcance práctico</td><td>Decenas de centímetros con bastón; hasta ~0,8–1 m con antena panel grande</td><td><strong>Determinante:</strong> obliga a que el animal pase a menos de un metro de la antena</td></tr>
+                <tr><td>Anticolisión</td><td>Prácticamente inexistente en la práctica de campo</td><td>Una lectura por vez. Dos animales juntos en la antena producen lectura perdida o ambigua, no dos lecturas</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout callout--risk">
+            <strong>La consecuencia que ordena todo el diseño:</strong> LF de campo cercano significa que <em>no existe lectura de identidad a distancia</em>. Cualquier arquitectura que pretenda estimar peso desde un dron sobre un potrero, o desde una cámara a diez metros, <strong>no puede asociar ese peso a la caravana oficial</strong> por radiofrecuencia. Sólo hay tres salidas: forzar el paso individual junto a una antena, agregar un segundo transpondedor UHF o BLE en paralelo al oficial, o resolver la identidad por vía visual (OCR de la caravana o biometría), asumiendo su tasa de error.
+          </div>
+
+          <h3>Alternativas de identificación a distancia</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Vía</th><th>Alcance</th><th>Fiabilidad</th><th>Costo por animal</th><th>Compatibilidad SNIG</th></tr></thead>
+              <tbody>
+                <tr><td>LF HDX oficial (antena panel)</td><td>&lt; 1 m</td><td class="matrix matrix--yes">Muy alta</td><td class="matrix matrix--yes">Nulo (ya está puesta)</td><td class="matrix matrix--yes">Nativa</td></tr>
+                <tr><td>UHF RAIN (860–960 MHz) como segunda caravana</td><td>3–10 m</td><td class="matrix matrix--partial">Alta, con anticolisión real, pero sensible a agua y metal</td><td class="matrix matrix--partial">Media</td><td class="matrix matrix--partial">Requiere tabla de correspondencia UHF↔SNIG mantenida</td></tr>
+                <tr><td>BLE / LoRa activo (Ceres Tag, Moovement)</td><td>10–1000 m</td><td class="matrix matrix--partial">Alta mientras dure la batería</td><td class="matrix matrix--no">Alta</td><td class="matrix matrix--partial">Igual: tabla de correspondencia</td></tr>
+                <tr><td>OCR del número de la caravana visual</td><td>1–5 m con óptica adecuada</td><td class="matrix matrix--partial">Depende de suciedad, giro y desgaste</td><td class="matrix matrix--yes">Nulo</td><td class="matrix matrix--yes">Directa: es el mismo número</td></tr>
+                <tr><td>Biometría de hocico (muzzle print)</td><td>&lt; 2 m, requiere frontal nítido</td><td class="matrix matrix--partial">Alta en laboratorio; exige enrolamiento previo de todo el rodeo</td><td class="matrix matrix--yes">Nulo</td><td class="matrix matrix--no">No oficial; sirve como verificación cruzada</td></tr>
+                <tr><td>Re-identificación por patrón de pelaje</td><td>5–20 m</td><td class="matrix matrix--no">Baja en Angus negro; media en Hereford</td><td class="matrix matrix--yes">Nulo</td><td class="matrix matrix--no">No oficial</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 9 -->
+        <section class="section" id="asociacion">
+          <p class="eyebrow">09 · El nudo</p>
+          <h2>Asociar el kilo al número: el problema real del sistema</h2>
+          <p class="section-intro">Estimar peso es un problema de visión resuelto a medias en la literatura. Atar ese peso al animal correcto, de forma auditable, es donde se define si el producto sirve.</p>
+
+          <span class="formula">evento_peso = ⟨t_captura, geometría, peso_estimado, confianza⟩ ⨝<sub>|Δt| &lt; τ</sub> ⟨t_lectura, id_SNIG, antena⟩</span>
+
+          <h3>El modelo formal y sus cuatro fallas</h3>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Modo de falla</th><th>Causa física</th><th>Síntoma en datos</th><th>Contramedida</th></tr></thead>
+              <tbody>
+                <tr><td>Lectura sin imagen</td><td>Animal pasa fuera del campo de visión o con pose inválida</td><td>ID sin peso</td><td>Registrar el paso igual; no inventar peso. Métrica de cobertura.</td></tr>
+                <tr><td>Imagen sin lectura</td><td>Caravana perdida, rota o fuera de alcance de la antena</td><td>Peso huérfano</td><td>Cola de excepciones con revisión humana; OCR visual como segunda vía</td></tr>
+                <tr><td>Dos animales en la ventana</td><td>Paso pegado; HDX no discrimina</td><td>Dos IDs, un peso, o viceversa</td><td>Sensor de presencia independiente (barrera fotoeléctrica o de peso) que valide “un animal por evento”; descartar el evento si hay ambigüedad</td></tr>
+                <tr><td>Retroceso y doble paso</td><td>El animal vuelve sobre sus pasos</td><td>Dos eventos idénticos con segundos de diferencia</td><td>Ventana de refractario por ID; sensor de dirección de paso</td></tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout">
+            <strong>Regla de oro operativa:</strong> es preferible perder el 15 % de los eventos que emitir el 3 % de los eventos mal asociados. Un peso asignado al animal equivocado contamina la serie temporal de dos animales a la vez y destruye la confianza en el sistema completo. Todo evento ambiguo debe morir en una cola de excepciones, no en la base de producción.
+          </div>
+
+          <h3>Sincronización temporal</h3>
+          <ul class="clean">
+            <li><strong>Origen del tiempo:</strong> un solo reloj para lector RFID y cámara. En un equipo embebido, el mismo host que lee el puerto serie del lector debe sellar los cuadros.</li>
+            <li><strong>Latencia del lector:</strong> los lectores LF entregan la lectura por serie o Ethernet con jitter de decenas a cientos de milisegundos. Debe medirse en banco, no suponerse.</li>
+            <li><strong>Ventana τ:</strong> debe calibrarse empíricamente con animales reales. Demasiado corta pierde asociaciones; demasiado larga las cruza. Un valor inicial razonable a validar está en el orden de 1–3 s en paso a paso.</li>
+            <li><strong>Sin conexión:</strong> el equipo debe funcionar sin red y sin NTP. Reloj de tiempo real con batería y detección de salto temporal; cualquier discontinuidad debe marcar los eventos afectados en lugar de descartarlos silenciosamente.</li>
+          </ul>
+
+          <h3>Tres estrategias de asociación, de más a menos determinista</h3>
+          <div class="grid grid--3">
+            <div class="card card--strong">
+              <span class="number">A</span>
+              <h3>Paso forzado con antena</h3>
+              <p>Manga, callejón de aguada o portón de báscula. El animal atraviesa la antena a menos de un metro. Asociación prácticamente determinista.</p>
+              <p><strong>Costo:</strong> obra civil o estructura móvil. <strong>Cobertura:</strong> alta pero solo en eventos de manejo o de acceso a agua.</p>
+            </div>
+            <div class="card card--cool">
+              <span class="number">B</span>
+              <h3>Estación de atracción</h3>
+              <p>Bebedero, comedero o suplemento con antena y sensor. Visita voluntaria. Es el modelo de Optiweigh y de Vytelle SENSE.</p>
+              <p><strong>Costo:</strong> medio. <strong>Cobertura:</strong> parcial y sesgada — los animales dominantes visitan más — pero con serie temporal densa.</p>
+            </div>
+            <div class="card card--risk">
+              <span class="number">C</span>
+              <h3>Sin paso forzado</h3>
+              <p>Dron o cámara a distancia. No hay RFID posible. La identidad depende de OCR visual o de biometría, con la tasa de error documentada de ~15 % de la re-identificación visual.</p>
+              <p><strong>Costo:</strong> bajo en hardware. <strong>Cobertura:</strong> total del lote, pero <em>a nivel de lote</em>, no de individuo trazable.</p>
+            </div>
+          </div>
+
+          <div class="callout callout--warning">
+            <strong>Distinción que conviene fijar temprano:</strong> hay dos productos posibles y no son el mismo. Uno estima <em>peso de lote</em> con cobertura total y sin identidad — sirve para decidir cuándo vender un corral. El otro estima <em>peso individual trazable</em> con cobertura parcial y con identidad SNIG — sirve para selección, para auditoría y para financiamiento. La tecnología, el CAPEX y el usuario son distintos en cada caso.
+          </div>
+        </section>
+
+        <!-- 10 -->
+        <section class="section" id="topologias">
+          <p class="eyebrow">10 · Despliegue</p>
+          <h2>Tres arquetipos de instalación</h2>
+
+          <div class="architecture-flow" style="grid-template-columns: repeat(3, minmax(0,1fr))">
+            <div class="architecture-node">
+              <span>Arquetipo A</span>
+              <strong>Portal fijo en manga o corral</strong>
+              <small>Antena panel LF + cámara de profundidad techada + barrera de presencia + cómputo en el borde. Alimentación de red o solar. Es la configuración de mayor exactitud y de identidad determinista. Apto para terminación y recría a corral.</small>
+            </div>
+            <div class="architecture-node">
+              <span>Arquetipo B</span>
+              <strong>Estación autónoma en aguada</strong>
+              <small>Callejón de acceso forzado al agua con antena LF y captura óptica. Solar autónomo, 4G intermitente, almacenamiento local. Cobertura voluntaria pero de alta frecuencia. Apto para recría a pasto y cría.</small>
+            </div>
+            <div class="architecture-node">
+              <span>Arquetipo C</span>
+              <strong>Captura móvil o aérea</strong>
+              <small>Dron con RGB o LiDAR, o equipo portátil de mano. Cobertura total del lote sin infraestructura. Sin identidad RFID: se usa para peso de lote, distribución y detección de colas de dispersión. Apto para cría extensiva.</small>
+            </div>
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Criterio</th><th>A · Portal fijo</th><th>B · Aguada autónoma</th><th>C · Móvil / aérea</th></tr></thead>
+              <tbody>
+                <tr><td>Identidad SNIG</td><td class="matrix matrix--yes">Determinista</td><td class="matrix matrix--yes">Determinista</td><td class="matrix matrix--no">No disponible</td></tr>
+                <tr><td>Cobertura del rodeo por evento</td><td class="matrix matrix--partial">Alta, solo en manejo</td><td class="matrix matrix--partial">Parcial y sesgada</td><td class="matrix matrix--yes">Total del lote visible</td></tr>
+                <tr><td>Frecuencia de medición</td><td class="matrix matrix--partial">Por evento de manejo</td><td class="matrix matrix--yes">Diaria o mayor</td><td class="matrix matrix--partial">Por vuelo</td></tr>
+                <tr><td>CAPEX relativo</td><td class="matrix matrix--no">Alto</td><td class="matrix matrix--partial">Medio</td><td class="matrix matrix--yes">Bajo</td></tr>
+                <tr><td>Energía requerida</td><td class="matrix matrix--partial">Media-alta continua</td><td class="matrix matrix--partial">Media, solar viable</td><td class="matrix matrix--yes">Solo la del vuelo</td></tr>
+                <tr><td>Control de pose del animal</td><td class="matrix matrix--yes">Alto</td><td class="matrix matrix--partial">Medio</td><td class="matrix matrix--no">Nulo</td></tr>
+                <tr><td>Robustez a sol directo</td><td class="matrix matrix--yes">Alta (techable)</td><td class="matrix matrix--partial">Media</td><td class="matrix matrix--partial">Depende del sensor</td></tr>
+                <tr><td>Apto para cría extensiva</td><td class="matrix matrix--no">No</td><td class="matrix matrix--yes">Sí</td><td class="matrix matrix--yes">Sí</td></tr>
+                <tr><td>Apto para terminación</td><td class="matrix matrix--yes">Sí</td><td class="matrix matrix--partial">Parcial</td><td class="matrix matrix--partial">Solo lote</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <!-- 11 -->
+        <section class="section" id="edge">
+          <p class="eyebrow">11 · Infraestructura</p>
+          <h2>Cómputo en el borde, energía solar y una red que no está</h2>
+          <p class="section-intro">Un despliegue de referencia publicado y validado en campo da el orden de magnitud de lo que hace falta para operar fuera de la red.</p>
+
+          <div class="kpi-row">
+            <div class="kpi"><b>~75 W</b><span>Consumo medio de la cadena completa de captura e inferencia en un despliegue de referencia</span></div>
+            <div class="kpi"><b>880 W</b><span>Pico fotovoltaico instalado (4 paneles bifaciales de 220 W)</span></div>
+            <div class="kpi"><b>1,6 kWh</b><span>Batería, equivalente a ~20 h de autonomía al 80 % de descarga</span></div>
+            <div class="kpi"><b>&lt;3 s</b><span>Latencia extremo a extremo desde captura hasta tablero, con detección en el borde</span></div>
+          </div>
+
+          <h3>Decisiones de infraestructura</h3>
+          <ul class="clean">
+            <li><strong>Inferencia en el borde, no en la nube.</strong> Un flujo continuo de 8 MP requiere 8–15 Mbps sostenidos: inviable sobre 4G rural. Se transmiten metadatos y recortes, no video.</li>
+            <li><strong>El switch PoE puede consumir más que el acelerador.</strong> En el despliegue de referencia fue el mayor consumidor individual, por encima del propio módulo de inferencia. La optimización energética empieza por la red, no por el modelo.</li>
+            <li><strong>Almacenar y reenviar es obligatorio.</strong> El sistema debe operar días sin enlace y reconciliar después, con detección de duplicados por identificador de evento.</li>
+            <li><strong>Conservar el original.</strong> Para poder recalibrar modelos hacia atrás y para auditoría, hay que guardar la captura cruda o una versión con pérdida controlada, no solo el kilo resultante. Esto define el dimensionamiento de almacenamiento local.</li>
+            <li><strong>Plataforma de cómputo.</strong> La familia Jetson (Orin Nano / Orin NX) con modelos compilados a TensorRT es el estándar de facto para visión en el borde agropecuario. La alternativa de menor consumo es capturar en el borde e inferir en diferido, a costa de perder el control de calidad en tiempo real.</li>
+          </ul>
+        </section>
+
+        <!-- 12 -->
+        <section class="section" id="calibracion">
+          <p class="eyebrow">12 · Método</p>
+          <h2>Calibración, validación y detección de deriva</h2>
+
+          <div class="steps">
+            <div class="step"><div>
+              <h3>Escala métrica verificable en la escena</h3>
+              <p>Todo sistema óptico necesita saber cuántos milímetros mide un píxel o un vóxel. Se resuelve con geometría fija conocida (distancia cámara–piso, ancho de manga) más un patrón de calibración físico en el campo de visión, verificado periódicamente. Sin esto, cualquier golpe al soporte introduce un sesgo silencioso.</p>
+            </div></div>
+            <div class="step"><div>
+              <h3>Conjunto de referencia estratificado</h3>
+              <p>Pares imagen–peso obtenidos con balanza certificada y contrastada, estratificados por raza, categoría y estación. Registrar también condición corporal, estado de preñez, horas desde el último acceso a comida y agua, y estado del pelaje. Estas covariables son las que después explican los residuos.</p>
+            </div></div>
+            <div class="step"><div>
+              <h3>Validación con partición por animal, no por imagen</h3>
+              <p>Error metodológico frecuente en la literatura: dividir train/test por imagen deja al mismo animal en ambos conjuntos e infla las métricas. La partición debe ser por individuo, y preferentemente por establecimiento.</p>
+            </div></div>
+            <div class="step"><div>
+              <h3>Bland–Altman, no solo R²</h3>
+              <p>Graficar diferencia contra promedio revela el sesgo dependiente del peso: casi todos los modelos entrenados en rango angosto sobreestiman a los livianos y subestiman a los pesados. Ese patrón es corregible; el R² lo oculta.</p>
+            </div></div>
+            <div class="step"><div>
+              <h3>Monitoreo de deriva y de datos fuera de distribución</h3>
+              <p>El sistema debe detectar cuándo está viendo algo para lo que no fue entrenado — una raza nueva, un animal embarrado, una hora del día con sombra rasante — y abstenerse en lugar de arriesgar un número. Una salida con intervalo de confianza explícito es más valiosa que un número puntual sin él.</p>
+            </div></div>
+            <div class="step"><div>
+              <h3>Recalibración periódica contra balanza</h3>
+              <p>Un subconjunto del rodeo debe seguir pasando por balanza con una cadencia definida, para medir deriva del modelo y del montaje. El sistema óptico no elimina la balanza: reduce su frecuencia de uso y la convierte en instrumento de calibración.</p>
+            </div></div>
+          </div>
+        </section>
+
+        <!-- 13 -->
+        <section class="section" id="fallas">
+          <p class="eyebrow">13 · Riesgos</p>
+          <h2>Modos de falla que se ven recién en el corral</h2>
+
+          <div class="grid grid--2">
+            <div class="card card--risk">
+              <h3>De sensado</h3>
+              <ul>
+                <li>Saturación IR bajo sol directo de mediodía en verano</li>
+                <li>Sombras duras que se segmentan como parte del animal</li>
+                <li>Pelaje negro sin textura: falla el estéreo pasivo y la fotogrametría</li>
+                <li>Polvo en suspensión en corral seco: falsos retornos en LiDAR</li>
+                <li>Lente sucio o con salpicaduras: degradación gradual e invisible</li>
+                <li>Vibración del soporte por el paso de los animales: descalibración progresiva</li>
+              </ul>
+            </div>
+            <div class="card card--risk">
+              <h3>De identidad</h3>
+              <ul>
+                <li>Caravana electrónica perdida o rota — porcentaje a medir en el rodeo real</li>
+                <li>Dos animales simultáneos en la antena: lectura perdida sin aviso</li>
+                <li>Retroceso y doble paso generando eventos duplicados</li>
+                <li>Interferencia electromagnética de motores, cercos eléctricos y variadores</li>
+                <li>Metal de la manga desintonizando la antena panel</li>
+                <li>Deriva de reloj en operación prolongada sin red</li>
+              </ul>
+            </div>
+            <div class="card card--warm">
+              <h3>De modelo</h3>
+              <ul>
+                <li>Sesgo estacional por pelo largo de invierno</li>
+                <li>Preñez avanzada leída como mayor condición corporal</li>
+                <li>Compresión de rango: subestimar los extremos del lote</li>
+                <li>Deriva por cambio de dieta o de tipo racial del rodeo</li>
+                <li>Sobreajuste al establecimiento de entrenamiento</li>
+                <li>Contaminación de train/test por partición mal hecha</li>
+              </ul>
+            </div>
+            <div class="card card--warm">
+              <h3>De operación</h3>
+              <ul>
+                <li>Corte de energía prolongado en invierno con poca radiación</li>
+                <li>Enlace 4G ausente durante días</li>
+                <li>Personal de campo sin capacidad de diagnosticar el equipo</li>
+                <li>Animales que aprenden a evitar el dispositivo</li>
+                <li>Vandalismo, animales que rompen el soporte, roedores en el cableado</li>
+                <li>Almacenamiento local lleno por no purgar capturas crudas</li>
+              </ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- 14 -->
+        <section class="section" id="matriz">
+          <p class="eyebrow">14 · Síntesis</p>
+          <h2>Qué elegir según el escenario</h2>
+
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Si el objetivo es…</th><th>Sensor</th><th>Topología</th><th>Identidad</th><th>Exactitud esperable</th></tr></thead>
+              <tbody>
+                <tr>
+                  <td>Curva de engorde individual en feedlot</td>
+                  <td>ToF o estéreo bajo techo, cenital + lateral</td><td>A · Portal fijo</td><td>LF SNIG determinista</td>
+                  <td>MAE objetivo 10–20 kg tras calibración local</td>
+                </tr>
+                <tr>
+                  <td>Ganancia diaria en recría a pasto</td>
+                  <td>ToF o RGB calibrado, o plataforma parcial</td><td>B · Aguada autónoma</td><td>LF SNIG determinista</td>
+                  <td>Tendencia confiable; peso puntual con 15–25 kg de error</td>
+                </tr>
+                <tr>
+                  <td>Peso y dispersión de un lote de cría extensiva</td>
+                  <td>Dron RGB o LiDAR aéreo</td><td>C · Aérea</td><td class="matrix matrix--no">Sin identidad</td>
+                  <td>Media de lote razonable; individuo no trazable</td>
+                </tr>
+                <tr>
+                  <td>Decidir venta individual con valor comercial</td>
+                  <td colspan="3">Ninguna tecnología óptica actual alcanza el nivel requerido</td>
+                  <td class="matrix matrix--no">Balanza sigue siendo necesaria</td>
+                </tr>
+                <tr>
+                  <td>Auditoría o verificación de existencias con evidencia</td>
+                  <td>RGB + LF en punto de paso, con sellado de tiempo y ubicación</td><td>A o B, transportable</td><td>LF SNIG + segunda vía visual</td>
+                  <td>El valor está en la trazabilidad del evento, no en el kilo exacto</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <div class="callout">
+            <strong>Conclusión técnica del análisis.</strong> El componente maduro y comprable es el sensado: hay cámaras de profundidad, LiDAR y drones suficientemente buenos y económicos. El componente inmaduro y específico de esta región es el <strong>modelo calibrado sobre Angus, Hereford y cruzas del Río de la Plata, por categoría y estación</strong>. Y el componente que decide si el producto es trazable o es un promedio de lote es la <strong>asociación determinista con la caravana LF del SNIG</strong>, que por física de campo cercano obliga al paso individual. Sensor, modelo y asociación no son tres decisiones independientes: la elección de topología las fija a las tres a la vez.
+          </div>
+
+          <div class="companion-links">
+            <div class="grid grid--2">
+              <a class="doc-link" href="supuestos.html"><h3>Supuestos declarados</h3><p>Lo que este análisis dio por cierto, con qué confianza y qué cambiaría si fuera falso.</p><span>Revisar supuestos →</span></a>
+              <a class="doc-link" href="preguntas.html"><h3>Preguntas de contexto</h3><p>Lo que hace falta responder para convertir este análisis general en una decisión concreta.</p><span>Ver preguntas →</span></a>
+            </div>
+          </div>
+        </section>
+
+        <!-- Fuentes -->
+        <section class="section" id="fuentes">
+          <p class="eyebrow">Trazabilidad de las afirmaciones</p>
+          <h2>Fuentes</h2>
+          <ul class="source-list">
+            <li><a href="https://www.snig.gub.uy/principal/snig-principal-trazabilidad-trazabilidad-individual-prueba">SNIG · Trazabilidad individual</a><span>Estructura del número de 12 dígitos, código de país 858, doble dispositivo y el hecho de que el chip almacena únicamente el número del animal.</span></li>
+            <li><a href="https://www.snig.gub.uy/principal/cartelera-identificadores">SNIG · Cartelera de identificadores</a><span>Modelos aprobados y tecnología HDX de los dispositivos electrónicos vigentes.</span></li>
+            <li><a href="https://www.oaepublish.com/articles/ir.2026.11">Computer vision-based livestock weight measurement: principles, methods, and challenges</a><span>Taxonomía de modalidades 2D/ToF/luz estructurada/LiDAR/estéreo, MAPE 4,72 % con nube de puntos, MAPE 8,4 % con CNN sobre RGB-D, R² 0,96 y RMSE 20 kg con Mask R-CNN, y desafíos de postura, iluminación y escasez de datos.</span></li>
+            <li><a href="https://www.mdpi.com/2077-0472/14/2/306">Computer Vision-Based Measurement Techniques for Livestock Body Dimension and Weight (Agriculture, 2024)</a><span>Comparación de cámaras de profundidad, sensibilidad a la luz, y limitación de los métodos 2D para medir perímetros.</span></li>
+            <li><a href="https://www.mdpi.com/2504-446X/9/2/84">Body Weight Estimation of Cattle Using UAV-Based LiDAR Point Clouds (Drones, 2025)</a><span>DJI M300 RTK + Zenmuse L1, 8–15 m, 96 Simmental cruza; R² 0,94 y RMSE 6,33 kg parados, R² 0,71 echados.</span></li>
+            <li><a href="https://vytelle.com/tools/accuracy-of-vytelle-sense-in-pen-weighing">Vytelle · Accuracy of SENSE In-Pen Weighing</a><span>RMSE 10,47 kg sobre 4.109 registros, 18 razas, 142–630 kg; y la referencia de ~19 kg de error entre pesadas de manga en días consecutivos.</span></li>
+            <li><a href="https://www.nature.com/articles/s41598-026-54742-3">PickAMoo: LiDAR-enhanced Mask R-CNN segmentation for weight estimation using smartphone imaging (Scientific Reports)</a><span>LiDAR de iPhone a ~2 m, 248 vacas, F1 0,98 de segmentación, 95,8 % de acierto en clasificación por bandas, y advertencias sobre reflectancia y transferencia entre razas.</span></li>
+            <li><a href="https://www.mdpi.com/2077-0472/15/18/1970">Knowledge-Enhanced Deep Learning for Identity-Preserved Multi-Camera Cattle Tracking (Agriculture, 2025)</a><span>YOLOv11x-pose + ByteTrack + reconocimiento facial bovino; precisión de asociación 84,5 % sobre más de 600.000 imágenes.</span></li>
+            <li><a href="https://www.mdpi.com/2076-3417/16/14/7257">A Portable Solar-Powered Edge-AI System for Livestock Monitoring in Off-Grid Mountain Pastures</a><span>Jetson Orin NX, ~75 W de consumo, 880 W solar, batería de 1,6 kWh, latencia &lt;3 s, y el hallazgo de que el switch PoE consume más que el módulo de inferencia.</span></li>
+            <li><a href="https://aab.copernicus.org/articles/52/371/2009/">The accuracy of prediction of body weight from body measurements in beef cattle (Archives Animal Breeding)</a><span>Perímetro torácico como mejor predictor único, con R² entre 0,607 y 0,911 según grupo racial, y degradación al aumentar el tamaño de estructura. <strong>Advertencia:</strong> los grupos del estudio son Holstein, Brown Swiss y cruzas — razas lecheras. La magnitud de la dispersión entre razas es lo transferible; los coeficientes no.</span></li>
+            <li><a href="https://infonegocios.biz/infoagro/ganaderia-la-startup-uruguaya-que-pesa-ganado-con-ia-prueba-su-tecnologia-en-australia-y-ee-uu">GanaderIA · estimación de peso con drones comerciales</a><span>Uso de drones DJI sin sensores adicionales y necesidad declarada de reentrenar el modelo por raza.</span></li>
+            <li><a href="https://www.optiweigh.com.au/our-story/">Optiweigh · pesaje en potrero</a><span>Plataforma parcial con atrayente y EID como referente de estación autónoma con identidad.</span></li>
+            <li><a href="https://olhododono.agr.br/">Olho do Dono</a><span>Referente regional de pesaje por cámara 3D con visión artificial.</span></li>
+            <li><a href="https://cattleeye.com/">CattleEye</a><span>Cámara 2D cenital para condición corporal y locomoción; referencia de producto maduro con identificación visual.</span></li>
+            <li><a href="https://www.cambridge.org/core/journals/animal-science/article/abs/gut-fill-in-cattle-effect-of-pasture-quality-on-fasting-losses/93C4AFE5E0FD41FECB3202FE1DE8FCF0">Gut fill in cattle: effect of pasture quality on fasting losses (Animal Science)</a><span>Base del argumento sobre variabilidad del peso vivo lleno y pérdidas por desbaste.</span></li>
+          </ul>
+          <div class="callout callout--warning" style="margin-top:2rem">
+            <strong>Nota de trazabilidad.</strong> Las cifras de proveedores (Vytelle, Optiweigh, Olho do Dono, GanaderIA, CattleEye) son afirmaciones publicadas por la empresa o por prensa especializada, no validaciones independientes en este contexto. Las cifras académicas provienen de rodeos, razas y condiciones distintas a las del objetivo, y se citan como techo optimista.
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">Análisis técnico · v1.0 · 23 ago 2026 · Complementado por los documentos de supuestos y preguntas.</footer>
+</body>
+</html>

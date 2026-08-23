@@ -1,0 +1,342 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Supuestos técnicos declarados detrás del análisis de estimación de peso bovino sin balanza con asociación a caravana RFID del SNIG.">
+  <title>Supuestos del análisis técnico</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="analisis.html"><span class="brand__mark">kg</span><span class="brand__text">Peso sin balanza</span></a>
+      <nav class="nav" aria-label="Documentos">
+        <a href="analisis.html">Análisis</a>
+        <a href="supuestos.html" aria-current="page">Supuestos</a>
+        <a href="preguntas.html">Preguntas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero--compact">
+      <div>
+        <p class="breadcrumbs"><a href="analisis.html">Análisis técnico</a> · Supuestos</p>
+        <p class="eyebrow">Lo que este análisis dio por cierto</p>
+        <h1>Veintiún supuestos, cada uno con su forma de caerse.</h1>
+        <p class="lede">El análisis técnico no es neutral: descansa sobre afirmaciones que no fueron verificadas en el rodeo objetivo. Cada una se declara acá con su nivel de confianza, la base que la sostiene, qué se rompe si es falsa y cómo comprobarla.</p>
+      </div>
+      <aside class="meta-card">
+        <dl>
+          <dt>Supuestos</dt><dd>21</dd>
+          <dt>Confianza alta</dt><dd>5</dd>
+          <dt>Confianza media</dt><dd>8</dd>
+          <dt>Confianza baja</dt><dd>8</dd>
+          <dt>Actualizado</dt><dd>23 ago 2026</dd>
+        </dl>
+      </aside>
+    </section>
+
+    <div class="layout">
+      <aside class="toc">
+        <strong>Bloques</strong>
+        <a href="#objetivo">A · Objetivo y exactitud</a>
+        <a href="#sensado">B · Sensado</a>
+        <a href="#modelo">C · Modelo y datos</a>
+        <a href="#identidad">D · Identidad y RFID</a>
+        <a href="#operacion">E · Operación</a>
+        <a href="#lectura">Cómo usar esto</a>
+      </aside>
+
+      <div class="content">
+
+        <section class="section" id="lectura">
+          <p class="eyebrow">Cómo leer</p>
+          <h2>Un supuesto no es un hecho ni una opinión</h2>
+          <p class="section-intro">Es una afirmación que el análisis necesita para sostenerse, que todavía no fue verificada en este rodeo, y que puede comprobarse. Si un supuesto de confianza baja resulta falso, no se ajusta un parámetro: cambia la arquitectura.</p>
+          <div class="grid grid--3">
+            <div class="card card--strong"><h4>Confianza alta</h4><p>Respaldado por fuente oficial, norma técnica o física del sensor. Falsarlo requeriría evidencia fuerte.</p></div>
+            <div class="card card--warm"><h4>Confianza media</h4><p>Respaldado por literatura o práctica de otros contextos. Transferible en principio, no verificado acá.</p></div>
+            <div class="card card--risk"><h4>Confianza baja</h4><p>Razonamiento propio o extrapolación. Es donde conviene invertir primero el esfuerzo de verificación.</p></div>
+          </div>
+        </section>
+
+        <!-- A -->
+        <section class="section" id="objetivo">
+          <p class="eyebrow">Bloque A</p>
+          <h2>Objetivo y exactitud</h2>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-01</span><span class="tag tag--vendor">Confianza media</span></div>
+            <h3>La magnitud de interés es peso vivo lleno, no peso desbastado ni carcasa</h3>
+            <p>Se asume que el usuario quiere reemplazar la pesada de rutina de manga, no la pesada comercial de venta ni la predicción de rendimiento de carcasa.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Es la medición más frecuente en manejo de recría y engorde.</dd></div>
+              <div><dt>Si es falso</dt><dd>Si el objetivo es peso de venta, se agrega el problema de modelar el desbaste, que no es observable ópticamente. Cambia el producto.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Preguntar qué decisión concreta se toma hoy con la balanza y con qué frecuencia.</dd></div>
+            </dl>
+          </div>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-02</span><span class="tag tag--inference">Confianza baja</span></div>
+            <h3>Un error de 10–20 kg por animal es útil para el usuario</h3>
+            <p>Se asume que existe una banda de exactitud entre “inútil” y “balanza” donde el producto tiene valor, y que ronda el 3–5 % del peso vivo.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Es lo que la literatura y los referentes comerciales alcanzan hoy en condiciones favorables.</dd></div>
+              <div><dt>Si es falso</dt><dd>Si el usuario solo acepta exactitud de balanza, ninguna tecnología óptica actual sirve y el proyecto debería reorientarse a pesaje parcial con celdas de carga.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Presentar la serie de un animal real con banda de error y preguntar qué decisión tomaría con ella.</dd></div>
+            </dl>
+          </div>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-03</span><span class="tag tag--verified">Confianza alta</span></div>
+            <h3>El referente de balanza tiene ruido propio del orden de ±19 kg día a día</h3>
+            <p>Se asume que la propia pesada de manga varía por llenado ruminal, hora del día y acceso a agua, y que eso fija un piso al error medible.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Cifra publicada por Vytelle para pesadas de manga en días consecutivos; consistente con la literatura de <em>gut fill</em>.</dd></div>
+              <div><dt>Si es falso</dt><dd>Si la balanza fuera más repetible, las métricas del sistema óptico serían peores de lo estimado, no mejores.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Pesar el mismo lote dos días seguidos a la misma hora y medir la dispersión propia.</dd></div>
+            </dl>
+          </div>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-04</span><span class="tag tag--inference">Confianza baja</span></div>
+            <h3>La frecuencia de medición vale más que la exactitud puntual</h3>
+            <p>Se asume que medir todos los días con ±20 kg es más valioso que medir cada 60 días con ±3 kg, porque la tendencia filtra el ruido.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Es la propuesta de valor de los sistemas de estación autónoma tipo Optiweigh y Vytelle.</dd></div>
+              <div><dt>Si es falso</dt><dd>Si la decisión del usuario es puntual (vender este animal hoy), la frecuencia no compensa y el producto pierde sentido.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Reconstruir con datos históricos qué decisión habría cambiado con una serie diaria ruidosa.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <!-- B -->
+        <section class="section" id="sensado">
+          <p class="eyebrow">Bloque B</p>
+          <h2>Sensado</h2>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-05</span><span class="tag tag--verified">Confianza alta</span></div>
+            <h3>Los sensores de profundidad por infrarrojo activo se degradan bajo sol directo</h3>
+            <p>Luz estructurada, estéreo activo IR y ToF pierden señal cuando el fondo infrarrojo solar satura el detector.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Física del sensor y limitación documentada en las revisiones de visión aplicada a ganado.</dd></div>
+              <div><dt>Si es falso</dt><dd>Se abriría la opción de capturar a cielo abierto sin techar, bajando el CAPEX del portal fijo.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Medir densidad de nube válida del mismo animal a las 8, 13 y 18 h en enero.</dd></div>
+            </dl>
+          </div>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-06</span><span class="tag tag--inference">Confianza baja</span></div>
+            <h3>El pelaje negro del Angus degrada significativamente estéreo pasivo y fotogrametría</h3>
+            <p>Se asume que la falta de textura visual y la baja reflectancia rompen la correspondencia entre vistas.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Principio de funcionamiento del estéreo por correspondencia. No se halló un estudio específico sobre Angus negro.</dd></div>
+              <div><dt>Si es falso</dt><dd>Se habilitaría estéreo pasivo y dron RGB, las opciones más baratas y más robustas al sol.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Comparar densidad y ruido de nube entre un Angus negro, un Angus colorado y un Hereford en la misma escena y hora. Es la prueba de banco más barata y más informativa de todo el proyecto.</dd></div>
+            </dl>
+          </div>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-07</span><span class="tag tag--vendor">Confianza media</span></div>
+            <h3>El LiDAR es indiferente a la luz ambiente pero no al color del pelaje</h3>
+            <p>Se asume retorno reducido en pelo negro y especialmente en pelo negro mojado, sin que eso impida la medición.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Comportamiento conocido de la reflectancia NIR en superficies oscuras y húmedas.</dd></div>
+              <div><dt>Si es falso</dt><dd>Si el retorno cae lo suficiente, el LiDAR pierde su ventaja principal y queda solo con el sobrecosto.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Registrar intensidad de retorno y densidad de puntos por color de pelaje, seco y mojado.</dd></div>
+            </dl>
+          </div>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-08</span><span class="tag tag--vendor">Confianza media</span></div>
+            <h3>Existe un punto de paso natural en el establecimiento objetivo</h3>
+            <p>Manga, callejón, portón de aguada o comedero por el que los animales pasan de a uno con regularidad.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Es la infraestructura habitual en feedlot y en recría intensiva.</dd></div>
+              <div><dt>Si es falso</dt><dd>Toda la arquitectura A y B se cae. Sin paso individual no hay lectura LF, y sin lectura LF no hay identidad oficial.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Visita a campo con relevamiento de recorridos y de frecuencia de paso por punto.</dd></div>
+            </dl>
+          </div>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-09</span><span class="tag tag--inference">Confianza baja</span></div>
+            <h3>Un dron comercial puede volar operativamente sobre el rodeo sin alterar su comportamiento</h3>
+            <p>Se asume que los animales toleran el sobrevuelo a 8–20 m y que la regulación aeronáutica local no lo impide en la práctica.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Estudios de LiDAR aéreo en bovinos y operación comercial regional declarada.</dd></div>
+              <div><dt>Si es falso</dt><dd>Los animales se dispersan, la pose deja de ser válida y la topología C queda limitada a conteo.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Prueba de sobrevuelo con registro de reacción y consulta a la autoridad aeronáutica correspondiente.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <!-- C -->
+        <section class="section" id="modelo">
+          <p class="eyebrow">Bloque C</p>
+          <h2>Modelo y datos</h2>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-10</span><span class="tag tag--verified">Confianza alta</span></div>
+            <h3>Un modelo entrenado en otra raza o geografía no transfiere sin recalibración</h3>
+            <p>La morfología racial cambia la relación entre geometría observada y masa.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>R² entre 0,607 y 0,911 <em>según raza</em> en un mismo estudio; los propios operadores regionales declaran reentrenamiento por raza.</dd></div>
+              <div><dt>Si es falso</dt><dd>Sería posible comprar un modelo hecho y ahorrar el costo de dataset. Es el escenario más favorable y el menos probable.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Aplicar un modelo público a un lote local y medir el sesgo.</dd></div>
+            </dl>
+          </div>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-11</span><span class="tag tag--inference">Confianza baja</span></div>
+            <h3>Hacen falta entre 150 y 300 pares imagen–balanza por estrato</h3>
+            <p>Con 18 estratos (3 categorías × 3 grupos raciales × 2 estaciones), implica del orden de 2.700 a 5.400 animales pesados.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Órdenes de magnitud de los datasets publicados; no hay una regla establecida.</dd></div>
+              <div><dt>Si es falso</dt><dd>Si alcanza con mucho menos por transferencia desde un modelo base, el proyecto es mucho más barato. Si hace falta mucho más, el costo de entrada puede ser prohibitivo para un actor pequeño.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Curva de aprendizaje: entrenar con 25 %, 50 % y 100 % del dato disponible y ver si el error se estabiliza.</dd></div>
+            </dl>
+          </div>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-12</span><span class="tag tag--vendor">Confianza media</span></div>
+            <h3>La morfometría explícita es preferible al extremo a extremo en la etapa inicial</h3>
+            <p>Se asume que la interpretabilidad y la baja necesidad de datos pesan más que el mejor error alcanzable.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>La literatura muestra que los modelos profundos ganan cuando hay mucho dato, que es exactamente lo que falta al principio.</dd></div>
+              <div><dt>Si es falso</dt><dd>Se pierde tiempo en una arquitectura intermedia que después habrá que reemplazar.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Entrenar ambas familias sobre el mismo conjunto reducido y comparar error y estabilidad fuera de distribución.</dd></div>
+            </dl>
+          </div>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-13</span><span class="tag tag--vendor">Confianza media</span></div>
+            <h3>El pelo largo de invierno introduce un sesgo estacional corregible</h3>
+            <p>Se asume que el volumen aparente aumenta sin aumento equivalente de masa, y que el efecto es sistemático y modelable.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Razonamiento físico; el efecto está reconocido en la práctica de campo.</dd></div>
+              <div><dt>Si es falso</dt><dd>Si el efecto fuera errático en lugar de sistemático, obligaría a suspender estimaciones en invierno.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Seguir los mismos animales a lo largo de un ciclo anual completo con pesadas de control.</dd></div>
+            </dl>
+          </div>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-14</span><span class="tag tag--inference">Confianza baja</span></div>
+            <h3>La preñez puede tratarse como covariable en lugar de excluir a la categoría cría</h3>
+            <p>Se asume que conociendo el estado y el tiempo de gestación es posible corregir el peso estimado.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Existen ajustes publicados de peso por condición y estado de gestación.</dd></div>
+              <div><dt>Si es falso</dt><dd>La categoría cría queda fuera del alcance individual y solo admite seguimiento de condición corporal.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Comparar el residuo del modelo entre vacas vacías y preñadas con tacto registrado.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <!-- D -->
+        <section class="section" id="identidad">
+          <p class="eyebrow">Bloque D</p>
+          <h2>Identidad y RFID</h2>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-15</span><span class="tag tag--verified">Confianza alta</span></div>
+            <h3>El dispositivo electrónico del SNIG es HDX en banda LF y solo guarda el número</h3>
+            <p>No hay memoria de usuario disponible: el peso nunca se escribe en la caravana.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Cartelera oficial de identificadores del SNIG y documentación de trazabilidad individual.</dd></div>
+              <div><dt>Si es falso</dt><dd>No cambia nada relevante: escribir en la caravana no sería deseable de todos modos por auditabilidad.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Leer una caravana real con un lector genérico ISO y volcar el contenido.</dd></div>
+            </dl>
+          </div>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-16</span><span class="tag tag--verified">Confianza alta</span></div>
+            <h3>El acoplamiento LF de campo cercano impide la lectura a distancia</h3>
+            <p>Alcance práctico por debajo del metro incluso con antena panel grande. No hay forma de leer la caravana oficial desde un dron o desde una cámara lejana.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Física del acoplamiento inductivo a 134,2 kHz y especificaciones de lectores comerciales.</dd></div>
+              <div><dt>Si es falso</dt><dd>Cambiaría por completo la arquitectura: se podría estimar peso a distancia con identidad oficial.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Medir alcance real con la antena panel más grande disponible, en la manga real, con metal alrededor.</dd></div>
+            </dl>
+          </div>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-17</span><span class="tag tag--vendor">Confianza media</span></div>
+            <h3>HDX no ofrece anticolisión útil en el paso de animales</h3>
+            <p>Dos animales simultáneos frente a la antena producen una lectura perdida o ambigua, no dos lecturas.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Comportamiento conocido de los sistemas de identificación animal ISO en campo.</dd></div>
+              <div><dt>Si es falso</dt><dd>Se relaja el requisito de paso estrictamente individual, simplificando la mecánica.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Prueba de banco con dos caravanas simultáneas a distintas separaciones.</dd></div>
+            </dl>
+          </div>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-18</span><span class="tag tag--inference">Confianza baja</span></div>
+            <h3>La identificación puramente visual no alcanza para trazabilidad oficial</h3>
+            <p>Se asume que la re-identificación por apariencia, con precisión de asociación del orden del 85 % en la literatura, es inadmisible para atar un peso a un número oficial.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Precisión de asociación de 84,5 % en un sistema multicámara con reconocimiento facial bovino sobre más de 600.000 imágenes.</dd></div>
+              <div><dt>Si es falso</dt><dd>Si con Hereford y con OCR de caravana se superara el 99 %, se abriría la topología aérea con identidad, que es el escenario más disruptivo.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Medir tasa de acierto de OCR de caravana visual en el rodeo real, por raza, distancia y estado de suciedad.</dd></div>
+            </dl>
+          </div>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-19</span><span class="tag tag--inference">Confianza baja</span></div>
+            <h3>La situación de identificación en Argentina difiere de la uruguaya</h3>
+            <p>Se asume que el esquema argentino no garantiza caravana electrónica universal equivalente al SNIG, y que por lo tanto la arquitectura de identidad no es directamente portable.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Extrapolación. <strong>Este análisis no verificó el marco argentino vigente</strong> y lo declara como vacío explícito.</dd></div>
+              <div><dt>Si es falso</dt><dd>Si Argentina tuviera caravana electrónica equivalente y universal, el mercado direccionable se multiplica sin cambio técnico.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Revisar la normativa vigente de SENASA sobre identificación bovina y la tasa real de adopción de dispositivos electrónicos.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <!-- E -->
+        <section class="section" id="operacion">
+          <p class="eyebrow">Bloque E</p>
+          <h2>Operación</h2>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-20</span><span class="tag tag--vendor">Confianza media</span></div>
+            <h3>El equipo debe operar sin conectividad durante días</h3>
+            <p>Se asume cobertura celular ausente o intermitente y ausencia de red eléctrica en la mayoría de los puntos de instalación.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Condición habitual del campo uruguayo y argentino; los despliegues de referencia publicados asumen lo mismo.</dd></div>
+              <div><dt>Si es falso</dt><dd>Con conectividad estable se podría inferir en la nube, bajando el costo del equipo de campo de forma sustancial.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Medición de señal y de energía disponible en los puntos candidatos concretos.</dd></div>
+            </dl>
+          </div>
+
+          <div class="assumption">
+            <div class="assumption__head"><span class="assumption__id">S-21</span><span class="tag tag--vendor">Confianza media</span></div>
+            <h3>Un presupuesto energético del orden de 75 W medios es suficiente y solar-viable</h3>
+            <p>Con del orden de 900 W de panel y 1,6 kWh de batería se sostiene operación continua con margen.</p>
+            <dl class="detail-grid">
+              <div><dt>Base</dt><dd>Despliegue publicado y validado en campo con Jetson Orin NX y cámara 8 MP.</dd></div>
+              <div><dt>Si es falso</dt><dd>Un invierno con baja radiación en el sur de Uruguay podría requerir sobredimensionar el arreglo, cambiando el costo por punto.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Simular el balance energético con datos de irradiancia local de junio y julio, no de verano.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="section">
+          <div class="callout callout--risk">
+            <strong>Los tres supuestos a atacar primero.</strong> <strong>S-06</strong> (pelaje negro y estéreo) porque decide qué sensor se compra y es la prueba más barata. <strong>S-08</strong> (existe punto de paso) porque decide si el producto es posible en ese establecimiento. <strong>S-02</strong> (10–20 kg es útil) porque decide si el producto vale algo para alguien. Los tres se responden con una visita a campo y un banco de prueba, no con más lectura.
+          </div>
+          <div class="prev-next">
+            <a href="analisis.html">← Análisis técnico</a>
+            <a href="preguntas.html">Preguntas de contexto →</a>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">Supuestos v1.0 · 23 ago 2026 · Un supuesto que no tiene forma de verificarse no es un supuesto: es una creencia.</footer>
+</body>
+</html>

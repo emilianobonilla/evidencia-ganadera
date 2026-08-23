@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Preguntas de contexto priorizadas para afinar el análisis técnico de estimación de peso bovino sin balanza con identidad RFID SNIG.">
+  <title>Preguntas de contexto</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="analisis.html"><span class="brand__mark">kg</span><span class="brand__text">Peso sin balanza</span></a>
+      <nav class="nav" aria-label="Documentos">
+        <a href="analisis.html">Análisis</a>
+        <a href="supuestos.html">Supuestos</a>
+        <a href="preguntas.html" aria-current="page">Preguntas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero hero--compact">
+      <div>
+        <p class="breadcrumbs"><a href="analisis.html">Análisis técnico</a> · Preguntas</p>
+        <p class="eyebrow">Lo que falta saber</p>
+        <h1>Treinta preguntas que cambian el diseño.</h1>
+        <p class="lede">El análisis es general porque el contexto todavía no está definido. Cada pregunta de esta lista, respondida, elimina ramas enteras del árbol de decisiones técnicas. Están ordenadas por cuánto mueven la aguja, no por comodidad de respuesta.</p>
+      </div>
+      <aside class="meta-card">
+        <dl>
+          <dt>Preguntas</dt><dd>30</dd>
+          <dt>Prioridad 1</dt><dd>11</dd>
+          <dt>Prioridad 2</dt><dd>12</dd>
+          <dt>Prioridad 3</dt><dd>7</dd>
+          <dt>Actualizado</dt><dd>23 ago 2026</dd>
+        </dl>
+      </aside>
+    </section>
+
+    <div class="layout">
+      <aside class="toc">
+        <strong>Bloques</strong>
+        <a href="#uso">A · Uso y decisión</a>
+        <a href="#rodeo">B · Rodeo</a>
+        <a href="#infra">C · Infraestructura</a>
+        <a href="#identidad">D · Identidad</a>
+        <a href="#datos">E · Datos y validación</a>
+        <a href="#restricciones">F · Restricciones</a>
+        <a href="#orden">Orden sugerido</a>
+      </aside>
+
+      <div class="content">
+
+        <section class="section">
+          <p class="eyebrow">Cómo usar esta lista</p>
+          <h2>Cada respuesta cierra ramas</h2>
+          <p class="section-intro">No hay que responderlas todas. Hay que responder las de prioridad 1 antes de comprar cualquier sensor, porque son las que determinan qué sensor comprar. Las de prioridad 3 pueden esperar al piloto.</p>
+          <div class="grid grid--3">
+            <div class="card card--risk"><span class="prio prio--1">Prioridad 1</span><p style="margin-top:.7rem">Bloquea la elección de arquitectura. Sin respuesta, cualquier decisión de hardware es una apuesta.</p></div>
+            <div class="card card--warm"><span class="prio prio--2">Prioridad 2</span><p style="margin-top:.7rem">Ajusta parámetros de diseño y dimensionamiento. Se puede avanzar en paralelo.</p></div>
+            <div class="card card--cool"><span class="prio prio--3">Prioridad 3</span><p style="margin-top:.7rem">Afina el producto. Puede responderse durante el piloto sin costo de retrabajo mayor.</p></div>
+          </div>
+        </section>
+
+        <!-- A -->
+        <section class="section" id="uso">
+          <p class="eyebrow">Bloque A</p>
+          <h2>Uso y decisión</h2>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-01</span><span class="prio prio--1">Prioridad 1</span></div>
+            <h3>¿Qué decisión concreta se toma hoy con la balanza, y cuánto cuesta tomarla mal?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Define el error tolerable, que es el único parámetro que descarta o habilita tecnologías enteras.</dd></div>
+              <div><dt>Qué cambia según la respuesta</dt><dd>“Decidir cuándo vender un corral” admite ±25 kg. “Liquidar un animal” no admite ninguna solución óptica actual.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Entrevista con el responsable de manejo, con números de la última zafra.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-02</span><span class="prio prio--1">Prioridad 1</span></div>
+            <h3>¿El valor está en el peso del individuo o en la distribución del lote?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Son dos productos distintos con sensores, topologías y costos distintos.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Individuo obliga a paso forzado con RFID. Lote habilita dron y cámara a distancia, sin identidad.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Preguntar qué haría con una lista de 300 pesos individuales y qué haría con un histograma del lote.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-03</span><span class="prio prio--1">Prioridad 1</span></div>
+            <h3>¿Se busca reemplazar la balanza o reducir la frecuencia con que se usa?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Si la balanza permanece como instrumento de calibración, el sistema puede ser mucho menos exacto y seguir siendo valioso.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Reemplazo total exige validación mucho más estricta y probablemente no sea alcanzable hoy.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Conversación directa con expectativa explícita sobre exactitud.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-04</span><span class="prio prio--2">Prioridad 2</span></div>
+            <h3>¿Quién consume el resultado: el productor, el técnico asesor, el frigorífico, un fondo o un auditor?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Un auditor exige procedencia verificable del evento; un productor exige un número en el celular.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Auditoría agrega sellado de tiempo, ubicación y cadena de custodia de la evidencia: un subsistema completo.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Mapear los destinatarios del dato antes de definir el formato de salida.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-05</span><span class="prio prio--2">Prioridad 2</span></div>
+            <h3>¿Con qué frecuencia sería útil el dato: diaria, semanal, por evento de manejo?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Determina si hace falta instalación permanente o equipo transportable.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Diaria exige estación fija con energía autónoma. Por evento habilita un equipo móvil mucho más barato.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Revisar el calendario real de encierres, apartes y ventas del último año.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-06</span><span class="prio prio--3">Prioridad 3</span></div>
+            <h3>¿El resultado necesita estar disponible en el momento o puede llegar horas después?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>La inferencia en tiempo real exige acelerador en el borde; la diferida permite hardware mucho más simple.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Si sirve diferido, se puede capturar con equipo barato e inferir en un servidor central.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Preguntar si alguna acción se toma con el animal todavía en la manga.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <!-- B -->
+        <section class="section" id="rodeo">
+          <p class="eyebrow">Bloque B</p>
+          <h2>Rodeo objetivo</h2>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-07</span><span class="prio prio--1">Prioridad 1</span></div>
+            <h3>¿Cuál es la composición racial real y qué proporción es Angus negro?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Es la variable que decide si el estéreo pasivo y la fotogrametría son viables.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Rodeo mayormente Hereford habilita las opciones baratas. Rodeo mayormente Angus negro empuja a ToF o LiDAR.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Registro del establecimiento; verificación visual en la visita.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-08</span><span class="prio prio--1">Prioridad 1</span></div>
+            <h3>¿Cuál es el rango de peso a cubrir y qué categoría domina?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Determina el número de estratos del modelo y por lo tanto el costo del dataset.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Cubrir solo terminación (380–650 kg) es un problema mucho más acotado que cubrir de 140 a 650 kg.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Distribución de pesos de los últimos encierres.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-09</span><span class="prio prio--2">Prioridad 2</span></div>
+            <h3>¿Cuántos animales por lote y cuántos lotes simultáneos?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Define el <em>throughput</em> requerido del punto de paso y cuántas unidades hacen falta.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Un punto para 300 animales es distinto a un punto para 5.000: cambia el diseño mecánico y la cadencia de captura.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Relevamiento de corrales y de capacidad instalada.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-10</span><span class="prio prio--2">Prioridad 2</span></div>
+            <h3>¿Qué proporción del rodeo tiene caravana electrónica funcional en un momento dado?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Es la cota superior de la cobertura del sistema con identidad oficial.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Si hay 5 % de pérdida de caravanas, hace falta una segunda vía de identificación y una cola de excepciones que la operación tiene que atender.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Pasar un lote conocido por un bastón lector y contar las no leídas.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-11</span><span class="prio prio--2">Prioridad 2</span></div>
+            <h3>¿Hay vacas preñadas dentro del alcance del sistema, y se conoce su estado?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Sin dato de gestación, la categoría cría genera residuos grandes e inexplicables.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Con tacto registrado, la preñez es una covariable. Sin él, hay que excluir la categoría o aceptar el error.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Consultar si los diagnósticos de gestación están digitalizados y asociados al número SNIG.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-12</span><span class="prio prio--3">Prioridad 3</span></div>
+            <h3>¿Se esquila, y en qué momento del año?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Cambia el volumen aparente de forma abrupta y datada.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Si hay una fecha conocida, el salto de calibración puede anticiparse en vez de descubrirse como deriva.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Calendario de manejo del establecimiento.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <!-- C -->
+        <section class="section" id="infra">
+          <p class="eyebrow">Bloque C</p>
+          <h2>Infraestructura y entorno</h2>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-13</span><span class="prio prio--1">Prioridad 1</span></div>
+            <h3>¿Existe un punto por donde los animales pasen de a uno, y con qué frecuencia?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Sin paso individual no hay lectura LF, y sin lectura LF no hay peso trazable a la caravana oficial.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Si no existe, hay que construirlo (obra y costo) o renunciar a la identidad individual.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Visita a campo: fotografiar y medir manga, callejón, aguadas y comederos.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-14</span><span class="prio prio--1">Prioridad 1</span></div>
+            <h3>¿Hay energía eléctrica de red en ese punto, o hay que ir a solar?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Cambia el presupuesto energético completo y por lo tanto qué sensor y qué cómputo son viables.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Con red, un LiDAR y un módulo de inferencia potente son triviales. Sin red, todo se dimensiona alrededor de ~75 W medios.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Relevamiento eléctrico del punto candidato.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-15</span><span class="prio prio--1">Prioridad 1</span></div>
+            <h3>¿Es posible techar o sombrear el punto de captura?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Decide si los sensores de profundidad por IR activo, que son los más maduros y baratos, quedan dentro o fuera del juego.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Con techo: ToF y estéreo activo. Sin techo: estéreo pasivo con sus problemas de textura, o LiDAR con su costo.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Inspección del punto y consulta sobre restricciones estructurales o de manejo.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-16</span><span class="prio prio--2">Prioridad 2</span></div>
+            <h3>¿Qué cobertura celular hay realmente en el punto, medida y no supuesta?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Determina si la sincronización es continua, diaria o manual por visita.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Sin cobertura, hay que dimensionar almacenamiento local para semanas y definir un procedimiento de descarga.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Medición con módem en el lugar exacto, a la altura de instalación.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-17</span><span class="prio prio--2">Prioridad 2</span></div>
+            <h3>¿Cuánta agua, barro y polvo hay en el punto según la estación?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Define el grado de protección del gabinete, la frecuencia de limpieza de ópticas y el sesgo estacional del modelo.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Un corral que se transforma en barrial en julio puede exigir una posición de sensor distinta o suspender operación.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Fotos del mismo punto en invierno y en verano.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-18</span><span class="prio prio--3">Prioridad 3</span></div>
+            <h3>¿Quién mantiene el equipo y con qué nivel técnico?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Determina cuánto autodiagnóstico hay que desarrollar y cuán tolerante debe ser el sistema a la falta de intervención.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Sin personal técnico, el equipo debe detectar y reportar su propia degradación en lenguaje llano.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Conocer al personal que efectivamente estará en el corral.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <!-- D -->
+        <section class="section" id="identidad">
+          <p class="eyebrow">Bloque D</p>
+          <h2>Identidad y trazabilidad</h2>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-19</span><span class="prio prio--1">Prioridad 1</span></div>
+            <h3>¿Cuál es el alcance real de lectura de la caravana SNIG con una antena panel en la manga concreta?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Es el parámetro que fija la geometría física de todo el punto de captura.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Si el alcance útil con metal alrededor cae a 40 cm, el animal tiene que pasar mucho más cerca de lo previsto y la posición de la cámara cambia.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Medición en la manga real, con la estructura metálica presente, no en banco limpio.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-20</span><span class="prio prio--1">Prioridad 1</span></div>
+            <h3>¿Se acepta agregar un segundo identificador (UHF o BLE) al animal, o la caravana oficial es la única vía?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Un identificador UHF con alcance de varios metros habilitaría estimar peso sin paso forzado, la topología más deseable.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Con segunda caravana se abre la captura a distancia; sin ella, todo el diseño queda anclado al paso individual.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Preguntar por costo aceptable por animal y por tolerancia a un manejo adicional de colocación.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-21</span><span class="prio prio--2">Prioridad 2</span></div>
+            <h3>¿Qué situación regulatoria y de adopción tiene la identificación bovina en Argentina hoy?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>El análisis asumió que difiere del SNIG uruguayo, sin verificarlo. Es un vacío declarado.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Si hay caravana electrónica equivalente y difundida, la arquitectura es portable sin cambios. Si no, Argentina requiere una vía de identidad distinta.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Revisión de normativa vigente de SENASA y consulta a operadores argentinos sobre adopción real.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-22</span><span class="prio prio--2">Prioridad 2</span></div>
+            <h3>¿Qué tasa de error de asociación se considera aceptable?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Es distinto un sistema informativo que uno que alimenta una auditoría o un financiamiento.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Si se exige menos de 1 en 1.000, hay que agregar sensor de presencia independiente y descartar agresivamente eventos ambiguos.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Definirlo con el consumidor final del dato antes de diseñar la mecánica.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-23</span><span class="prio prio--2">Prioridad 2</span></div>
+            <h3>¿Qué pasa operativamente con un animal sin lectura: se descarta, se estima igual, o se resuelve manualmente?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Define si hace falta una interfaz de excepciones y quién la atiende.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Si nadie va a atender excepciones, el sistema debe descartar en silencio y reportar cobertura, en vez de acumular una cola que nadie mira.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Observar cómo se resuelve hoy una caravana ilegible en la práctica.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-24</span><span class="prio prio--3">Prioridad 3</span></div>
+            <h3>¿Los datos de peso deben integrarse con algún sistema existente?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Define formatos de exportación e interfaces, y si el número SNIG alcanza como clave de unión.</dd></div>
+              <div><dt>Qué cambia</dt><dd>La integración con un sistema de gestión existente puede ser más determinante para la adopción que la exactitud del peso.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Inventario de software en uso y de sus capacidades de importación.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <!-- E -->
+        <section class="section" id="datos">
+          <p class="eyebrow">Bloque E</p>
+          <h2>Datos y validación</h2>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-25</span><span class="prio prio--1">Prioridad 1</span></div>
+            <h3>¿Hay acceso a una balanza confiable y a animales para construir el conjunto de referencia?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Sin pares imagen–peso reales del rodeo objetivo, no hay modelo posible. Es el insumo crítico del proyecto.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Sin acceso, el proyecto no arranca por más sensores que se compren.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Acordar con un establecimiento el uso de sus eventos de pesada de rutina para capturar en paralelo.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-26</span><span class="prio prio--2">Prioridad 2</span></div>
+            <h3>¿Existen datos históricos de pesadas asociadas a número SNIG?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Permiten estimar la variabilidad real del rodeo y validar hipótesis antes de instalar nada.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Con histórico se puede simular qué habría aportado el sistema y dimensionar el valor antes de invertir.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Solicitar exportación de las balanzas o del software de gestión en uso.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-27</span><span class="prio prio--2">Prioridad 2</span></div>
+            <h3>¿Se registran covariables junto a la pesada: condición corporal, dieta, horas de ayuno?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Son las variables que explican los residuos del modelo y permiten corregir sesgos sistemáticos.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Sin ellas, buena parte del error quedará inexplicado y no habrá manera de mejorar el modelo.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Revisar el formulario de registro actual y proponer campos adicionales.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-28</span><span class="prio prio--3">Prioridad 3</span></div>
+            <h3>¿Se puede conservar la captura cruda o hay restricciones de almacenamiento o privacidad?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Guardar el original permite recalibrar modelos hacia atrás y sostener una auditoría.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Si no se puede conservar, cada mejora de modelo exige recapturar datos desde cero.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Definir política de retención y dimensionar almacenamiento en consecuencia.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <!-- F -->
+        <section class="section" id="restricciones">
+          <p class="eyebrow">Bloque F</p>
+          <h2>Restricciones del proyecto</h2>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-29</span><span class="prio prio--3">Prioridad 3</span></div>
+            <h3>¿Cuál es el techo de costo por punto de captura y por animal medido?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Separa el LiDAR del ToF y el portal fijo del equipo transportable.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Un techo bajo obliga a RGB 2D calibrado con geometría fija, aceptando peor exactitud.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Comparar contra el costo actual de una jornada de pesada con personal y estrés animal.</dd></div>
+            </dl>
+          </div>
+
+          <div class="question">
+            <div class="question__head"><span class="question__id">P-30</span><span class="prio prio--3">Prioridad 3</span></div>
+            <h3>¿Hay restricciones para volar drones sobre el establecimiento?</h3>
+            <dl class="detail-grid">
+              <div><dt>Por qué importa</dt><dd>Condiciona la topología aérea, que es la única que da cobertura total sin infraestructura.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Restricciones aeronáuticas o de operador certificado pueden hacer inviable la operación recurrente.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Consultar la normativa aeronáutica aplicable y verificar quién operaría el equipo.</dd></div>
+            </dl>
+          </div>
+        </section>
+
+        <section class="section" id="orden">
+          <p class="eyebrow">Recomendación</p>
+          <h2>Orden sugerido para responderlas</h2>
+          <div class="steps">
+            <div class="step"><div><h3>Conversación de encuadre (P-01, P-02, P-03)</h3><p>Una hora con el responsable del rodeo define si el producto es de individuo o de lote, y cuál es el error tolerable. Sin esto, todo lo demás es prematuro.</p></div></div>
+            <div class="step"><div><h3>Visita a campo (P-07, P-08, P-13, P-14, P-15, P-17)</h3><p>Una recorrida con cámara y cinta métrica responde de una vez composición racial, punto de paso, energía, sombra y condiciones estacionales.</p></div></div>
+            <div class="step"><div><h3>Banco de prueba de RFID (P-10, P-19)</h3><p>Un lector prestado y un lote conocido dan alcance real, tasa de caravanas perdidas y comportamiento con metal en menos de una jornada.</p></div></div>
+            <div class="step"><div><h3>Banco de prueba óptico (S-06 del registro de supuestos)</h3><p>Un Angus negro, un Angus colorado y un Hereford frente a tres sensores distintos, a tres horas del día. Es la prueba que decide la compra.</p></div></div>
+            <div class="step"><div><h3>Acuerdo de datos (P-25, P-26, P-27)</h3><p>Asegurar acceso a balanza e histórico antes de comprometerse con cualquier promesa de exactitud.</p></div></div>
+            <div class="step"><div><h3>Verificación regulatoria (P-21, P-30)</h3><p>Marco argentino de identificación y normativa de drones: dos consultas documentales que cierran vacíos declarados del análisis.</p></div></div>
+          </div>
+
+          <div class="prev-next">
+            <a href="supuestos.html">← Supuestos</a>
+            <a href="analisis.html">Análisis técnico →</a>
+          </div>
+        </section>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="footer">Preguntas v1.0 · 23 ago 2026 · Las de prioridad 1 se responden con una visita y dos bancos de prueba, no con más búsqueda bibliográfica.</footer>
+</body>
+</html>
