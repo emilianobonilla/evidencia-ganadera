@@ -29,7 +29,7 @@
       </div>
       <aside class="meta-card">
         <dl>
-          <dt>Versión</dt><dd>0.5</dd>
+          <dt>Versión</dt><dd>0.6</dd>
           <dt>Supuestos</dt><dd>28</dd>
           <dt>Críticos</dt><dd>16</dd>
           <dt>Actualizados con respuestas</dt><dd>15</dd>
@@ -72,7 +72,7 @@
           </article>
 
           <article class="assumption" id="s02">
-            <div class="assumption__head"><div><span class="assumption__id">S02</span><h3>La primera etapa no requiere integración directa con SNIG.</h3></div><span class="tag tag--verified">Decisión del proyecto</span></div>
+            <div class="assumption__head"><div><span class="assumption__id">S02</span><h3>El producto no requiere integración directa con SNIG para empezar.</h3></div><span class="tag tag--verified">Decisión del proyecto</span></div>
             <p>Se podrá cargar o importar el universo de animales por medios autorizados y mantener una capa productiva independiente.</p>
             <dl class="detail-grid"><div><dt>Base</dt><dd>Restricción explícita del usuario.</dd></div><div><dt>Si cambiara</dt><dd>Habría que investigar APIs, permisos y sincronización oficial.</dd></div><div><dt>Revisión</dt><dd>Al definir altas, ventas y movimientos.</dd></div></dl>
           </article>
@@ -132,7 +132,7 @@
           <article class="assumption" id="s10">
             <div class="assumption__head"><div><span class="assumption__id">S10 · CRÍTICO</span><h3>La mayoría de los animales objetivo conserva una caravana electrónica legible.</h3></div><span class="tag tag--open">Baja confianza</span></div>
             <p>Pérdidas, daños, duplicidades operativas o errores de registro no dominarán el flujo.</p>
-            <p><strong>Precisión de la v0.5:</strong> Uruguay habilita dos tecnologías de caravana electrónica —HDX y FDX‑B, ambas bajo ISO 11784/11785—, de modo que un rodeo real puede mezclarlas según el año y el proveedor del tag. El lector propio debe soportar las dos, y la diligencia con proveedores no puede limitarse a preguntar por HDX.</p>
+            <p><strong>Precisión:</strong> Uruguay habilita dos tecnologías de caravana electrónica —HDX y FDX‑B, ambas bajo ISO 11784/11785—, de modo que un rodeo real puede mezclarlas según el año y el proveedor del tag. El lector propio debe soportar las dos, y la diligencia con proveedores no puede limitarse a preguntar por HDX.</p>
             <dl class="detail-grid"><div><dt>Base</dt><dd>La identificación es obligatoria, pero la calidad en campo no fue medida. <a href="https://ainfo.inia.uy/digital/bitstream/item/11293/1/Brito-G..pdf">INIA · identificación electrónica en Uruguay</a>.</dd></div><div><dt>Si fuera falso</dt><dd>Se necesita manejo explícito de identidad incierta y reidentificación.</dd></div><div><dt>Pregunta</dt><dd><a href="preguntas.html#q09">Q09 · calidad de lectura</a></dd></div></dl>
           </article>
 
@@ -202,10 +202,10 @@
           </article>
 
           <article class="assumption" id="s21">
-            <div class="assumption__head"><div><span class="assumption__id">S21 · CRÍTICO · REVISADO</span><h3>La secuencia comercial es feedlot primero y auditoría financiera después.</h3></div><span class="tag tag--verified">Confirmado</span></div>
-            <p>El feedlot valida conteo, identidad y tendencia de peso en operación continua. Luego, esos componentes y su evidencia se adaptan a fondos y fideicomisos ganaderos.</p>
-            <p><strong>Tensión abierta en la v0.5:</strong> la secuencia se justificó por razones operativas, no comerciales. El diferencial defendible del producto —evidencia con procedencia— pesa más en la etapa 2 que en la etapa 1, y la demanda de la etapa 2 se manifestó antes de lo previsto (ver <a href="#s28">S28</a>). La secuencia no se revierte, pero las entrevistas de la etapa 2 dejan de ser “después” y pasan a ejecutarse en paralelo.</p>
-            <dl class="detail-grid"><div><dt>Evidencia</dt><dd>Respuesta Q31 del 23 ago 2026.</dd></div><div><dt>Implicación</dt><dd>El primer piloto e investigación de campo ocurren en encierro; la validación comercial de auditoría avanza en paralelo.</dd></div><div><dt>Pendiente</dt><dd><a href="preguntas.html#q02">Escala y ritmo concretos</a></dd></div></dl>
+            <div class="assumption__head"><div><span class="assumption__id">S21 · CRÍTICO · REVISADO</span><h3>La prioridad comercial es la vía de fondos ganaderos; el feedlot es sostén y banco de pruebas.</h3></div><span class="tag tag--verified">Revisado</span></div>
+            <p>La verificación de existencias para fondos y fideicomisos es hoy la apuesta comercial: la ventana regulatoria está abierta y el estándar probatorio se está definiendo. Ver <a href="fondos.html">la vía de fondos</a>.</p>
+        <p>El feedlot conserva dos funciones que ninguna otra parte del proyecto cumple: aporta ingreso recurrente y es el único lugar donde se genera, con balanza sincronizada, la verdad de referencia de peso por raza y categoría uruguayas que vuelve defendible la estimación visual de un informe de auditoría. Ver <a href="feedlot.html">la vía de feedlot</a>.</p>
+            <dl class="detail-grid"><div><dt>Evidencia</dt><dd>Respuesta Q31 del 23 ago 2026.</dd></div><div><dt>Implicación</dt><dd>El piloto técnico y la investigación de campo ocurren en encierro; la validación comercial ocurre con fiduciarios, bancos, síndicos y el regulador.</dd></div><div><dt>Pendiente</dt><dd><a href="preguntas.html#q02">Escala y ritmo concretos</a></dd></div></dl>
           </article>
 
           <article class="assumption" id="s22">
@@ -265,8 +265,8 @@
                 <tr><td>Dron como capa de lote</td><td><a href="#s14">S14</a>, <a href="#s16">S16</a></td><td>Si se demuestra reidentificación individual confiable o la operación aérea no es viable.</td></tr>
                 <tr><td>Relaciones como módulo separado</td><td><a href="#s15">S15</a>, <a href="#s16">S16</a></td><td>Si basta la convivencia por lote/potrero o surge un caso de alto valor.</td></tr>
                 <tr><td>Offline con procesamiento diferido</td><td><a href="#s06">S06</a>, <a href="#s18">S18</a></td><td>Si se exige resultado inmediato sin conectividad o nube no aceptable.</td></tr>
-                <tr><td>Feedlot como primer producto</td><td><a href="#s21">S21</a>, <a href="#s23">S23</a>, <a href="#s24">S24</a></td><td>Si el flujo no alcanza cobertura individual o no mejora decisiones del encierro.</td></tr>
-                <tr><td>Auditoría financiera como segunda etapa</td><td><a href="#s21">S21</a>, <a href="#s22">S22</a>, <a href="#s25">S25</a>, <a href="#s28">S28</a></td><td>Si nadie paga por la evidencia pese al problema probado, o si la regulación fija un mínimo que no la requiere.</td></tr>
+                <tr><td>Feedlot como vía de sostén y banco de pruebas</td><td><a href="#s21">S21</a>, <a href="#s23">S23</a>, <a href="#s24">S24</a></td><td>Si el flujo no alcanza cobertura individual o no mejora decisiones del encierro.</td></tr>
+                <tr><td>Fondos ganaderos como vía principal</td><td><a href="#s21">S21</a>, <a href="#s22">S22</a>, <a href="#s25">S25</a>, <a href="#s28">S28</a></td><td>Si nadie paga por la evidencia pese al problema probado, o si la regulación fija un mínimo que no la requiere.</td></tr>
                 <tr><td>Confianza anclada en el aparato</td><td><a href="#s19">S19</a>, <a href="#s22">S22</a>, <a href="#s25">S25</a>, <a href="#s26">S26</a></td><td>Si la procedencia técnica no es aceptada o no resiste sustitución/replay.</td></tr>
                 <tr><td>Paso individual como núcleo físico</td><td><a href="#s08">S08</a>, <a href="#s26">S26</a>, <a href="#s27">S27</a></td><td>Si el caudal o bienestar requerido no puede alcanzarse a costo razonable.</td></tr>
                 <tr><td>Dos modalidades tecnológicas</td><td><a href="#s04">S04</a>, <a href="#s23">S23</a>, <a href="#s24">S24</a></td><td>Si un mismo flujo demuestra cubrir campaña puntual y monitoreo continuo con costo razonable.</td></tr>
@@ -282,7 +282,8 @@
             <table>
               <thead><tr><th>Fecha</th><th>Versión</th><th>Cambio</th><th>Motivo</th></tr></thead>
               <tbody>
-                <tr><td>23 ago 2026</td><td>0.5</td><td>S10 precisado (HDX y FDX‑B); S21 con tensión de secuencia declarada; creación de S28.</td><td>Revisión externa con verificación independiente.</td></tr>
+                <tr><td>23 ago 2026</td><td>0.6</td><td>S02 y S21 reescritos: la prioridad comercial pasa a la vía de fondos ganaderos y el feedlot queda como sostén y banco de pruebas.</td><td>Separación de los dos enfoques en documentos propios.</td></tr>
+            <tr><td>23 ago 2026</td><td>0.5</td><td>S10 precisado (HDX y FDX‑B); S21 con tensión de secuencia declarada; creación de S28.</td><td>Revisión externa con verificación independiente.</td></tr>
                 <tr><td>23 ago 2026</td><td>0.4</td><td>S08 confirmado; creación de S27.</td><td>Respuesta Q05.</td></tr>
                 <tr><td>23 ago 2026</td><td>0.3</td><td>S19, S21, S22 y S24 revisados; creación de S25–S26.</td><td>Respuestas Q31, Q32, Q33 y Q36.</td></tr>
                 <tr><td>23 ago 2026</td><td>0.2</td><td>S03, S04, S06, S11 y S19 actualizados; creación de S21–S24.</td><td>Respuestas Q01, Q02, Q03, Q06 y Q08.</td></tr>
@@ -296,6 +297,6 @@
     </div>
   </main>
 
-  <footer class="footer">Documento 02 · Supuestos · versión 0.5 · <a href="preguntas.html">continuar con preguntas</a></footer>
+  <footer class="footer">Documento 02 · Supuestos · versión 0.6 · <a href="preguntas.html">continuar con preguntas</a></footer>
 </body>
 </html>

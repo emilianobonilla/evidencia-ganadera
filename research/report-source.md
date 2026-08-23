@@ -1,7 +1,7 @@
-# Mapa competitivo para Ganadería aumentada (Smart Weight)
+# Mapa competitivo para Ganadería aumentada
 
 **Audiencia:** equipo fundador y de producto  
-**Versión:** 0.6 — separa los dos enfoques comerciales sobre la base de la revisión externa de la v0.5  
+**Versión:** 0.6 — dos vías separadas: fondos ganaderos y feedlot  
 **Fecha de corte:** 23 de agosto de 2026  
 **Geografía primaria:** Uruguay  
 **Geografía secundaria:** América Latina y soluciones globales aplicables a bovinos de carne/feedlot  
@@ -9,7 +9,7 @@
 
 ## Alcance tomado del proyecto
 
-Este informe usa como fuente de verdad interna `index.html`, `analisis.html`, `tecnologia.html`, `supuestos.html` y `preguntas.html`. El producto investigado no es una balanza aislada: busca unir conteo, identificación oficial, tendencia de peso, ubicación y evidencia visual en un evento auditable. La secuencia original del proyecto era feedlot primero y auditoría de fondos/fideicomisos después; la v0.6 la invierte y documenta cada vía por separado en `fondos.html` y `feedlot.html`. La captura debe tolerar baja conectividad y la confianza debe quedar anclada en el dispositivo, no en la declaración del operador.
+Este informe usa como fuente de verdad interna `index.html`, `analisis.html`, `tecnologia.html`, `supuestos.html` y `preguntas.html`. El producto investigado no es una balanza aislada: busca unir conteo, identificación oficial, tendencia de peso, ubicación y evidencia visual en un evento auditable. El proyecto se organiza en dos vías documentadas por separado en `fondos.html` y `feedlot.html`: la verificación de existencias para fondos y fideicomisos es la prioridad comercial, y el feedlot aporta ingreso recurrente y el banco de pruebas técnico. La captura debe tolerar baja conectividad y la confianza debe quedar anclada en el dispositivo, no en la declaración del operador.
 
 ## Supuestos de investigación
 
@@ -21,31 +21,21 @@ Este informe usa como fuente de verdad interna `index.html`, `analisis.html`, `t
 6. “No publicado” significa que no se encontró evidencia pública suficiente; no equivale a que la función no exista.
 7. Las afirmaciones de exactitud de proveedores se mantienen como declaraciones comerciales salvo validación independiente explícita.
 
-## Correcciones de la versión 0.5
+## El colapso de los fondos ganaderos
 
-Una revisión externa contrastó las afirmaciones materiales de la v0.4 contra fuentes independientes. Cinco resultados cambian el mapa:
-
-1. **GanaderIA es uruguaya, no argentina.** La v0.4 la clasificaba como jugador regional con despliegue local no confirmado. Es una startup uruguaya fundada por egresados de la ORT, con apoyo de ANII, que opera en Uruguay y Argentina y prueba en Australia, Nueva Zelanda y Estados Unidos. La confusión provino de que su validación pública (ValidAgro) es argentina. Consecuencia: compite en casa, por los mismos clientes, talento y apoyos institucionales.
-2. **“HDX SNIG” es una simplificación incorrecta.** Uruguay habilita tanto HDX como FDX‑B bajo ISO 11784/11785. Un rodeo real puede mezclar ambas según año y proveedor de caravana, de modo que el lector propio debe soportar las dos y la diligencia con proveedores debe preguntar por ambas.
-3. **La presencia de Optiweigh en Uruguay está mejor respaldada de lo que suponíamos.** Su página internacional lista a Uruguay entre los países de operación y declara más de 500.000 animales monitoreados por mes; la prensa sectorial reportó la unidad número 1.000. La confianza sube de media a alta y refuerza la tesis de que la tendencia de peso por sí sola no es diferenciable.
-4. **Faltaban dos ítems en familias que el propio mapa considera estratégicas.** Ceres Tag trata la resistencia a manipulación como atributo del dispositivo —la columna donde detectamos el hueco— y Cattler es la plataforma de gestión especializada justamente en el segmento elegido primero, el feedlot.
-5. **El contexto de mercado más importante estaba ausente:** el colapso de los fondos ganaderos uruguayos. Ver la sección siguiente.
-
-## Contexto omitido: el colapso de los fondos ganaderos
-
-Ningún documento de la v0.4 mencionaba a Conexión Ganadera, República Ganadera ni el Grupo Larrarte, pese a ser la validación de demanda más fuerte disponible para la etapa 2.
+Conexión Ganadera, República Ganadera y el Grupo Larrarte son la validación de demanda más fuerte disponible para la vía de fondos, y el hecho que ordena la prioridad comercial del proyecto.
 
 Los hechos públicos: un déficit de unos **US$272 millones** (pasivos por US$387 millones contra activos por US$115 millones), unas **7.000 personas afectadas** entre los distintos fondos, y un hallazgo central que coincide exactamente con el problema que este producto ataca: **ganado declarado que no existía físicamente**. En un caso documentado, contratos por aproximadamente 28.000 animales valuados en US$6,5 millones frente a **nueve vacunos** hallados por el MGAP en el lugar declarado. El BCU había advertido públicamente desde 2022 que estos esquemas operaban sin supervisión y en 2025 redactó cambios regulatorios para ampliar el control sobre la captación masiva de recursos; el MGAP debió salir a verificar existencias físicamente ante las denuncias.
 
 Tres consecuencias para el proyecto:
 
 - **El supuesto M04 deja de ser una hipótesis abstracta.** El mercado ya conoce el costo de no tener verificación independiente de existencias. Esto es evidencia de problema, no todavía de disposición a pagar: sigue siendo necesario preguntar quién compra el informe y a qué precio.
-- **Tensiona la secuencia decidida en S21/Q31.** “Feedlot primero, auditoría después” se justificó por razones operativas, no comerciales. La ventana de la auditoría está abierta ahora: hay urgencia regulatoria, damnificados organizados y un regulador rediseñando la supervisión. Como mínimo, MQ01–MQ03 y MQ25 deberían ejecutarse **en paralelo** al descubrimiento de feedlot.
-- **El competidor de la etapa 2 puede ser institucional antes que tecnológico.** Si el estándar probatorio lo termina fijando la regulación, participar temprano en esa definición vale más que cualquier funcionalidad.
+- **Define la prioridad comercial.** La ventana está abierta ahora: hay urgencia regulatoria, damnificados organizados y un regulador rediseñando la supervisión. MQ01–MQ03 y MQ25 son el descubrimiento principal del proyecto, no un anexo del piloto de feedlot.
+- **El competidor de esta vía puede ser institucional antes que tecnológico.** Si el estándar probatorio lo termina fijando la regulación, participar temprano en esa definición vale más que cualquier funcionalidad.
 
-## Separación de enfoques (v0.6)
+## Los dos enfoques
 
-La v0.5 dejó los dos negocios dentro de una sola secuencia. Al mirarlos por separado queda claro que comparten el evento técnico y casi nada más, y que la etiqueta “etapa 1 / etapa 2” escondía diferencias que cambian decisiones de producto. La v0.6 crea dos documentos independientes, `fondos.html` y `feedlot.html`, e invierte la prioridad comercial.
+Fondos y feedlot comparten el evento técnico y casi nada más. Tratarlos como una sola secuencia escondía diferencias que cambian decisiones de producto, así que cada uno tiene su documento —`fondos.html` y `feedlot.html`— y su propia economía.
 
 | Dimensión | Fondos y fideicomisos | Feedlot |
 |---|---|---|
@@ -60,9 +50,9 @@ La v0.5 dejó los dos negocios dentro de una sola secuencia. Al mirarlos por sep
 | Independencia | Exigida: no se puede vender al auditado y al que audita | No exigida, salvo en operaciones a fasón |
 | Hardware | Estructura transportable, sellada, con verificación previa y posterior | Corredor fijo o semipermanente con energía y balanza |
 
-Tres consecuencias que no estaban explícitas antes:
+Tres consecuencias que la separación deja a la vista:
 
-1. **La secuencia se invierte y hay que decirlo.** S21 fijaba feedlot primero por razones operativas, no comerciales. La ventana regulatoria de los fondos está abierta ahora y el estándar probatorio se está escribiendo. S21 queda pendiente de revisión formal en `supuestos.html`.
+1. **La prioridad comercial es la vía de fondos.** La ventana regulatoria está abierta ahora y el estándar probatorio se está escribiendo. S21 y S02 quedaron reescritos en `supuestos.html` para reflejarlo.
 2. **El feedlot no se abandona: cambia de función.** Es el único lugar donde se genera, con balanza sincronizada, el conjunto de datos por raza y categoría uruguayas que vuelve defendible la estimación visual de peso ante un tercero. Sin ese dataset, el informe de auditoría no resiste la primera repregunta. Además financia el desarrollo con ingreso recurrente.
 3. **La primera medición de la vía de fondos es de mercado, no técnica.** El colapso creó la necesidad y al mismo tiempo destruyó parte de la clientela. Antes de diseñar hardware transportable hay que saber cuántos fideicomisos ganaderos siguen operando en Uruguay y con cuántas cabezas. Es la pregunta que puede cancelar la vía entera y todavía no está respondida.
 
@@ -74,7 +64,7 @@ El competidor más cercano al concepto completo es **Olho do Dono**: publica cá
 
 En feedlot, la amenaza más madura no necesariamente viene de visión. **Optiweigh**, **Vytelle SENSE** y **Tru‑Test WOW** ya capturan RFID + peso frecuente con baja intervención. Optiweigh confirma a Uruguay entre sus países de operación y declara más de 500.000 animales monitoreados por mes a nivel global. Estos productos vuelven débil una propuesta basada sólo en tendencia de peso; la diferenciación debe sumar evidencia visual, conteo/existencia y cadena de custodia.
 
-**GanaderIA** domina el trabajo por lote desde dron y tiene una validación de campo mucho más transparente que la mayoría: conteo fuerte, pesaje sensible al protocolo y flujo comercial aún no validado de forma independiente. Es un posible socio o competidor para inventario periódico, pero no demuestra identidad SNIG individual. **Corregido en la v0.5:** es una startup uruguaya en operación local, no un jugador argentino a vigilar de lejos; el contacto pasa a ser temprano y no diferido.
+**GanaderIA** domina el trabajo por lote desde dron y tiene una validación de campo mucho más transparente que la mayoría: conteo fuerte, pesaje sensible al protocolo y flujo comercial aún no validado de forma independiente. Es un posible socio o competidor para inventario periódico, pero no demuestra identidad SNIG individual. Es una startup uruguaya en operación local: el contacto es temprano, y en la vía de fondos pasa a ser la amenaza frontal, porque un censo aéreo responde la pregunta de existencia más barato que cualquier paso individual.
 
 El ecosistema uruguayo **Baqueano / balanza / RFID**, junto con **Terko** y plataformas como **PGG**, ya resuelve buena parte del registro productivo. Construir otro sistema de gestión general sería una distracción. La oportunidad está en producir un evento probatorio que esas plataformas puedan consumir.
 
@@ -124,9 +114,9 @@ Las rutas de convergencia más relevantes son: **CattleEye** desde visión conti
 | Afirmación material | Evidencia | Confianza | Brecha / próxima consulta |
 |---|---|---|---|
 | Olho do Dono cubre la mayor parte del concepto | Sitio oficial + entrevista FDC 2025/actualizada 2026 | Media-alta | Pedir demo con caravana SNIG, archivos originales y prueba de replay. |
-| Optiweigh opera en Uruguay | Páginas oficiales “Our Story” e “International”, más prensa sectorial (unidad 1.000) | Alta (revisado en v0.5) | Confirmar número de unidades **en el país**, clientes, soporte, lectura de tags HDX y FDX‑B y conectividad local. |
+| Optiweigh opera en Uruguay | Páginas oficiales “Our Story” e “International”, más prensa sectorial (unidad 1.000) | Alta | Confirmar número de unidades **en el país**, clientes, soporte, lectura de tags HDX y FDX‑B y conectividad local. |
 | GanaderIA logra buen conteo y pesaje condicionado | ValidAgro 2025–2026 | Alta para la prueba, no para generalización | Repetir con flujo comercial autónomo y razas/condiciones uruguayas. |
-| GanaderIA es una startup uruguaya en operación local | Infonegocios 31-07-2026 y Radio Carve | Alta (corrección de la v0.4, que la clasificaba como argentina) | Confirmar establecimientos uruguayos activos, frecuencia de uso y si buscan enlace con RFID terrestre. |
+| GanaderIA es una startup uruguaya en operación local | Infonegocios 31-07-2026 y Radio Carve | Alta | Confirmar establecimientos uruguayos activos, frecuencia de uso y si buscan enlace con RFID terrestre. |
 | Uruguay habilita HDX y FDX‑B, no sólo HDX | Documento técnico de INIA sobre identificación electrónica | Alta | Verificar la mezcla real de tecnologías en el rodeo objetivo y la tasa de lectura por cada una. |
 | El fraude de los fondos ganaderos evidencia la demanda de verificación de existencias | Prensa nacional e internacional 2025–2026; verificaciones del MGAP | Alta para los hechos; **nula para disposición a pagar** | Entrevistar fiduciarios, bancos, síndicos y al BCU: qué evidencia aceptarían, quién la paga y qué exigirá la nueva normativa. |
 | Vytelle pesa con buen acuerdo | Applied Animal Science 2021, 88 novillos | Alta en contexto del estudio | Confirmar costo, throughput, HDX SNIG, red y servicio regional. |
@@ -135,9 +125,23 @@ Las rutas de convergencia más relevantes son: **CattleEye** desde visión conti
 | Ganaderos UY estima peso con 95% de precisión | Fundación Ricaldoni/ANDE, afirmación del proyecto | Media-baja | Solicitar método, muestra, error por subgrupo, disponibilidad y retención de imágenes. |
 | PGG tiene adopción e integración RFID/balanza | Sitio del proveedor | Baja-media | Verificar clientes, producto en operación, exportaciones, offline y API. |
 
+## Historial de correcciones
+
+Se conservan para no perder la trazabilidad del razonamiento; describen versiones anteriores del mapa, no su estado actual.
+
+**Revisión externa (0.5).** Una verificación contra fuentes independientes cambió cinco cosas:
+
+1. **GanaderIA es uruguaya, no argentina.** La v0.4 la clasificaba como jugador regional con despliegue local no confirmado. Es una startup uruguaya fundada por egresados de la ORT, con apoyo de ANII, que opera en Uruguay y Argentina y prueba en Australia, Nueva Zelanda y Estados Unidos. La confusión provino de que su validación pública (ValidAgro) es argentina. Consecuencia: compite en casa, por los mismos clientes, talento y apoyos institucionales.
+2. **“HDX SNIG” es una simplificación incorrecta.** Uruguay habilita tanto HDX como FDX‑B bajo ISO 11784/11785. Un rodeo real puede mezclar ambas según año y proveedor de caravana, de modo que el lector propio debe soportar las dos y la diligencia con proveedores debe preguntar por ambas.
+3. **La presencia de Optiweigh en Uruguay está mejor respaldada de lo que suponíamos.** Su página internacional lista a Uruguay entre los países de operación y declara más de 500.000 animales monitoreados por mes; la prensa sectorial reportó la unidad número 1.000. La confianza sube de media a alta y refuerza la tesis de que la tendencia de peso por sí sola no es diferenciable.
+4. **Faltaban dos ítems en familias que el propio mapa considera estratégicas.** Ceres Tag trata la resistencia a manipulación como atributo del dispositivo —la columna donde detectamos el hueco— y Cattler es la plataforma de gestión especializada justamente en el segmento elegido primero, el feedlot.
+5. **El contexto de mercado más importante estaba ausente:** el colapso de los fondos ganaderos uruguayos, hoy tratado en su propia sección.
+
+**Separación de enfoques (0.6).** Los dos negocios dejaron de tratarse como una sola secuencia y pasaron a documentos propios, con la prioridad comercial en la vía de fondos. S21 y S02 se reescribieron en consecuencia.
+
 ## Limitaciones
 
-La v0.5 verificó afirmaciones materiales contra fuentes independientes, pero eso no sustituye el contacto directo: no se solicitaron demos, cotizaciones, contratos, APIs ni referencias de clientes. La disponibilidad, precios, términos, precisión por raza y compatibilidad con caravanas SNIG deben verificarse directamente. Algunas cifras provienen de proveedores y se identifican como tales. La taxonomía no pretende ser un censo exhaustivo del software ganadero mundial; se detuvo la búsqueda cuando las cuatro familias estratégicas tuvieron alternativas suficientemente diferenciadas y nuevas búsquedas devolvían productos redundantes o sin evidencia verificable.
+El mapa verificó sus afirmaciones materiales contra fuentes independientes, pero eso no sustituye el contacto directo: no se solicitaron demos, cotizaciones, contratos, APIs ni referencias de clientes. La disponibilidad, precios, términos, precisión por raza y compatibilidad con caravanas SNIG deben verificarse directamente. Algunas cifras provienen de proveedores y se identifican como tales. La taxonomía no pretende ser un censo exhaustivo del software ganadero mundial; se detuvo la búsqueda cuando las cuatro familias estratégicas tuvieron alternativas suficientemente diferenciadas y nuevas búsquedas devolvían productos redundantes o sin evidencia verificable.
 
 ## Ledger de fuentes
 
@@ -146,7 +150,7 @@ La v0.5 verificó afirmaciones materiales contra fuentes independientes, pero es
 | Trazabilidad individual | SNIG, consultado 23-08-2026 | https://www.snig.gub.uy/principal/snig-principal-trazabilidad-trazabilidad-individual-prueba | Identidad oficial, 12 dígitos y contenido del RFID. |
 | Olho do Dono | Proveedor, consultado 23-08-2026 | https://olhododono.agr.br/ | Producto y beneficios declarados. |
 | Olho do Dono ayuda productores… | Fundação Dom Cabral, Rafael Maia, 03-04-2025; página actualizada 20-08-2026 | https://sejarelevante.fdc.org.br/olho-do-dono-ajuda-produtores-na-gestao-e-manejo-do-gado/ | Operación, RFID, GPS, offline, países y auditoría declarada. |
-| Ganader | Proveedor, consultado 23-08-2026 | https://www.ganader-ia.com/ | Flujo, drones y métricas declaradas. |
+| GanaderIA | Proveedor, consultado 23-08-2026 | https://www.ganader-ia.com/ | Flujo, drones y métricas declaradas. |
 | ValidAgro edición 2025 | ValidAgro, resultados 2025–2026 | https://www.validagro.com.ar/convocatoria2025/ | Validación de GanaderIA y Finca, límites incluidos. |
 | Ganaderos | ANDE, proyecto 2023 en seguimiento | https://www.ande.org.uy/proyectos-apoyados/item/ganaderos.html | Descripción y etapa del proyecto uruguayo. |
 | Emprendedores natos | Fundación Julio Ricaldoni, 02-04-2025 | https://www.ricaldoni.org.uy/noticias/845-ganaderos-inteligencia-artificial-para-pesaje-bovino.html | Equipo y precisión declarada de Ganaderos. |

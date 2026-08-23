@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Arquitectura tecnológica propuesta para Smart Weight: hardware, software, datos, seguridad y hoja de ruta de desarrollo.">
+  <meta name="description" content="Arquitectura tecnológica propuesta para Ganadería aumentada: hardware, software, datos, seguridad y hoja de ruta de desarrollo.">
   <title>Tecnología a usar y desarrollar · Ganadería aumentada</title>
   <link rel="icon" href="data:,">
   <link rel="stylesheet" href="styles.css">
@@ -27,13 +27,13 @@
       <div>
         <p class="eyebrow">Documento 05 · Arquitectura tecnológica</p>
         <h1>Integrar lo estándar. Desarrollar la evidencia.</h1>
-        <p class="lede">Propuesta inicial de hardware y software para capturar un evento indivisible RFID–imagen–peso–ubicación, operar sin conexión y conservar procedencia verificable. Define una dirección de construcción; no sustituye la validación en feedlot.</p>
+        <p class="lede">Propuesta inicial de hardware y software para capturar un evento indivisible RFID–imagen–peso–ubicación, operar sin conexión y conservar procedencia verificable. Define una dirección de construcción; no sustituye la validación en campo.</p>
       </div>
       <aside class="meta-card" aria-label="Metadatos del documento">
         <dl>
           <dt>Versión</dt><dd>0.1</dd>
           <dt>Estado</dt><dd>Arquitectura candidata</dd>
-          <dt>Prioridad</dt><dd>Piloto de feedlot</dd>
+          <dt>Prioridad</dt><dd>Dos vías, un contrato</dd>
           <dt>Principio</dt><dd>Offline primero</dd>
           <dt>Corte</dt><dd>23 ago 2026</dd>
         </dl>
@@ -68,7 +68,7 @@
             <div class="card card--warm"><span class="number">4</span><h3>Peso medido y estimado no se mezclan</h3><p>Cada evento declara método, calibración, modelo, incertidumbre y uso permitido. Una estimación visual nunca se presenta como lectura de balanza.</p></div>
             <div class="card card--cool"><span class="number">5</span><h3>La IA asiste; las reglas protegen</h3><p>La visión puede detectar, seguir y estimar, pero el sistema determinístico decide si hubo un único animal, una única caravana y evidencia suficiente para aceptar el evento.</p></div>
           </div>
-          <div class="callout callout--warning"><strong>Compromiso de alcance:</strong> no se desarrollará en la primera etapa otro ERP ganadero, una caravana propia, un lector RFID desde cero ni una balanza completa. Se construirán un dispositivo de captura integrable y una capa de evidencia exportable.</div>
+          <div class="callout callout--warning"><strong>Compromiso de alcance:</strong> no se desarrollará en esta fase otro ERP ganadero, una caravana propia, un lector RFID desde cero ni una balanza completa. Se construirán un dispositivo de captura integrable y una capa de evidencia exportable.</div>
         </section>
 
         <section class="section" id="arquitectura">
@@ -221,7 +221,7 @@
           <h2>Configuraciones previstas</h2>
           <div class="grid grid--2">
             <div class="card card--strong">
-              <span class="tag tag--verified">Primera configuración</span>
+              <span class="tag tag--verified">Vía de feedlot</span>
               <h3 style="margin-top:1rem">Feedlot fijo o semipermanente</h3>
               <ul>
                 <li>Corredor en agua, alimento u otro paso de frecuencia suficiente.</li>
@@ -232,7 +232,7 @@
               </ul>
             </div>
             <div class="card card--warm">
-              <span class="tag tag--vendor">Segunda configuración</span>
+              <span class="tag tag--vendor">Vía de fondos</span>
               <h3 style="margin-top:1rem">Auditoría transportable</h3>
               <ul>
                 <li>Estructura armable con RFID, RGB/profundidad y peso según decisión.</li>
@@ -256,7 +256,7 @@
             <div class="step"><div><h3>3 · Edge offline y sincronización</h3><p>Agregar cola persistente, firma, panel de estado e ingesta idempotente. <strong>Puerta:</strong> operar varios días, perder red/energía y recuperar sin duplicar ni perder originales.</p></div></div>
             <div class="step"><div><h3>4 · Piloto continuo de feedlot</h3><p>El personal opera el sistema durante un período representativo. <strong>Puerta:</strong> cobertura útil, caudal, tendencia, mantenimiento y soporte dentro de umbrales acordados.</p></div></div>
             <div class="step"><div><h3>5 · Industrialización</h3><p>Congelar interfaces, revisar seguridad, ambiente, manufactura y servicio; recién entonces evaluar placa propia. <strong>Puerta:</strong> costo total, confiabilidad y capacidad de mantener una flota.</p></div></div>
-            <div class="step"><div><h3>6 · Variante de auditoría</h3><p>Validar con financiadores el informe y los ataques relevantes; adaptar hardware transportable y controles. <strong>Puerta:</strong> aceptación del paquete probatorio por el tercero objetivo.</p></div></div>
+            <div class="step"><div><h3>6 · Equipo de auditoría en campo</h3><p>Congelar el hardware transportable y sus controles contra los ataques relevantes. La validación comercial con financiadores no espera a esta etapa: corre en paralelo desde el inicio. <strong>Puerta:</strong> aceptación del paquete probatorio por el tercero objetivo.</p></div></div>
           </div>
         </section>
 

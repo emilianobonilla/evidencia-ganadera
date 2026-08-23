@@ -29,7 +29,7 @@
       </div>
       <aside class="meta-card">
         <dl>
-          <dt>Versión</dt><dd>0.5</dd>
+          <dt>Versión</dt><dd>0.6</dd>
           <dt>Preguntas</dt><dd>43</dd>
           <dt>Prioridad P0</dt><dd>19</dd>
           <dt>Respondidas</dt><dd>10</dd>
@@ -66,7 +66,7 @@
           <h2>Preguntas que definen la dirección</h2>
 
           <article class="question" id="q01">
-            <div class="question__head"><div><span class="question__id">Q01 · ALCANCE</span><h3>¿Qué especies, categorías, razas y cruzas deben funcionar en la primera etapa?</h3></div><span class="tag tag--vendor">Parcial</span></div>
+            <div class="question__head"><div><span class="question__id">Q01 · ALCANCE</span><h3>¿Qué especies, categorías, razas y cruzas deben funcionar al inicio?</h3></div><span class="tag tag--vendor">Parcial</span></div>
             <p>Ejemplos: recría Angus/Hereford y cruzas; vacas de cría; terneros; ganado lechero; más de una especie.</p>
             <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Los modelos de peso visual no transfieren automáticamente entre morfologías.</dd></div><div><dt>Cambia</dt><dd>Dataset, proveedor, sensores y rango de validación.</dd></div><div><dt>Preguntar a</dt><dd>Propietario, técnico y responsable productivo.</dd></div></dl>
             <div class="response"><div class="response__meta">Respuesta · definición del proyecto · 23 ago 2026</div><p>Comenzar con bovinos comunes en Uruguay: recría Angus/Hereford y cruzas, vacas de cría, terneros, ganado lechero y ganado gordo. Se mantiene una ambición de más de una especie.</p><p><strong>Lectura actual:</strong> el núcleo inicial es bovino, pero abarca morfologías y categorías muy distintas; la especie adicional todavía debe definirse. No corresponde asumir un único modelo visual universal.</p></div>
@@ -121,7 +121,7 @@
 
           <article class="question" id="q09">
             <div class="question__head"><div><span class="question__id">Q09 · IDENTIDAD</span><h3>¿Con qué frecuencia faltan, fallan o no se leen las caravanas electrónicas?</h3></div><span class="tag tag--open">P0</span></div>
-            <p>Incluir lectores actuales, orientación, distancia, animales juntos, caravanas perdidas y discrepancia visual/electrónica. <strong>Precisión v0.5:</strong> registrar también qué tecnología tiene cada tag —Uruguay habilita HDX y FDX‑B— y medir la tasa de lectura por separado para cada una.</p>
+            <p>Incluir lectores actuales, orientación, distancia, animales juntos, caravanas perdidas y discrepancia visual/electrónica. Registrar también qué tecnología tiene cada tag —Uruguay habilita HDX y FDX‑B— y medir la tasa de lectura por separado para cada una.</p>
             <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>La identidad es la columna vertebral del historial.</dd></div><div><dt>Cambia</dt><dd>Excepciones, reintentos, elección de lector compatible con ambas tecnologías y necesidad de biometría auxiliar.</dd></div><div><dt>Preguntar a</dt><dd>Operador de movimiento y personal de campo.</dd></div></dl>
           </article>
 
@@ -147,7 +147,7 @@
             <div class="question__head"><div><span class="question__id">Q31 · SEGMENTO INICIAL</span><h3>¿Cuál debería ser el primer contexto comercial que validemos?</h3></div><span class="tag tag--verified">Respondida</span></div>
             <p>Elegir entre auditoría de fondo/fideicomiso, ganado en garantía bancaria, servicio a intermediarios o monitoreo de feedlot. Se podrán abordar varios después, pero no necesariamente con el mismo primer experimento.</p>
             <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Cada contexto tiene distinto comprador, escala, frecuencia y estándar probatorio.</dd></div><div><dt>Cambia</dt><dd>Concepto, piloto, interlocutores y modelo comercial.</dd></div><div><dt>Preguntar a</dt><dd>Promotor del proyecto y potenciales clientes.</dd></div></dl>
-            <div class="response"><div class="response__meta">Respuesta · definición del proyecto · 23 ago 2026</div><p><strong>Secuencia:</strong> primero feedlot; luego auditoría de fondos y fideicomisos ganaderos.</p><p><strong>Decisión derivada:</strong> el primer piloto debe validar captura continua, identidad, conteo y tendencia de peso en encierro. La cadena probatoria para terceros se diseña desde el inicio, pero se valida comercialmente en una segunda etapa.</p></div>
+            <div class="response"><div class="response__meta">Respuesta · definición del proyecto · 23 ago 2026</div><p><strong>Secuencia:</strong> primero feedlot; luego auditoría de fondos y fideicomisos ganaderos.</p><p><strong>Decisión derivada:</strong> el piloto técnico valida captura continua, identidad, conteo y tendencia de peso en encierro, mientras la validación comercial avanza en la vía de fondos, que es hoy la prioridad. La cadena probatoria para terceros se diseña desde el inicio.</p></div>
           </article>
 
           <article class="question" id="q32">
@@ -305,7 +305,7 @@
 
         <section class="section" id="proveedores">
           <p class="eyebrow">Diligencia técnica y comercial</p>
-          <h2>Preguntas para Olho do Dono, Ganader y alternativas</h2>
+          <h2>Preguntas para Olho do Dono, GanaderIA y alternativas</h2>
 
           <article class="question" id="q25">
             <div class="question__head"><div><span class="question__id">Q25 · EVIDENCIA</span><h3>¿Cómo definen y distribuyen el error?</h3></div><span class="tag tag--vendor">Proveedor</span></div>
@@ -337,7 +337,7 @@
             <p>El proveedor recibe capturas sin pesos de referencia; se fijan muestra, protocolo, plazo y métricas antes de abrir los resultados.</p>
           </article>
 
-          <div class="callout callout--warning"><strong>Específico de Ganader:</strong> pedir la diferencia entre procesamiento comercial y asistido, y cómo se vincula una estimación “individual” de un vuelo con la misma caravana en otro vuelo. <strong>Específico de Olho do Dono:</strong> pedir compatibilidad RFID SNIG, razas validadas, especificación del corredor y funcionamiento actual offline/nube.</div>
+          <div class="callout callout--warning"><strong>Específico de GanaderIA:</strong> pedir la diferencia entre procesamiento comercial y asistido, y cómo se vincula una estimación “individual” de un vuelo con la misma caravana en otro vuelo. <strong>Específico de Olho do Dono:</strong> pedir compatibilidad RFID SNIG, razas validadas, especificación del corredor y funcionamiento actual offline/nube.</div>
         </section>
 
         <section class="section" id="observacion">
@@ -368,12 +368,12 @@
             <li><a href="#q39">¿Cómo se verifica el corral o potrero?</a></li>
             <li><a href="#q42">¿Qué verificación de existencias exigirá el regulador?</a></li>
           </ol>
-          <div class="callout callout--warning"><strong>Resultado esperado:</strong> definir el primer piloto de feedlot y el evento indivisible <em>lectura RFID + foto + peso + ubicación + procedencia del dispositivo</em>. Agregado en la v0.5: abrir en paralelo las conversaciones de la etapa 2 —fiduciarios, bancos, auditores y regulador— porque su ventana está abierta ahora (<a href="#q42">Q42</a>, <a href="#q43">Q43</a>).</div>
+          <div class="callout callout--warning"><strong>Resultado esperado:</strong> definir el evento indivisible <em>lectura RFID + foto + peso + ubicación + procedencia del dispositivo</em> y sostener en paralelo las conversaciones de la vía de fondos —fiduciarios, bancos, auditores y regulador—, cuya ventana está abierta ahora (<a href="#q42">Q42</a>, <a href="#q43">Q43</a>).</div>
         </section>
       </article>
     </div>
   </main>
 
-  <footer class="footer">Documento 03 · Preguntas · versión 0.5 · 10 respuestas registradas · <a href="analisis.html">volver al análisis</a></footer>
+  <footer class="footer">Documento 03 · Preguntas · versión 0.6 · 10 respuestas registradas · <a href="analisis.html">volver al análisis</a></footer>
 </body>
 </html>

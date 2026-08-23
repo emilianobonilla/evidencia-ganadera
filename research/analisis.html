@@ -29,7 +29,7 @@
       </div>
       <aside class="meta-card">
         <dl>
-          <dt>Versión</dt><dd>0.5</dd>
+          <dt>Versión</dt><dd>0.6</dd>
           <dt>Estado</dt><dd>Reencuadrado</dd>
           <dt>Respuestas incorporadas</dt><dd>10</dd>
           <dt>Próxima revisión</dt><dd>Piloto feedlot</dd>
@@ -60,13 +60,13 @@
           <p class="eyebrow">Lectura rápida</p>
           <h2>Ocho conclusiones provisionales</h2>
           <div class="grid grid--2">
-            <div class="card card--warm"><span class="number">1</span><h3>Feedlot primero; auditoría después</h3><p>La primera validación comercial y operativa será en feedlot: conteo, identidad y tendencia de peso individual. La segunda etapa aplicará evidencia verificable a fondos y fideicomisos ganaderos.</p><div class="tagline"><span class="tag tag--verified">Respuesta Q31</span><a class="tag" href="supuestos.html#s21">S21</a></div></div>
+            <div class="card card--warm"><span class="number">1</span><h3>Fondos primero; feedlot como sostén</h3><p>La prioridad comercial es la verificación de existencias para fondos y fideicomisos ganaderos. El feedlot aporta ingreso recurrente y es el banco de pruebas donde se genera la verdad de referencia de peso.</p><div class="tagline"><span class="tag tag--verified">Respuesta Q31</span><a class="tag" href="supuestos.html#s21">S21</a></div></div>
             <div class="card card--strong"><span class="number">2</span><h3>La caravana es la llave, no el archivo</h3><p>El RFID oficial contiene el identificador del animal. El peso, potrero y demás eventos deben vivir en una base privada vinculada a ese número. La experiencia “leo y veo” puede funcionar sin integración directa con SNIG.</p><div class="tagline"><span class="tag tag--verified">SNIG</span><a class="tag" href="supuestos.html#s01">S01</a></div></div>
             <div class="card"><span class="number">3</span><h3>El paso individual conecta identidad y observación</h3><p>Un punto natural o un dispositivo construido separará los animales de a uno. Allí se enlazan RFID, foto y peso sin depender de identificar la caravana desde un dron.</p><div class="tagline"><span class="tag tag--verified">Respuesta Q05</span><a class="tag" href="supuestos.html#s27">S27</a></div></div>
             <div class="card"><span class="number">4</span><h3>Foto y RFID son un solo evento</h3><p>Ante una asociación dudosa, se omite el dato y se repite. La foto debe quedar ligada a la lectura de la caravana durante la misma captura; una medición correcta vinculada al animal equivocado no ingresa silenciosamente.</p><div class="tagline"><span class="tag tag--verified">Respuestas Q08/Q36</span><a class="tag" href="supuestos.html#s26">S26</a></div></div>
             <div class="card"><span class="number">5</span><h3>No habrá una configuración universal</h3><p>Un feedlot de hasta miles de cabezas y una auditoría puntual de pocos animales comparten objetivos, pero probablemente requieren dispositivos, ritmos y costos distintos.</p><div class="tagline"><span class="tag tag--verified">Respuesta Q02</span><a class="tag" href="supuestos.html#s23">S23</a></div></div>
             <div class="card"><span class="number">6</span><h3>El peso óptimo depende de la decisión</h3><p>Una balanza mide peso vivo; visión 3D y dron lo estiman. Para tendencia en feedlot puede alcanzar un error que sería inaceptable para una valoración financiera.</p><div class="tagline"><span class="tag tag--open">Definir tolerancias</span><a class="tag" href="preguntas.html#q07">Q07</a></div></div>
-            <div class="card"><span class="number">7</span><h3>Olho do Dono y Ganader son complementarios</h3><p>El primero se acerca al problema individual en un paso controlado; el segundo reduce el esfuerzo para inventario y estimación de lotes a campo. Ninguno demuestra públicamente toda la cadena “caravana → evidencia auditable” para Uruguay. <strong>Corregido en la v0.5:</strong> Ganader es uruguayo y opera en el país, de modo que el contacto es temprano y no diferido.</p><div class="tagline"><span class="tag tag--vendor">Análisis de proveedor</span></div></div>
+            <div class="card"><span class="number">7</span><h3>Olho do Dono y GanaderIA son complementarios</h3><p>El primero se acerca al problema individual en un paso controlado; el segundo reduce el esfuerzo para inventario y estimación de lotes a campo. Ninguno demuestra públicamente toda la cadena “caravana → evidencia auditable” para Uruguay. GanaderIA es uruguaya y opera en el país, de modo que el contacto es temprano y no diferido.</p><div class="tagline"><span class="tag tag--vendor">Análisis de proveedor</span></div></div>
             <div class="card"><span class="number">8</span><h3>La primera inversión debería ser aprender</h3><p>Antes de construir, conviene validar qué evidencia aceptan los compradores y comparar conceptos en condiciones uruguayas. El resultado debe ser evidencia y criterios de descarte.</p><div class="tagline"><span class="tag tag--inference">Dirección propuesta</span></div></div>
           </div>
           <div class="callout callout--warning">
@@ -105,24 +105,26 @@
         </section>
 
         <section class="section" id="modalidades">
-          <p class="eyebrow">Segmentación emergente</p>
-          <h2>Dos modalidades que no conviene mezclar todavía</h2>
+          <p class="eyebrow">Segmentación</p>
+          <h2>Dos vías que no conviene mezclar</h2>
           <div class="grid grid--2">
+            <div class="card card--warm">
+              <span class="tag tag--verified">Vía 1 · prioritaria</span>
+              <h3 style="margin-top:1rem">Auditoría de existencias para fondos</h3>
+              <p>Un aparato operado en campo captura existencia, identidad, ubicación y eventualmente peso para respaldar una relación financiera o comercial.</p>
+              <ul><li>Escala variable: desde pocos animales hasta rodeos mayores.</li><li>Equipamiento transportable y energía propia son aceptables.</li><li>La confianza debe depender de la procedencia técnica, no de la palabra del agente.</li><li>La salida principal es un informe con excepciones y evidencia trazable.</li></ul>
+              <p><a href="fondos.html">Abrir la vía de fondos →</a></p>
+            </div>
             <div class="card card--cool">
-              <span class="tag tag--verified">Modalidad 1 · prioritaria</span>
+              <span class="tag tag--vendor">Vía 2 · sostén</span>
               <h3 style="margin-top:1rem">Monitoreo continuo de feedlot</h3>
               <p>Infraestructura fija o semipermanente cuenta e identifica, y construye tendencia de peso individual sin movilizaciones frecuentes.</p>
               <ul><li>Puede alcanzar aproximadamente 5.000 cabezas por encierro.</li><li>Importan throughput, repetición y cobertura por animal.</li><li>Un corredor instrumentado o balanza de paso ganan relevancia.</li><li>La salida principal es tendencia y excepciones operativas.</li></ul>
-            </div>
-            <div class="card card--warm">
-              <span class="tag tag--vendor">Modalidad 2 · siguiente</span>
-              <h3 style="margin-top:1rem">Auditoría puntual basada en evidencia</h3>
-              <p>Un aparato operado en campo captura existencia, identidad, ubicación y eventualmente peso para respaldar una relación financiera o comercial.</p>
-              <ul><li>Escala variable: desde pocos animales hasta rodeos mayores.</li><li>Equipamiento transportable y energía propia son aceptables.</li><li>La confianza debe depender de la procedencia técnica, no de la palabra del agente.</li><li>La salida principal es un informe con excepciones y evidencia trazable.</li></ul>
+              <p><a href="feedlot.html">Abrir la vía de feedlot →</a></p>
             </div>
           </div>
-          <div class="callout"><strong>Secuencia decidida:</strong> feedlot primero y auditoría de fondos/fideicomisos después. Compartirán identidad y modelo de evidencia, pero no necesariamente hardware, operación ni criterio de éxito.</div>
-          <div class="callout callout--warning"><strong>Tensión detectada en la v0.5:</strong> la secuencia se decidió por razones operativas, pero el mercado de la modalidad 2 se abrió antes de tiempo. El colapso de los fondos ganaderos uruguayos dejó un déficit de unos US$272 millones, cerca de 7.000 personas afectadas y ganado declarado que no existía —en un caso, contratos por ~28.000 animales frente a nueve vacunos hallados por el MGAP en el lugar declarado—. El BCU, que venía advirtiendo desde 2022, redactó en 2025 cambios para ampliar la supervisión. Consecuencia práctica: las entrevistas con fiduciarios, bancos, auditores y el regulador conviene ejecutarlas <em>en paralelo</em> al descubrimiento de feedlot, porque la ventana puede cerrarse con un estándar fijado por otro. Ver <a href="supuestos-mercado.html#m13">M13</a> y <a href="preguntas-mercado.html#mq25">MQ25</a>.</div>
+          <div class="callout"><strong>Secuencia vigente:</strong> la vía de <a href="fondos.html">fondos ganaderos</a> es la prioridad comercial; la de <a href="feedlot.html">feedlot</a> aporta ingreso recurrente y el banco de pruebas técnico. Comparten identidad y modelo de evidencia, pero no hardware, operación ni criterio de éxito.</div>
+            <div class="callout callout--warning"><strong>Por qué manda la vía de fondos:</strong> el colapso de los fondos ganaderos uruguayos dejó un déficit de unos US$272 millones, cerca de 7.000 personas afectadas y ganado declarado que no existía —en un caso, contratos por ~28.000 animales frente a nueve vacunos hallados por el MGAP en el lugar declarado—. El BCU venía advirtiendo desde 2022 y redactó cambios regulatorios en 2025: el estándar probatorio se está escribiendo ahora.</div>
         </section>
 
         <section class="section" id="snig">
@@ -161,7 +163,7 @@
 
         <section class="section" id="referentes">
           <p class="eyebrow">Casos solicitados</p>
-          <h2>Olho do Dono y Ganader</h2>
+          <h2>Olho do Dono y GanaderIA</h2>
 
           <div class="grid grid--2">
             <article class="card card--strong">
@@ -188,9 +190,9 @@
 
             <article class="card card--cool">
               <div class="tagline"><span class="tag tag--vendor">Proveedor · Uruguay</span><span class="tag tag--inference">Dron RGB 4K</span></div>
-              <h3>Ganader</h3>
+              <h3>GanaderIA</h3>
               <p><strong>Flujo publicado:</strong> el usuario filma con un dron DJI compatible en 4K, sube el video y la IA entrega conteo y peso estimado. Para peso se requiere ganado en desfile y objetos de referencia; para conteo permite vuelo más libre en corrales, feedlot o campo.</p>
-              <p><strong>Corrección v0.5:</strong> la versión anterior lo daba por argentino. Es una startup uruguaya —fundadores egresados de la ORT, apoyo de ANII— que opera en Uruguay y Argentina y prueba en Australia, Nueva Zelanda y Estados Unidos. La confusión venía de que su validación pública, ValidAgro, es argentina.</p>
+              <p><strong>Origen:</strong> es una startup uruguaya —fundadores egresados de la ORT, apoyo de ANII— que opera en Uruguay y Argentina y prueba en Australia, Nueva Zelanda y Estados Unidos. La confusión venía de que su validación pública, ValidAgro, es argentina.</p>
               <h4>Lo atractivo para este proyecto</h4>
               <ul>
                 <li>Muy poca infraestructura fija y menor necesidad de trasladar animales.</li>
@@ -214,12 +216,12 @@
           <h3 style="margin-top:2rem">Comparación orientada al caso uruguayo</h3>
           <div class="table-wrap">
             <table>
-              <thead><tr><th>Criterio</th><th>Olho do Dono</th><th>Ganader</th><th>Lectura provisional</th></tr></thead>
+              <thead><tr><th>Criterio</th><th>Olho do Dono</th><th>GanaderIA</th><th>Lectura provisional</th></tr></thead>
               <tbody>
                 <tr><td>Conteo a campo abierto</td><td><span class="score score--mid">Medio</span></td><td><span class="score score--high">Alto</span></td><td>El dron está mejor alineado con inventario sin punto de paso.</td></tr>
                 <tr><td>Peso individual</td><td><span class="score score--high">Alto, condicionado</span></td><td><span class="score score--mid">Medio, estimado</span></td><td>Ambos dependen del protocolo; la cámara 3D en paso facilita individualizar.</td></tr>
                 <tr><td>Asociación con SNIG</td><td><span class="score score--mid">Posible con RFID</span></td><td><span class="score score--low">No visible</span></td><td>Se requiere prueba de punta a punta; no asumir compatibilidad.</td></tr>
-                <tr><td>Sin arrear</td><td><span class="score score--mid">Requiere paso</span></td><td><span class="score score--high">Fuerte</span></td><td>Para pesar, Ganader también requiere desfile; no equivale a cero manejo.</td></tr>
+                <tr><td>Sin arrear</td><td><span class="score score--mid">Requiere paso</span></td><td><span class="score score--high">Fuerte</span></td><td>Para pesar, GanaderIA también requiere desfile; no equivale a cero manejo.</td></tr>
                 <tr><td>Operación no técnica</td><td><span class="score score--mid">A validar</span></td><td><span class="score score--mid">A validar</span></td><td>“Tres clics” o “filmar en 4K” no prueban autonomía de usuarios reales.</td></tr>
                 <tr><td>Evidencia pública</td><td><span class="score score--mid">Descriptiva</span></td><td><span class="score score--mid">Piloto externo</span></td><td>Faltan datasets, protocolos completos e intervalos de error transferibles.</td></tr>
               </tbody>
@@ -227,7 +229,7 @@
           </div>
 
           <div class="callout callout--warning">
-            <strong>Conclusión del benchmark:</strong> estudiar el patrón operativo, no copiar el producto. Olho do Dono enseña el valor de un corredor instrumentado portátil; Ganader enseña el valor de separar conteo libre de pesaje protocolizado. El hueco de oportunidad es una experiencia local que mantenga el vínculo confiable con la identidad SNIG.
+            <strong>Conclusión del benchmark:</strong> estudiar el patrón operativo, no copiar el producto. Olho do Dono enseña el valor de un corredor instrumentado portátil; GanaderIA enseña el valor de separar conteo libre de pesaje protocolizado. El hueco de oportunidad es una experiencia local que mantenga el vínculo confiable con la identidad SNIG.
           </div>
         </section>
 
@@ -320,7 +322,7 @@
                 <li><strong>Mejor para:</strong> inventario rápido y comparación de potreros.</li>
                 <li><strong>Ventaja:</strong> baja infraestructura y amplia cobertura.</li>
                 <li><strong>Debilidad:</strong> identidad individual débil y operador habilitado.</li>
-                <li><strong>Referencia:</strong> Ganader, con un puente RFID propio.</li>
+                <li><strong>Referencia:</strong> GanaderIA, con un puente RFID propio.</li>
               </ul>
             </article>
             <article class="card card--warm">
@@ -389,7 +391,7 @@
             </div>
             <div class="card card--warm">
               <h3>Prueba de usabilidad propuesta</h3>
-              <p>En la primera etapa, entregar el equipo a un operador de feedlot que no participó del diseño y pedirle completar una jornada real con una instrucción de una página.</p>
+              <p>En el piloto de feedlot, entregar el equipo a un operador que no participó del diseño y pedirle completar una jornada real con una instrucción de una página.</p>
               <ul>
                 <li>¿Puede iniciar sin llamar a soporte?</li>
                 <li>¿Sabe si terminó y qué quedó pendiente?</li>
@@ -458,7 +460,7 @@
             <li><a href="https://www.icar.org/certifications/animal-identification-devices/rfid-transceivers/">ICAR · RFID transceivers</a> — pruebas de lectores para transponders ISO 11784/11785.</li>
             <li><a href="https://olhododono.agr.br/">Olho do Dono · sitio oficial</a> — beneficios y operación publicada.</li>
             <li><a href="https://sejarelevante.fdc.org.br/olho-do-dono-ajuda-produtores-na-gestao-e-manejo-do-gado/">Fundação Dom Cabral · entrevista a Olho do Dono</a> — descripción de cámara, offline y RFID.</li>
-            <li><a href="https://www.ganader-ia.com/">Ganader · sitio oficial</a> — flujo, métricas declaradas, razas, drones y requisitos de captura.</li>
+            <li><a href="https://www.ganader-ia.com/">GanaderIA · sitio oficial</a> — flujo, métricas declaradas, razas, drones y requisitos de captura.</li>
             <li><a href="https://www.validagro.com.ar/convocatoria2025/">ValidAgro 2025 · GanaderIA</a> — resultados de conteo, pesaje y eficiencia, incluidas limitaciones.</li>
             <li><a href="https://www.journalofdairyscience.org/article/S0022-0302%2813%2900363-9/fulltext">Journal of Dairy Science · automated walk-over weighing</a> — repetibilidad y acuerdo con balanza estática.</li>
             <li><a href="https://www.sciencedirect.com/science/article/pii/S1751731120000282">Animal · remote monitoring units for grazing cattle</a> — evaluación de WoW en pastoreo.</li>
@@ -474,6 +476,6 @@
     </div>
   </main>
 
-  <footer class="footer">Documento 01 · Análisis · versión 0.5 · <a href="supuestos.html">continuar con supuestos</a></footer>
+  <footer class="footer">Documento 01 · Análisis · versión 0.6 · <a href="supuestos.html">continuar con supuestos</a></footer>
 </body>
 </html>
