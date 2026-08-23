@@ -1,7 +1,7 @@
 # Mapa competitivo para Ganadería aumentada (Smart Weight)
 
 **Audiencia:** equipo fundador y de producto  
-**Versión:** 0.5 — incorpora una revisión externa con verificación independiente  
+**Versión:** 0.6 — separa los dos enfoques comerciales sobre la base de la revisión externa de la v0.5  
 **Fecha de corte:** 23 de agosto de 2026  
 **Geografía primaria:** Uruguay  
 **Geografía secundaria:** América Latina y soluciones globales aplicables a bovinos de carne/feedlot  
@@ -9,7 +9,7 @@
 
 ## Alcance tomado del proyecto
 
-Este informe usa como fuente de verdad interna `index.html`, `analisis.html`, `tecnologia.html`, `supuestos.html` y `preguntas.html`. El producto investigado no es una balanza aislada: busca unir conteo, identificación oficial, tendencia de peso, ubicación y evidencia visual en un evento auditable. La secuencia elegida por el proyecto es feedlot primero y auditoría de fondos/fideicomisos después. La captura debe tolerar baja conectividad y la confianza debe quedar anclada en el dispositivo, no en la declaración del operador.
+Este informe usa como fuente de verdad interna `index.html`, `analisis.html`, `tecnologia.html`, `supuestos.html` y `preguntas.html`. El producto investigado no es una balanza aislada: busca unir conteo, identificación oficial, tendencia de peso, ubicación y evidencia visual en un evento auditable. La secuencia original del proyecto era feedlot primero y auditoría de fondos/fideicomisos después; la v0.6 la invierte y documenta cada vía por separado en `fondos.html` y `feedlot.html`. La captura debe tolerar baja conectividad y la confianza debe quedar anclada en el dispositivo, no en la declaración del operador.
 
 ## Supuestos de investigación
 
@@ -43,6 +43,31 @@ Tres consecuencias para el proyecto:
 - **Tensiona la secuencia decidida en S21/Q31.** “Feedlot primero, auditoría después” se justificó por razones operativas, no comerciales. La ventana de la auditoría está abierta ahora: hay urgencia regulatoria, damnificados organizados y un regulador rediseñando la supervisión. Como mínimo, MQ01–MQ03 y MQ25 deberían ejecutarse **en paralelo** al descubrimiento de feedlot.
 - **El competidor de la etapa 2 puede ser institucional antes que tecnológico.** Si el estándar probatorio lo termina fijando la regulación, participar temprano en esa definición vale más que cualquier funcionalidad.
 
+## Separación de enfoques (v0.6)
+
+La v0.5 dejó los dos negocios dentro de una sola secuencia. Al mirarlos por separado queda claro que comparten el evento técnico y casi nada más, y que la etiqueta “etapa 1 / etapa 2” escondía diferencias que cambian decisiones de producto. La v0.6 crea dos documentos independientes, `fondos.html` y `feedlot.html`, e invierte la prioridad comercial.
+
+| Dimensión | Fondos y fideicomisos | Feedlot |
+|---|---|---|
+| Quién paga | Quien absorbe la pérdida: fiduciario, banco con prenda, síndico, auditor, aseguradora | Quien paga la comida: el propio feedlot, o el corral que engorda a fasón |
+| Presupuesto de origen | Auditoría, legal y riesgo | Costo operativo de alimentación |
+| Qué debe probar | Existencia, no duplicación, identidad individual, lugar y fecha resistentes a repetición | Error por subgrupo, cobertura, sesgo de muestreo y una decisión que cambie |
+| Rol del peso | Valuación y coherencia; tolerancia mayor, reproducibilidad obligatoria | Dosificación, aparte y venta; la exigencia de precisión más alta del proyecto |
+| Método de peso | Estimación visual conservada con su original; balanza sólo si hay efecto de liquidación | Celdas de carga como verdad de referencia, con estimación visual calibrándose contra ella |
+| Competencia principal | El regulador y el statu quo (escribano más extracto SNIG); GanaderIA por censo aéreo; Olho do Dono; CattleProof como modelo | Optiweigh, Vytelle, Tru‑Test WOW, Olho do Dono; Baqueano y Terko como statu quo |
+| Unidad de cobro | Informe más cabeza observada, con mínimo por movilización | Cabeza bajo monitoreo por mes, o abono por encierro |
+| Techo de precio | Honorario de auditoría y costo de capital | Oferta local instalada de Optiweigh y costo de una pesada manual |
+| Independencia | Exigida: no se puede vender al auditado y al que audita | No exigida, salvo en operaciones a fasón |
+| Hardware | Estructura transportable, sellada, con verificación previa y posterior | Corredor fijo o semipermanente con energía y balanza |
+
+Tres consecuencias que no estaban explícitas antes:
+
+1. **La secuencia se invierte y hay que decirlo.** S21 fijaba feedlot primero por razones operativas, no comerciales. La ventana regulatoria de los fondos está abierta ahora y el estándar probatorio se está escribiendo. S21 queda pendiente de revisión formal en `supuestos.html`.
+2. **El feedlot no se abandona: cambia de función.** Es el único lugar donde se genera, con balanza sincronizada, el conjunto de datos por raza y categoría uruguayas que vuelve defendible la estimación visual de peso ante un tercero. Sin ese dataset, el informe de auditoría no resiste la primera repregunta. Además financia el desarrollo con ingreso recurrente.
+3. **La primera medición de la vía de fondos es de mercado, no técnica.** El colapso creó la necesidad y al mismo tiempo destruyó parte de la clientela. Antes de diseñar hardware transportable hay que saber cuántos fideicomisos ganaderos siguen operando en Uruguay y con cuántas cabezas. Es la pregunta que puede cancelar la vía entera y todavía no está respondida.
+
+Un cambio de énfasis que surge de mirar la vía de fondos sola: **GanaderIA sube de competidor lateral a amenaza frontal.** Un censo aéreo por lote responde “¿hay 28.000 o hay nueve?” más rápido y más barato que cualquier paso individual. Lo que no responde es “¿son estos animales y están en un solo contrato?”. Esa es la frontera exacta del producto en esta vía, y también el mejor argumento para explorar una alianza en vez de una competencia.
+
 ## Respuesta ejecutiva
 
 El competidor más cercano al concepto completo es **Olho do Dono**: publica cámara 3D portátil, conteo, peso, RFID, filmación, GPS, operación sin internet y uso remoto para auditoría. La brecha estratégica del proyecto no puede ser simplemente “pesar por imagen”; debe ser correspondencia RFID–foto demostrable, procedencia resistente a manipulación, reglas de descarte y adaptación SNIG verificable.
@@ -61,7 +86,7 @@ Las rutas de convergencia más relevantes son: **CattleEye** desde visión conti
 - Hacer que el evento exportable sea el producto: RFID leído, imagen/video original, peso y método, tiempo, ubicación, identidad de dispositivo, confianza, excepciones y firma/hash.
 - Evaluar integración o piloto comparativo antes de fabricar toda la medición: Olho do Dono, Optiweigh, Baqueano/Datamars y GanaderIA cubren piezas complementarias.
 - Competir por **integridad y cobertura verificable**, no por un único porcentaje promedio de precisión.
-- Separar los dos modos comerciales: monitoreo continuo de feedlot y auditoría puntual; compartir modelo de evidencia, no necesariamente hardware.
+- Separar los dos modos comerciales en documentos, presupuestos y discurso propios: auditoría de existencias para fondos y monitoreo continuo para feedlot. Comparten el contrato de evento y la plataforma; no comparten comprador, hardware, unidad de cobro ni estándar de prueba.
 
 ## Selección de ítems
 

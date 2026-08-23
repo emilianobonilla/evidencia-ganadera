@@ -355,6 +355,8 @@ function sourceLink(key) {
 
 function nav(active = "mercado", prefix = "") {
   const links = [
+    ["fondos", "fondos.html", "Fondos"],
+    ["feedlot", "feedlot.html", "Feedlot"],
     ["mercado", "mercado.html", "Mercado"],
     ["analisis", "analisis.html", "Análisis"],
     ["tecnologia", "tecnologia.html", "Tecnología"],

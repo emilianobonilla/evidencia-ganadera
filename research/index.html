@@ -12,7 +12,7 @@
     <div class="topbar__inner">
       <a class="brand" href="index.html" aria-current="page"><span class="brand__mark">UY</span><span class="brand__text">Ganadería aumentada</span></a>
       <nav class="nav" aria-label="Documentos">
-        <a href="mercado.html">Mercado</a>
+        <a href="fondos.html">Fondos</a><a href="feedlot.html">Feedlot</a><a href="mercado.html">Mercado</a>
         <a href="analisis.html">Análisis</a>
         <a href="tecnologia.html">Tecnología</a>
         <a href="supuestos.html">Supuestos</a>
@@ -26,12 +26,12 @@
       <div>
         <p class="eyebrow">Dossier de investigación · Uruguay</p>
         <h1>Más información, menos manejo.</h1>
-        <p class="lede">Base de análisis para explorar un paso individual que capture caravana, foto y peso en feedlots; luego, aplicar esa evidencia a auditorías ganaderas.</p>
+        <p class="lede">Base de análisis para un paso individual que capture caravana, foto y peso. Tras el colapso de los fondos ganaderos, el dossier separa dos vías con clientes, estándares de prueba y economías distintas: <a href="fondos.html">fondos y fideicomisos</a> como apuesta principal, <a href="feedlot.html">feedlot</a> como sostén y banco de pruebas.</p>
       </div>
       <aside class="meta-card" aria-label="Metadatos del dossier">
         <dl>
-          <dt>Versión</dt><dd>0.5</dd>
-          <dt>Estado</dt><dd>Reencuadrado</dd>
+          <dt>Versión</dt><dd>0.6</dd>
+          <dt>Estado</dt><dd>Dos vías separadas</dd>
           <dt>Actualizado</dt><dd>23 ago 2026</dd>
           <dt>Respuestas registradas</dt><dd>10</dd>
           <dt>Referentes incluidos</dt><dd>Olho do Dono · Ganader</dd>
@@ -42,6 +42,7 @@
     <div class="layout">
       <aside class="toc">
         <strong>En esta portada</strong>
+        <a href="#vias">Dos vías</a>
         <a href="#documentos">Documentos</a>
         <a href="#marco">Marco actual</a>
         <a href="#lectura">Cómo leer</a>
@@ -49,6 +50,27 @@
       </aside>
 
       <div class="content">
+        <section class="section" id="vias">
+          <p class="eyebrow">Reencuadre 0.6 · después de Conexión Ganadera</p>
+          <h2>Un producto, dos negocios distintos</h2>
+          <p class="section-intro">Feedlot y fondos ganaderos comparten el evento técnico y casi nada más: el comprador, el presupuesto, el estándar de prueba, la unidad de cobro y hasta la exigencia de precisión del peso son distintos. Tratarlos como una sola secuencia escondía esas diferencias.</p>
+          <div class="grid grid--2" style="margin-top: 1.5rem">
+            <a class="doc-link" href="fondos.html">
+              <span class="number">V1</span>
+              <h3>Fondos y fideicomisos ganaderos</h3>
+              <p>Probar que el ganado existe, que es ese animal y que está donde se declaró. Comprador: quien absorbe la pérdida. Se cobra por informe, no por cabeza y mes.</p>
+              <span>Abrir la vía 1 →</span>
+            </a>
+            <a class="doc-link" href="feedlot.html">
+              <span class="number">V2</span>
+              <h3>Feedlot</h3>
+              <p>Ingreso recurrente y banco de pruebas. Es el único lugar donde se genera, con balanza sincronizada, la verdad de referencia que vuelve defendible la estimación de peso de la vía 1.</p>
+              <span>Abrir la vía 2 →</span>
+            </a>
+          </div>
+          <div class="callout callout--warning"><strong>Cambio de secuencia:</strong> esto invierte <a href="supuestos.html#s21">S21</a>, que ordenaba “feedlot primero, auditoría después”. Ese orden se había decidido por razones operativas, no comerciales; la ventana regulatoria de los fondos está abierta ahora.</div>
+        </section>
+
         <section class="section" id="documentos">
           <p class="eyebrow">Cinco documentos conectados</p>
           <h2>Una conversación que deja rastro</h2>
@@ -92,8 +114,8 @@
           <h2>El problema no es solamente “pesar sin balanza”</h2>
           <div class="grid grid--2">
             <div class="card card--strong">
-              <h3>Primera etapa: feedlot</h3>
-              <p>Validar conteo, identidad y tendencia de peso individual sin movimientos frecuentes. Luego extender el núcleo de evidencia a fondos y fideicomisos ganaderos.</p>
+              <h3>Dos estándares de prueba</h3>
+              <p>El feedlot necesita precisión: error por subgrupo, cobertura y una decisión que cambie. Los fondos necesitan otra cosa: que cada animal se cuente una sola vez y que la fecha, el lugar y el archivo original resistan a un tercero que quiera discutirlos.</p>
             </div>
             <div class="card card--warm">
               <h3>Restricción decisiva</h3>
@@ -120,17 +142,18 @@
           <p class="eyebrow">Uso recomendado</p>
           <h2>La próxima iteración empieza por el campo</h2>
           <div class="steps">
+            <div class="step"><div><h3>Medir el mercado de fondos</h3><p>Cuántos fideicomisos ganaderos siguen operando en Uruguay y con cuántas cabezas. El colapso creó la necesidad y también achicó la clientela.</p></div></div>
+            <div class="step"><div><h3>Entrevistar a quien firma</h3><p>BCU, fiduciarios, bancos, síndicos y auditores: qué evidencia aceptarían, quién la paga y qué exigirá la nueva normativa.</p></div></div>
             <div class="step"><div><h3>Observar un feedlot real</h3><p>Documentar escala, recorridos, ritmo, errores y puntos de paso antes de evaluar equipamiento.</p></div></div>
             <div class="step"><div><h3>Definir el evento RFID–foto</h3><p>Probar la correspondencia con animales juntos, dobles lecturas, caravanas ausentes y vueltas atrás.</p></div></div>
-            <div class="step"><div><h3>Medir tendencia contra balanza</h3><p>Comparar peso medido/estimado por categoría y período, conservando archivos originales.</p></div></div>
+            <div class="step"><div><h3>Levantar el conjunto de datos de peso</h3><p>Balanza e imagen sincronizadas desde el primer día del piloto: es lo que vuelve defendible la estimación visual en la auditoría.</p></div></div>
             <div class="step"><div><h3>Validar procedencia</h3><p>Comprobar que ubicación, hora y dispositivo no puedan alterarse o reutilizarse silenciosamente.</p></div></div>
-            <div class="step"><div><h3>Abrir en paralelo la etapa 2</h3><p>Entrevistar fiduciarios, bancos, auditores y al regulador mientras se observa el feedlot: tras el colapso de los fondos ganaderos, la ventana de la auditoría está abierta ahora.</p></div></div>
           </div>
         </section>
       </div>
     </div>
   </main>
 
-  <footer class="footer">Dossier vivo · versión 0.5 · 10 respuestas incorporadas · las afirmaciones comerciales no equivalen a validación independiente.</footer>
+  <footer class="footer">Dossier vivo · versión 0.6 · dos vías separadas · 10 respuestas incorporadas · las afirmaciones comerciales no equivalen a validación independiente.</footer>
 </body>
 </html>
