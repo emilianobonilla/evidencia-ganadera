@@ -1,0 +1,366 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Preguntas priorizadas de investigación para comprender el contexto de un sistema ganadero asociado a la caravana SNIG.">
+  <title>Preguntas de investigación · Ganadería aumentada</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="index.html"><span class="brand__mark">UY</span><span class="brand__text">Ganadería aumentada</span></a>
+      <nav class="nav" aria-label="Documentos">
+        <a href="mercado.html">Mercado</a>
+        <a href="analisis.html">Análisis</a>
+        <a href="supuestos.html">Supuestos</a>
+        <a href="preguntas.html" aria-current="page">Preguntas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Documento 03 · Preguntas de investigación</p>
+        <h1>Preguntar para poder descartar.</h1>
+        <p class="lede">Las mejores respuestas no agregan funciones: cambian prioridades, eliminan conceptos inviables y revelan qué precisión, frecuencia y esfuerzo generan valor real.</p>
+      </div>
+      <aside class="meta-card">
+        <dl>
+          <dt>Versión</dt><dd>0.4</dd>
+          <dt>Preguntas</dt><dd>41</dd>
+          <dt>Prioridad P0</dt><dd>18</dd>
+          <dt>Respondidas</dt><dd>10</dd>
+        </dl>
+      </aside>
+    </section>
+
+    <div class="layout">
+      <aside class="toc">
+        <strong>Contenido</strong>
+        <a href="#uso">Cómo responder</a>
+        <a href="#p0">P0 · Definen dirección</a>
+        <a href="#p1">P1 · Diseñan el piloto</a>
+        <a href="#proveedores">Proveedores</a>
+        <a href="#observacion">Guía de observación</a>
+        <a href="#primerasesion">Primera sesión</a>
+      </aside>
+
+      <article class="content">
+        <section class="section" id="uso">
+          <p class="eyebrow">Método</p>
+          <h2>No buscar consenso prematuro</h2>
+          <p class="section-intro">Conviene registrar respuestas por rol y establecimiento. Una contradicción entre productor, encargado y operario puede ser más informativa que un promedio.</p>
+          <div class="grid grid--3">
+            <div class="card"><h3>P0 · Dirección</h3><p>Puede invalidar un concepto o cambiar el caso de uso principal. Responder antes de cualquier piloto.</p></div>
+            <div class="card"><h3>P1 · Diseño</h3><p>Determina protocolo, muestra, hardware, métricas y condiciones de prueba.</p></div>
+            <div class="card"><h3>Diligencia</h3><p>Se pregunta a proveedores con evidencia verificable, no sólo con una demo.</p></div>
+          </div>
+          <div class="callout"><strong>Formato de registro:</strong> cada respuesta conserva contenido, fuente, fecha, estado y una lectura provisional. “Respondida parcialmente” significa que ya orienta el análisis pero deja una decisión abierta.</div>
+        </section>
+
+        <section class="section" id="p0">
+          <p class="eyebrow">Prioridad cero</p>
+          <h2>Preguntas que definen la dirección</h2>
+
+          <article class="question" id="q01">
+            <div class="question__head"><div><span class="question__id">Q01 · ALCANCE</span><h3>¿Qué especies, categorías, razas y cruzas deben funcionar en la primera etapa?</h3></div><span class="tag tag--vendor">Parcial</span></div>
+            <p>Ejemplos: recría Angus/Hereford y cruzas; vacas de cría; terneros; ganado lechero; más de una especie.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Los modelos de peso visual no transfieren automáticamente entre morfologías.</dd></div><div><dt>Cambia</dt><dd>Dataset, proveedor, sensores y rango de validación.</dd></div><div><dt>Preguntar a</dt><dd>Propietario, técnico y responsable productivo.</dd></div></dl>
+            <div class="response"><div class="response__meta">Respuesta · definición del proyecto · 23 ago 2026</div><p>Comenzar con bovinos comunes en Uruguay: recría Angus/Hereford y cruzas, vacas de cría, terneros, ganado lechero y ganado gordo. Se mantiene una ambición de más de una especie.</p><p><strong>Lectura actual:</strong> el núcleo inicial es bovino, pero abarca morfologías y categorías muy distintas; la especie adicional todavía debe definirse. No corresponde asumir un único modelo visual universal.</p></div>
+          </article>
+
+          <article class="question" id="q02">
+            <div class="question__head"><div><span class="question__id">Q02 · ESCALA</span><h3>Para cada modalidad, ¿cuántos animales debe observar una operación y en cuánto tiempo?</h3></div><span class="tag tag--vendor">Reformulada</span></div>
+            <p>Separar al menos feedlot, auditoría de fideicomiso/fondo y ganado tomado en garantía. Registrar tamaño y ritmo de captura, no buscar un único promedio.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Cambia costo por animal, tiempos, almacenamiento y portabilidad.</dd></div><div><dt>Cambia</dt><dd>Equipo propio vs. servicio; fijo vs. móvil.</dd></div><div><dt>Preguntar a</dt><dd>Propietario y administración.</dd></div></dl>
+            <div class="response"><div class="response__meta">Respuesta parcial · definición del proyecto · 23 ago 2026</div><p>Un encierro puede tener 5.000 cabezas; un fideicomiso puede involucrar pocos animales. Probablemente sean aproximaciones distintas, con dispositivos distintos, aunque sirvan al mismo objetivo de inventario y auditoría.</p><p><strong>Lectura actual:</strong> la escala es segmentada. Se elimina el supuesto de una configuración universal y queda abierta la elección del primer segmento comercial.</p></div>
+          </article>
+
+          <article class="question" id="q03">
+            <div class="question__head"><div><span class="question__id">Q03 · VALOR</span><h3>¿Qué tres decisiones concretas deberían mejorar con el sistema?</h3></div><span class="tag tag--verified">Respondida</span></div>
+            <p>Opciones a priorizar: venta, suplementación, cambio de potrero, detección de bajo desempeño, inventario, sanidad, selección o auditoría.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Cada decisión necesita otra frecuencia y precisión.</dd></div><div><dt>Cambia</dt><dd>Qué medimos primero y cómo probamos valor.</dd></div><div><dt>Preguntar a</dt><dd>Todos los roles, por separado.</dd></div></dl>
+            <div class="response"><div class="response__meta">Respuesta · definición del proyecto · 23 ago 2026</div><p><strong>Prioridad:</strong> inventario y auditoría. El enfoque comercial inicial es actuar como agente independiente que genera confianza cuando existen intermediarios: fondos ganaderos, inversores o bancos que toman ganado en garantía. No se plantea inicialmente como sistema de administración del establecimiento.</p><p><strong>Segundo escenario:</strong> corrales de encierro/feedlots, con conteo y tendencia de peso por animal evitando movimientos frecuentes.</p><p><strong>Lectura actual:</strong> la integridad de identidad, evidencia y cadena de custodia pasa a ser tan importante como la precisión del sensor.</p></div>
+          </article>
+
+          <article class="question" id="q04">
+            <div class="question__head"><div><span class="question__id">Q04 · FLUJO ACTUAL</span><h3>¿Cómo se cuenta y pesa hoy, cuánto demora y qué se deja de hacer por su costo?</h3></div><span class="tag tag--open">P0</span></div>
+            <p>Medir personas, horas, kilómetros, instalaciones, esperas, frecuencia, incidentes, correcciones y resultado final.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Establece una línea base y revela la fricción verdadera.</dd></div><div><dt>Cambia</dt><dd>Beneficio mínimo y diseño operacional.</dd></div><div><dt>Preguntar a</dt><dd>Operario y encargado; observar además.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q05">
+            <div class="question__head"><div><span class="question__id">Q05 · INFRAESTRUCTURA</span><h3>¿Por dónde pasan naturalmente todos —o casi todos— los animales?</h3></div><span class="tag tag--verified">Respondida</span></div>
+            <p>Agua, suplemento, sombra, portera, manga, tambo o cambio de potrero; indicar ancho, piso, frecuencia y si pasan de a uno.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Define la viabilidad de RFID fijo, cámara 3D y WoW.</dd></div><div><dt>Cambia</dt><dd>Concepto A/B frente a C o lector manual.</dd></div><div><dt>Preguntar a</dt><dd>Encargado y operario, con recorrido físico.</dd></div></dl>
+            <div class="response"><div class="response__meta">Respuesta · definición del proyecto · 23 ago 2026</div><p>Existen puntos de paso. Si en una operación no existen, es aceptable construir un dispositivo que haga pasar los animales de a uno para obtener lectura, fotos y demás información con precisión.</p><p><strong>Decisión derivada:</strong> la separación individual forma parte del sistema; no se limita a sensores agregados sobre infraestructura existente.</p></div>
+          </article>
+
+          <article class="question" id="q06">
+            <div class="question__head"><div><span class="question__id">Q06 · CONTEXTO</span><h3>¿Qué conectividad y energía existen realmente en esos puntos?</h3></div><span class="tag tag--vendor">Parcial</span></div>
+            <p>Medir cobertura por operador, no responder sólo “hay señal”. Incluir 220 V, solar, sombra, seguridad y acceso vehicular.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Determina offline, sincronización y autonomía.</dd></div><div><dt>Cambia</dt><dd>Nube, edge, energía y mantenimiento.</dd></div><div><dt>Preguntar a</dt><dd>Operario; validar con medición.</dd></div></dl>
+            <div class="response"><div class="response__meta">Respuesta parcial · definición del proyecto · 23 ago 2026</div><p>Puede no existir internet ni corriente eléctrica. Para operaciones puntuales se podrían usar baterías con inversor o generadores.</p><p><strong>Lectura actual:</strong> la captura no puede depender de conexión; la energía transportable es aceptable para campañas puntuales, pero falta medir autonomía y logística por modalidad.</p></div>
+          </article>
+
+          <article class="question" id="q07">
+            <div class="question__head"><div><span class="question__id">Q07 · PRECISIÓN</span><h3>¿Qué error de peso es tolerable para cada decisión?</h3></div><span class="tag tag--open">P0</span></div>
+            <p>Separar: tendencia/alerta, cambio de lote, proyección de venta, precio comercial y dosificación. Preguntar en kg y en consecuencia, no sólo en porcentaje.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Decide si estimación visual alcanza o si hace falta load cell.</dd></div><div><dt>Cambia</dt><dd>Tecnología, validación y advertencias de uso.</dd></div><div><dt>Preguntar a</dt><dd>Productor, técnico, veterinario y comercial.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q08">
+            <div class="question__head"><div><span class="question__id">Q08 · RIESGO</span><h3>¿Qué daño causa asociar un peso o evento al animal equivocado?</h3></div><span class="tag tag--verified">Respondida</span></div>
+            <p>Comparar ese daño con omitir el dato o pedir una segunda lectura.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Define umbral de identidad y manejo de conflictos.</dd></div><div><dt>Cambia</dt><dd>Automatización vs. revisión humana.</dd></div><div><dt>Preguntar a</dt><dd>Responsable productivo y veterinario.</dd></div></dl>
+            <div class="response"><div class="response__meta">Respuesta · definición del proyecto · 23 ago 2026</div><p>El daño es alto. Es preferible omitir el peso y, cuando sea posible, pedir una segunda lectura.</p><p><strong>Decisión derivada:</strong> asociación conservadora; los conflictos no se resuelven automáticamente y deben quedar visibles en la auditoría.</p></div>
+          </article>
+
+          <article class="question" id="q09">
+            <div class="question__head"><div><span class="question__id">Q09 · IDENTIDAD</span><h3>¿Con qué frecuencia faltan, fallan o no se leen las caravanas electrónicas?</h3></div><span class="tag tag--open">P0</span></div>
+            <p>Incluir lectores actuales, orientación, distancia, animales juntos, caravanas perdidas y discrepancia visual/electrónica.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>La identidad es la columna vertebral del historial.</dd></div><div><dt>Cambia</dt><dd>Excepciones, reintentos y necesidad de biometría auxiliar.</dd></div><div><dt>Preguntar a</dt><dd>Operador de movimiento y personal de campo.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q10">
+            <div class="question__head"><div><span class="question__id">Q10 · CICLO DE VIDA</span><h3>Sin integración SNIG, ¿cómo ingresarán y saldrán animales de la base propia?</h3></div><span class="tag tag--open">P0</span></div>
+            <p>Alternativas: lectura inicial total, importación autorizada, alta manual verificada, archivos de operador; incluir venta, muerte y reidentificación.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Evita duplicados e historias huérfanas.</dd></div><div><dt>Cambia</dt><dd>Operación administrativa y frontera con SNIG.</dd></div><div><dt>Preguntar a</dt><dd>Productor, operador SNIG y asesor legal/técnico.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q11">
+            <div class="question__head"><div><span class="question__id">Q11 · USUARIO</span><h3>¿Quién captura, quién corrige y quién decide con el dato?</h3></div><span class="tag tag--open">P0</span></div>
+            <p>Nombrar roles reales, alfabetización digital, idioma, dispositivo habitual y disponibilidad de soporte.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>No existe un único “usuario rural”.</dd></div><div><dt>Cambia</dt><dd>Interfaz, permisos, capacitación y soporte.</dd></div><div><dt>Preguntar a</dt><dd>Cada rol por separado.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q12">
+            <div class="question__head"><div><span class="question__id">Q12 · FRECUENCIA</span><h3>¿Cada cuánto debe existir un dato nuevo y qué cobertura mínima del rodeo sirve?</h3></div><span class="tag tag--open">P0</span></div>
+            <p>Distinguir resultado inmediato, diario, semanal, por cambio de potrero o mensual; individual vs. distribución del lote.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Define captura dirigida u oportunista.</dd></div><div><dt>Cambia</dt><dd>WoW continuo, dron periódico o campaña de manga.</dd></div><div><dt>Preguntar a</dt><dd>Responsable de cada decisión de Q03.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q31">
+            <div class="question__head"><div><span class="question__id">Q31 · SEGMENTO INICIAL</span><h3>¿Cuál debería ser el primer contexto comercial que validemos?</h3></div><span class="tag tag--verified">Respondida</span></div>
+            <p>Elegir entre auditoría de fondo/fideicomiso, ganado en garantía bancaria, servicio a intermediarios o monitoreo de feedlot. Se podrán abordar varios después, pero no necesariamente con el mismo primer experimento.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Cada contexto tiene distinto comprador, escala, frecuencia y estándar probatorio.</dd></div><div><dt>Cambia</dt><dd>Concepto, piloto, interlocutores y modelo comercial.</dd></div><div><dt>Preguntar a</dt><dd>Promotor del proyecto y potenciales clientes.</dd></div></dl>
+            <div class="response"><div class="response__meta">Respuesta · definición del proyecto · 23 ago 2026</div><p><strong>Secuencia:</strong> primero feedlot; luego auditoría de fondos y fideicomisos ganaderos.</p><p><strong>Decisión derivada:</strong> el primer piloto debe validar captura continua, identidad, conteo y tendencia de peso en encierro. La cadena probatoria para terceros se diseña desde el inicio, pero se valida comercialmente en una segunda etapa.</p></div>
+          </article>
+
+          <article class="question" id="q32">
+            <div class="question__head"><div><span class="question__id">Q32 · EVIDENCIA</span><h3>¿Qué debe contener una auditoría para que un inversor o banco confíe en ella?</h3></div><span class="tag tag--vendor">Parcial</span></div>
+            <p>Identidad individual, conteo total, ubicación, peso, archivos originales, fecha/hora, geolocalización, operador, método, tasa de cobertura, excepciones y firma del informe.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>“Dato correcto” y “evidencia aceptable” no son equivalentes.</dd></div><div><dt>Cambia</dt><dd>Cadena de custodia, almacenamiento, reporte y controles antifraude.</dd></div><div><dt>Preguntar a</dt><dd>Bancos, fondos, fiduciarios, auditores y asesores legales.</dd></div></dl>
+            <div class="response"><div class="response__meta">Respuesta parcial · definición del proyecto · 23 ago 2026</div><p>Fotos de los animales que ayuden a comprobar que existen al momento del conteo y que no fueron sustituidos; variación de peso dentro de márgenes razonables de ganancia o pérdida; y evidencia de que se encuentran en el potrero correspondiente.</p><p><strong>Lectura actual:</strong> se necesita evidencia longitudinal de identidad, existencia, peso y ubicación. Falta validar con financiadores qué fuerza probatoria tienen las fotos y qué márgenes consideran aceptables.</p></div>
+          </article>
+
+          <article class="question" id="q33">
+            <div class="question__head"><div><span class="question__id">Q33 · INDEPENDENCIA</span><h3>¿Cómo se vuelve confiable la evidencia sin depender de la palabra del agente?</h3></div><span class="tag tag--verified">Respondida</span></div>
+            <p>Definir qué datos registra automáticamente el dispositivo, quién puede corregir y cómo se detectan alteraciones o reutilización de capturas.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>La confianza puede depender más del proceso que del algoritmo.</dd></div><div><dt>Cambia</dt><dd>Roles, permisos, trazabilidad y modelo de prestación.</dd></div><div><dt>Preguntar a</dt><dd>Financiadores, inversores y auditores.</dd></div></dl>
+            <div class="response"><div class="response__meta">Respuesta · definición del proyecto · 23 ago 2026</div><p>La información no debe depender del agente, sino del aparato que toma las evidencias. Por ejemplo, la captura debe quedar geolocalizada.</p><p><strong>Decisión derivada:</strong> operador y dispositivo son identidades diferentes. Ubicación, hora, equipo y archivos originales deben registrarse automáticamente; la geolocalización es necesaria, aunque por sí sola no prueba que el archivo sea nuevo o inalterado.</p></div>
+          </article>
+
+          <article class="question" id="q36">
+            <div class="question__head"><div><span class="question__id">Q36 · IDENTIDAD VISUAL</span><h3>¿Qué combinación prueba que la foto corresponde a esa caravana y a ese animal?</h3></div><span class="tag tag--verified">Respondida</span></div>
+            <p>Comparar foto aislada, video continuo, RFID leído en el mismo paso, caravana visual visible, varias vistas y reidentificación visual longitudinal.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Animales parecidos pueden existir y una imagen puede reutilizarse.</dd></div><div><dt>Cambia</dt><dd>Geometría de captura, número de cámaras y protocolo RFID–imagen.</dd></div><div><dt>Validar con</dt><dd>Prueba de sustitución deliberada y revisión ciega.</dd></div></dl>
+            <div class="response"><div class="response__meta">Respuesta · definición del proyecto · 23 ago 2026</div><p>La foto debe estar asociada a una lectura de la caravana.</p><p><strong>Decisión derivada:</strong> foto y RFID forman un único evento de evidencia. Sigue abierta la validación de correspondencia física cuando haya más de un animal dentro del campo de lectura o de la imagen.</p></div>
+          </article>
+
+          <article class="question" id="q37">
+            <div class="question__head"><div><span class="question__id">Q37 · PROCEDENCIA DIGITAL</span><h3>¿Cómo demostrará el aparato que una captura es original, reciente y no alterada?</h3></div><span class="tag tag--open">P0 · Nueva</span></div>
+            <p>Explorar identificación del dispositivo, sello temporal, ubicación, hash/firma, secuencia de captura, almacenamiento local protegido y registro de cualquier corrección.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>GPS y metadatos editables no constituyen por sí solos una cadena de custodia.</dd></div><div><dt>Cambia</dt><dd>Hardware, firmware, arquitectura de evidencia y auditoría.</dd></div><div><dt>Validar con</dt><dd>Intentos de replay, edición y captura fuera del lugar.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q40">
+            <div class="question__head"><div><span class="question__id">Q40 · CAUDAL DEL PASO</span><h3>¿Cuántos animales por hora debe procesar el dispositivo individualizador?</h3></div><span class="tag tag--open">P0 · Nueva</span></div>
+            <p>Definir mínimo y objetivo, tiempo máximo de espera, proporción de reintentos y si el paso ocurre voluntariamente o durante una operación dirigida.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Un paso preciso pero lento puede ser inviable para miles de animales.</dd></div><div><dt>Cambia</dt><dd>Geometría, cantidad de carriles, captura y costo.</dd></div><div><dt>Validar con</dt><dd>Jornada real de feedlot y simulación de fallas.</dd></div></dl>
+          </article>
+        </section>
+
+        <section class="section" id="p1">
+          <p class="eyebrow">Prioridad uno</p>
+          <h2>Preguntas que diseñan el piloto</h2>
+
+          <article class="question" id="q13">
+            <div class="question__head"><div><span class="question__id">Q13 · AMBIENTE</span><h3>¿Qué condiciones extremas debe soportar la captura?</h3></div><span class="tag tag--vendor">P1</span></div>
+            <p>Lluvia, barro, polvo, sol frontal, sombra, viento, temperaturas, golpes, insectos y vandalismo.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Visión, térmica, balanza y electrónica fallan de formas distintas.</dd></div><div><dt>Cambia</dt><dd>Protección, instalación y escenarios de prueba.</dd></div><div><dt>Responder con</dt><dd>Observación estacional y registros.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q14">
+            <div class="question__head"><div><span class="question__id">Q14 · DRON</span><h3>¿Quién podría volar, con qué frecuencia y bajo qué restricciones?</h3></div><span class="tag tag--vendor">P1</span></div>
+            <p>Experiencia, permiso DINACIA, cercanía a espacio controlado, ganado sensible, viento y logística de baterías.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Una buena métrica no sirve si el vuelo no ocurre.</dd></div><div><dt>Cambia</dt><dd>Autoservicio vs. prestador y frecuencia real.</dd></div><div><dt>Preguntar a</dt><dd>Productor, piloto y DINACIA.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q15">
+            <div class="question__head"><div><span class="question__id">Q15 · RELACIONES</span><h3>¿Qué significa exactamente “se relacionó” y qué decisión habilita?</h3></div><span class="tag tag--vendor">P1</span></div>
+            <p>Opciones: compartir potrero, estar a menos de X metros durante Y minutos, contacto, amamantamiento, monta, dominancia o trazabilidad sanitaria.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Cada definición exige sensores y validación diferentes.</dd></div><div><dt>Cambia</dt><dd>De simple historial de lote a red de proximidad o visión conductual.</dd></div><div><dt>Preguntar a</dt><dd>Productor, veterinario y etólogo/técnico.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q16">
+            <div class="question__head"><div><span class="question__id">Q16 · WEARABLES</span><h3>¿Se aceptaría colocar y mantener un dispositivo adicional?</h3></div><span class="tag tag--vendor">P1</span></div>
+            <p>Preguntar para todo el rodeo, categorías de alto valor o una muestra centinela; incluir batería, pérdidas y retiro.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Desbloquea GNSS, actividad y proximidad.</dd></div><div><dt>Cambia</dt><dd>Alcance de ubicación y relaciones.</dd></div><div><dt>Preguntar a</dt><dd>Propietario y quien lo mantendría.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q17">
+            <div class="question__head"><div><span class="question__id">Q17 · ALERTAS</span><h3>¿Qué excepción merece una alerta y quién debe recibirla?</h3></div><span class="tag tag--vendor">P1</span></div>
+            <p>Ejemplos: animal no visto, caída de peso, estancamiento, salida de potrero, temperatura anómala o tag conflictivo.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Evita tableros sin acción y fatiga de alertas.</dd></div><div><dt>Cambia</dt><dd>Frecuencia, calidad requerida y canales.</dd></div><div><dt>Preguntar a</dt><dd>Quien puede actuar, no sólo quien mira.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q18">
+            <div class="question__head"><div><span class="question__id">Q18 · MODELO DE ACCESO</span><h3>¿Equipo propio, servicio por visita o infraestructura compartida?</h3></div><span class="tag tag--vendor">P1</span></div>
+            <p>Comparar disponibilidad, inversión, capacitación, control de agenda y mantenimiento.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>La forma de acceso condiciona diseño y frecuencia.</dd></div><div><dt>Cambia</dt><dd>Portabilidad, soporte y economía unitaria.</dd></div><div><dt>Preguntar a</dt><dd>Productores de diferentes escalas.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q19">
+            <div class="question__head"><div><span class="question__id">Q19 · DATOS</span><h3>¿Quién puede ver, exportar, compartir y borrar cada tipo de dato?</h3></div><span class="tag tag--vendor">P1</span></div>
+            <p>Incluir productor, empleado, veterinario, consignatario, comprador, proveedor tecnológico y eventual auditor.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Peso, ubicación y archivos visuales tienen sensibilidad comercial.</dd></div><div><dt>Cambia</dt><dd>Permisos, contratos, retención y exportación.</dd></div><div><dt>Preguntar a</dt><dd>Propietario y asesor legal.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q20">
+            <div class="question__head"><div><span class="question__id">Q20 · LATENCIA</span><h3>¿Cuánto se puede esperar entre captura y resultado?</h3></div><span class="tag tag--vendor">P1</span></div>
+            <p>Segundos para decidir una apartada; minutos para repetir una toma; horas o días para gestión.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Define nube vs. procesamiento local.</dd></div><div><dt>Cambia</dt><dd>Hardware, conectividad y experiencia.</dd></div><div><dt>Preguntar a</dt><dd>Responsable de cada caso de uso.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q21">
+            <div class="question__head"><div><span class="question__id">Q21 · REFERENCIA</span><h3>¿Qué balanza y procedimiento serán la verdad de referencia?</h3></div><span class="tag tag--vendor">P1</span></div>
+            <p>Calibración, hora respecto de la captura, ayuno/agua, repetición, operador y tolerancia del equipo.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Sin referencia confiable no se puede atribuir el error.</dd></div><div><dt>Cambia</dt><dd>Diseño estadístico y credibilidad.</dd></div><div><dt>Responder con</dt><dd>Protocolo firmado antes de probar.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q22">
+            <div class="question__head"><div><span class="question__id">Q22 · PILOTO</span><h3>¿Qué establecimientos y animales pueden formar una muestra representativa?</h3></div><span class="tag tag--vendor">P1</span></div>
+            <p>Buscar diversidad de raza, edad, peso, manejo, topografía, infraestructura y usuario; incluir condiciones no ideales.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Una demo óptima no mide transferibilidad.</dd></div><div><dt>Cambia</dt><dd>Confianza y límites declarables.</dd></div><div><dt>Preguntar a</dt><dd>Red de productores, INIA, academia y técnicos.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q23">
+            <div class="question__head"><div><span class="question__id">Q23 · SOPORTE</span><h3>¿Quién limpia, carga, calibra, actualiza y repara?</h3></div><span class="tag tag--vendor">P1</span></div>
+            <p>Asignar persona y frecuencia para cada tarea; si nadie es dueño, tratarlo como falla de diseño.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>El mantenimiento domina la confiabilidad anual.</dd></div><div><dt>Cambia</dt><dd>Protección, modularidad y SLA.</dd></div><div><dt>Preguntar a</dt><dd>Encargado y proveedor.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q24">
+            <div class="question__head"><div><span class="question__id">Q24 · ÉXITO</span><h3>¿Qué resultado justificaría avanzar, combinar o detener cada concepto?</h3></div><span class="tag tag--vendor">P1</span></div>
+            <p>Definir antes de ver resultados: identidad, error, cobertura, minutos activos, personas, reintentos, costo y comprensión.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Evita mover el objetivo para salvar una tecnología favorita.</dd></div><div><dt>Cambia</dt><dd>Decisión al terminar el piloto.</dd></div><div><dt>Responder con</dt><dd>Criterios cuantitativos y no negociables.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q34">
+            <div class="question__head"><div><span class="question__id">Q34 · OPERACIÓN DE AUDITORÍA</span><h3>¿Cuánto tiempo, costo y periodicidad admite cada tipo de auditoría?</h3></div><span class="tag tag--vendor">P1 · Nueva</span></div>
+            <p>Separar alta inicial, control periódico, evento de garantía, discrepancia y cierre; incluir desplazamiento del agente y ventana disponible en el establecimiento.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Define si se necesita automatización continua o una campaña transportable.</dd></div><div><dt>Cambia</dt><dd>Equipamiento, energía y modelo de cobro.</dd></div><div><dt>Preguntar a</dt><dd>Comprador del informe y operador.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q35">
+            <div class="question__head"><div><span class="question__id">Q35 · ANTIFRAUDE</span><h3>¿Qué manipulaciones debe poder detectar o hacer evidentes el sistema?</h3></div><span class="tag tag--vendor">P1 · Nueva</span></div>
+            <p>Ejemplos: repetir animales o videos, trasladar caravanas, sustituir archivos, cambiar fecha/ubicación, omitir animales, editar correcciones o reutilizar una captura para otra operación.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>El incentivo cambia cuando el dato respalda dinero o garantías.</dd></div><div><dt>Cambia</dt><dd>Firmas, evidencia original, geolocalización, controles cruzados y revisión.</dd></div><div><dt>Preguntar a</dt><dd>Auditores, financiadores, seguridad y asesor legal.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q38">
+            <div class="question__head"><div><span class="question__id">Q38 · CURVA ESPERADA</span><h3>¿Qué márgenes de ganancia o pérdida de peso son razonables en cada intervalo?</h3></div><span class="tag tag--vendor">P1 · Nueva</span></div>
+            <p>Definir por categoría, raza, dieta, días entre capturas y condición sanitaria; distinguir alerta productiva de indicio de sustitución.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Una regla única puede marcar como fraude una variación biológica real.</dd></div><div><dt>Cambia</dt><dd>Alertas, revisión humana y valor de la tendencia.</dd></div><div><dt>Preguntar a</dt><dd>Nutricionista, veterinario y operador de feedlot.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q39">
+            <div class="question__head"><div><span class="question__id">Q39 · UBICACIÓN</span><h3>¿Cómo se define y verifica el potrero o corral correcto?</h3></div><span class="tag tag--vendor">P1 · Nueva</span></div>
+            <p>Polígono geográfico, punto de captura, portera de acceso, corral declarado o combinación; registrar tolerancia GPS y cambios autorizados.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Estar cerca de un potrero no demuestra permanencia dentro de él.</dd></div><div><dt>Cambia</dt><dd>Geocercas, ubicación del aparato y evidencia de movimientos.</dd></div><div><dt>Validar con</dt><dd>Recorridos en límites, corrales vecinos y captura fuera de zona.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q41">
+            <div class="question__head"><div><span class="question__id">Q41 · BIENESTAR Y FALLAS</span><h3>¿Cómo debe comportarse el paso ante miedo, retroceso, dos animales juntos o atasco?</h3></div><span class="tag tag--vendor">P1 · Nueva</span></div>
+            <p>Definir salida segura, supervisión, límites de presión/tiempo, detección de ocupación y protocolo de liberación.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>La separación física introduce riesgos animales y humanos.</dd></div><div><dt>Cambia</dt><dd>Diseño mecánico, sensores auxiliares y operación.</dd></div><div><dt>Validar con</dt><dd>Veterinario, especialista en manejo y pruebas supervisadas.</dd></div></dl>
+          </article>
+        </section>
+
+        <section class="section" id="proveedores">
+          <p class="eyebrow">Diligencia técnica y comercial</p>
+          <h2>Preguntas para Olho do Dono, Ganader y alternativas</h2>
+
+          <article class="question" id="q25">
+            <div class="question__head"><div><span class="question__id">Q25 · EVIDENCIA</span><h3>¿Cómo definen y distribuyen el error?</h3></div><span class="tag tag--vendor">Proveedor</span></div>
+            <p>Solicitar MAE/sesgo/percentiles, tamaño de muestra, exclusiones, razas, categorías, rango de peso y condiciones; no aceptar sólo “97% de precisión” o “5% de error”.</p>
+          </article>
+
+          <article class="question" id="q26">
+            <div class="question__head"><div><span class="question__id">Q26 · IDENTIDAD</span><h3>¿Pueden demostrar lectura de una caravana SNIG real y asociación temporal inequívoca?</h3></div><span class="tag tag--vendor">Proveedor</span></div>
+            <p>Probar con dos animales juntos, tag no leído, lectura duplicada y reintento; pedir modelo de lector y estándares soportados.</p>
+          </article>
+
+          <article class="question" id="q27">
+            <div class="question__head"><div><span class="question__id">Q27 · FLUJO REAL</span><h3>¿Qué preparación, captura, carga, corrección y espera requiere una operación completa?</h3></div><span class="tag tag--vendor">Proveedor</span></div>
+            <p>Medir tiempo activo de personal y tasa de repetición; incluir instalación, objetos de referencia, desfile, conectividad y retiro.</p>
+          </article>
+
+          <article class="question" id="q28">
+            <div class="question__head"><div><span class="question__id">Q28 · DATOS</span><h3>¿Qué datos y archivos se pueden exportar, por API o descarga, y con qué licencia?</h3></div><span class="tag tag--vendor">Proveedor</span></div>
+            <p>Identidad, pesos, confianza, videos, point clouds, errores, metadatos, correcciones y historial; incluir salida al terminar contrato.</p>
+          </article>
+
+          <article class="question" id="q29">
+            <div class="question__head"><div><span class="question__id">Q29 · ROBUSTEZ</span><h3>¿Qué ocurre cuando la captura está fuera de especificación?</h3></div><span class="tag tag--vendor">Proveedor</span></div>
+            <p>¿El sistema rechaza, advierte o entrega un número? Pedir tasa de descarte y ejemplos con oclusión, barro, sombra, viento o mala trayectoria.</p>
+          </article>
+
+          <article class="question" id="q30">
+            <div class="question__head"><div><span class="question__id">Q30 · PRUEBA LOCAL</span><h3>¿Aceptan una comparación ciega y preacordada en Uruguay?</h3></div><span class="tag tag--vendor">Proveedor</span></div>
+            <p>El proveedor recibe capturas sin pesos de referencia; se fijan muestra, protocolo, plazo y métricas antes de abrir los resultados.</p>
+          </article>
+
+          <div class="callout callout--warning"><strong>Específico de Ganader:</strong> pedir la diferencia entre procesamiento comercial y asistido, y cómo se vincula una estimación “individual” de un vuelo con la misma caravana en otro vuelo. <strong>Específico de Olho do Dono:</strong> pedir compatibilidad RFID SNIG, razas validadas, especificación del corredor y funcionamiento actual offline/nube.</div>
+        </section>
+
+        <section class="section" id="observacion">
+          <p class="eyebrow">Investigación contextual</p>
+          <h2>Guía para observar una jornada</h2>
+          <div class="grid grid--2">
+            <div class="card"><h3>Antes</h3><ul><li>¿Quién decide que se hará la operación?</li><li>¿Qué se prepara y cuánto antes?</li><li>¿Qué equipos, archivos y personas se coordinan?</li><li>¿Qué suele faltar?</li></ul></div>
+            <div class="card"><h3>Durante</h3><ul><li>Recorrido de animales y personas.</li><li>Puntos de espera, recuentos y transcripción.</li><li>Animales juntos, vueltas atrás o sin tag.</li><li>Condiciones de luz, piso, señal y ruido.</li></ul></div>
+            <div class="card"><h3>Después</h3><ul><li>Quién revisa y corrige.</li><li>Cuándo queda disponible el dato.</li><li>Cómo se comparte o vuelve a cargar.</li><li>Qué decisión se toma realmente.</li></ul></div>
+            <div class="card card--strong"><h3>Evidencia a conservar</h3><ul><li>Mapa simple y fotos autorizadas.</li><li>Tiempos por etapa y número de personas.</li><li>Errores/excepciones y recuperación.</li><li>Artefactos existentes: planillas, lector, balanza, mensajes.</li></ul></div>
+          </div>
+          <div class="callout"><strong>No preguntar solamente “¿usarías esto?”</strong> Pedir el último caso concreto: “Contame la última vez que pesaron; ¿qué pasó desde que lo decidieron hasta que usaron el dato?”.</div>
+        </section>
+
+        <section class="section" id="primerasesion">
+          <p class="eyebrow">Próxima conversación</p>
+          <h2>Las preguntas para la próxima iteración</h2>
+          <ol>
+            <li><a href="#q02">¿Qué escala y ritmo tiene el primer feedlot?</a></li>
+            <li><a href="#q04">¿Cómo fue la última pesada y conteo?</a></li>
+            <li><a href="#q40">¿Qué caudal debe soportar el paso individual?</a></li>
+            <li><a href="#q07">¿Qué error sirve para cada decisión?</a></li>
+            <li><a href="#q12">¿Con qué frecuencia y cobertura?</a></li>
+            <li><a href="#q09">¿Qué tan bien se leen hoy las caravanas?</a></li>
+            <li><a href="#q11">¿Quién hará y usará cada tarea?</a></li>
+            <li><a href="#q37">¿Cómo prueba el aparato la procedencia de la captura?</a></li>
+            <li><a href="#q38">¿Qué variación de peso es razonable?</a></li>
+            <li><a href="#q39">¿Cómo se verifica el corral o potrero?</a></li>
+          </ol>
+          <div class="callout callout--warning"><strong>Resultado esperado:</strong> definir el primer piloto de feedlot y el evento indivisible <em>lectura RFID + foto + peso + ubicación + procedencia del dispositivo</em>.</div>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">Documento 03 · Preguntas · versión 0.4 · 10 respuestas registradas · <a href="analisis.html">volver al análisis</a></footer>
+</body>
+</html>

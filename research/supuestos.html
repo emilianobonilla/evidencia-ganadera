@@ -1,0 +1,290 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Registro vivo de supuestos para el sistema de información productiva ganadera asociado a la caravana SNIG.">
+  <title>Registro de supuestos · Ganadería aumentada</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="index.html"><span class="brand__mark">UY</span><span class="brand__text">Ganadería aumentada</span></a>
+      <nav class="nav" aria-label="Documentos">
+        <a href="mercado.html">Mercado</a>
+        <a href="analisis.html">Análisis</a>
+        <a href="supuestos.html" aria-current="page">Supuestos</a>
+        <a href="preguntas.html">Preguntas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Documento 02 · Registro de supuestos</p>
+        <h1>Lo que creemos antes de saberlo.</h1>
+        <p class="lede">Un supuesto no es un defecto: es una deuda de evidencia. Este registro hace visible qué sostiene cada dirección del análisis y qué deberíamos revisar primero.</p>
+      </div>
+      <aside class="meta-card">
+        <dl>
+          <dt>Versión</dt><dd>0.4</dd>
+          <dt>Supuestos</dt><dd>27</dd>
+          <dt>Críticos</dt><dd>15</dd>
+          <dt>Actualizados con respuestas</dt><dd>15</dd>
+        </dl>
+      </aside>
+    </section>
+
+    <div class="layout">
+      <aside class="toc">
+        <strong>Contenido</strong>
+        <a href="#metodo">Cómo usar</a>
+        <a href="#fundacionales">Fundacionales</a>
+        <a href="#operacion">Operación</a>
+        <a href="#tecnologia">Tecnología</a>
+        <a href="#negocio">Datos y negocio</a>
+        <a href="#cadena">Cadena de razonamiento</a>
+        <a href="#cambios">Historial</a>
+      </aside>
+
+      <article class="content">
+        <section class="section" id="metodo">
+          <p class="eyebrow">Método</p>
+          <h2>Prioridad = incertidumbre × impacto</h2>
+          <div class="grid grid--3">
+            <div class="card"><span class="tag tag--verified">Alta confianza</span><p style="margin-top:.8rem">Respaldado por fuente primaria o decisión explícita del proyecto.</p></div>
+            <div class="card"><span class="tag tag--vendor">Confianza media</span><p style="margin-top:.8rem">Plausible y respaldado parcialmente, pero no validado en el contexto objetivo.</p></div>
+            <div class="card"><span class="tag tag--open">Baja confianza</span><p style="margin-top:.8rem">Inferencia inicial que puede cambiar el concepto o la viabilidad.</p></div>
+          </div>
+          <div class="callout"><strong>Regla de actualización:</strong> cuando una entrevista o prueba responda un supuesto, conservar el texto original, agregar evidencia y cambiar su estado a validado, refutado o segmentado. No borrar la historia.</div>
+        </section>
+
+        <section class="section" id="fundacionales">
+          <p class="eyebrow">A · Fundacionales</p>
+          <h2>Qué problema y frontera estamos asumiendo</h2>
+
+          <article class="assumption" id="s01">
+            <div class="assumption__head"><div><span class="assumption__id">S01 · CRÍTICO</span><h3>La caravana SNIG será una clave de consulta, no un soporte de almacenamiento productivo.</h3></div><span class="tag tag--verified">Alta confianza</span></div>
+            <p>El RFID contiene el número individual; peso, potrero y otros eventos se guardarán en una base privada asociada.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd>Descripción oficial del SNIG.</dd></div><div><dt>Si fuera falso</dt><dd>Cambiarían arquitectura, hardware y gobernanza.</dd></div><div><dt>Cómo cerrar</dt><dd>Confirmación técnica con SNIG y lectura de tags reales.</dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s02">
+            <div class="assumption__head"><div><span class="assumption__id">S02</span><h3>La primera etapa no requiere integración directa con SNIG.</h3></div><span class="tag tag--verified">Decisión del proyecto</span></div>
+            <p>Se podrá cargar o importar el universo de animales por medios autorizados y mantener una capa productiva independiente.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd>Restricción explícita del usuario.</dd></div><div><dt>Si cambiara</dt><dd>Habría que investigar APIs, permisos y sincronización oficial.</dd></div><div><dt>Revisión</dt><dd>Al definir altas, ventas y movimientos.</dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s03">
+            <div class="assumption__head"><div><span class="assumption__id">S03 · SEGMENTADO</span><h3>El núcleo definido es bovino uruguayo; el alcance multiespecie sigue abierto.</h3></div><span class="tag tag--verified">Dirección parcial</span></div>
+            <p>El alcance bovino ya es amplio: recría Angus/Hereford y cruzas, vacas de cría, terneros, ganado lechero y ganado gordo. La especie adicional todavía no está definida.</p>
+            <dl class="detail-grid"><div><dt>Evidencia</dt><dd>Respuesta Q01 del 23 ago 2026.</dd></div><div><dt>Implicación</dt><dd>Validar por raza, categoría y rango; no asumir modelo universal.</dd></div><div><dt>Pendiente</dt><dd><a href="preguntas.html#q01">Definir especie y horizonte</a></dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s04">
+            <div class="assumption__head"><div><span class="assumption__id">S04 · CRÍTICO · SEGMENTADO</span><h3>Auditoría e historia individual tienen valor distinto según el contexto.</h3></div><span class="tag tag--verified">Dirección confirmada</span></div>
+            <p>Para fondos, garantías o intermediación puede dominar la fotografía auditable de inventario; en feedlot importa además la tendencia de peso individual.</p>
+            <dl class="detail-grid"><div><dt>Evidencia</dt><dd>Respuesta Q03 del 23 ago 2026.</dd></div><div><dt>Implicación</dt><dd>Diseñar dos modalidades, no forzar el mismo flujo.</dd></div><div><dt>Pendiente</dt><dd><a href="preguntas.html#q31">Elegir primer segmento</a></dd></div></dl>
+          </article>
+        </section>
+
+        <section class="section" id="operacion">
+          <p class="eyebrow">B · Operación y personas</p>
+          <h2>Cómo imaginamos el trabajo de campo</h2>
+
+          <article class="assumption" id="s05">
+            <div class="assumption__head"><div><span class="assumption__id">S05 · CRÍTICO</span><h3>Los usuarios principales tendrán baja tolerancia a configuración y carga manual.</h3></div><span class="tag tag--vendor">Confianza media</span></div>
+            <p>La solución debe guiar tareas concretas y capturar información como efecto del trabajo, no como una tarea administrativa adicional.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd>Requisito explícito: personal no técnico.</dd></div><div><dt>Si fuera falso</dt><dd>Podrían aceptarse flujos más flexibles y manuales.</dd></div><div><dt>Cómo cerrar</dt><dd>Observación contextual y prueba sin asistencia.</dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s06">
+            <div class="assumption__head"><div><span class="assumption__id">S06 · CRÍTICO</span><h3>La captura debe funcionar sin internet ni corriente de red.</h3></div><span class="tag tag--verified">Dirección confirmada</span></div>
+            <p>En operaciones puntuales se acepta llevar baterías con inversor o generador; la sincronización puede ocurrir después.</p>
+            <dl class="detail-grid"><div><dt>Evidencia</dt><dd>Respuesta Q06 del 23 ago 2026.</dd></div><div><dt>Implicación</dt><dd>Confirmación y almacenamiento local obligatorios.</dd></div><div><dt>Pendiente</dt><dd>Medir autonomía y potencia por equipo.</dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s07">
+            <div class="assumption__head"><div><span class="assumption__id">S07 · CRÍTICO</span><h3>El pesaje actual tiene suficiente fricción como para justificar más frecuencia.</h3></div><span class="tag tag--open">Baja confianza</span></div>
+            <p>Arreo, personal, instalaciones, estrés, tiempo o distancia limitan hoy la frecuencia de medición.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd>Problema común citado por proveedores y literatura.</dd></div><div><dt>Si fuera falso</dt><dd>El valor diferencial de visión o WoW disminuye.</dd></div><div><dt>Pregunta</dt><dd><a href="preguntas.html#q04">Q04 · costo del flujo actual</a></dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s08">
+            <div class="assumption__head"><div><span class="assumption__id">S08 · CRÍTICO</span><h3>Habrá un punto de paso individual, natural o construido.</h3></div><span class="tag tag--verified">Confirmado</span></div>
+            <p>Cuando no exista un paso apropiado, se acepta construir un dispositivo que separe a los animales de a uno para capturar RFID, fotos y métricas.</p>
+            <dl class="detail-grid"><div><dt>Evidencia</dt><dd>Respuesta Q05 del 23 ago 2026.</dd></div><div><dt>Implicación</dt><dd>La estructura física entra en el alcance conceptual.</dd></div><div><dt>Pendiente</dt><dd><a href="preguntas.html#q40">Caudal requerido</a></dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s09">
+            <div class="assumption__head"><div><span class="assumption__id">S09</span><h3>Es aceptable obtener observaciones oportunistas y no simultáneas de todo el rodeo.</h3></div><span class="tag tag--open">Baja confianza</span></div>
+            <p>Una curva construida con pasos frecuentes podría tener valor aunque no todos los animales se midan el mismo día.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd>Patrón de balanza de paso.</dd></div><div><dt>Si fuera falso</dt><dd>Se necesita una operación dirigida por lote.</dd></div><div><dt>Pregunta</dt><dd><a href="preguntas.html#q12">Q12 · frecuencia y cobertura</a></dd></div></dl>
+          </article>
+        </section>
+
+        <section class="section" id="tecnologia">
+          <p class="eyebrow">C · Tecnología y medición</p>
+          <h2>Qué rendimiento estamos presuponiendo</h2>
+
+          <article class="assumption" id="s10">
+            <div class="assumption__head"><div><span class="assumption__id">S10 · CRÍTICO</span><h3>La mayoría de los animales objetivo conserva una caravana electrónica legible.</h3></div><span class="tag tag--open">Baja confianza</span></div>
+            <p>Pérdidas, daños, duplicidades operativas o errores de registro no dominarán el flujo.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd>La identificación es obligatoria, pero la calidad en campo no fue medida.</dd></div><div><dt>Si fuera falso</dt><dd>Se necesita manejo explícito de identidad incierta y reidentificación.</dd></div><div><dt>Pregunta</dt><dd><a href="preguntas.html#q09">Q09 · calidad de lectura</a></dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s11">
+            <div class="assumption__head"><div><span class="assumption__id">S11 · CRÍTICO</span><h3>Un error de identidad es peor que una observación faltante.</h3></div><span class="tag tag--verified">Confirmado</span></div>
+            <p>Ante conflicto entre RFID y visión, el sistema debe pedir revisión o descartar, no elegir silenciosamente.</p>
+            <dl class="detail-grid"><div><dt>Evidencia</dt><dd>Respuesta Q08: daño alto.</dd></div><div><dt>Decisión</dt><dd>Omitir y pedir segunda lectura cuando sea posible.</dd></div><div><dt>Consecuencia</dt><dd>No usar asociación probabilística silenciosa.</dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s12">
+            <div class="assumption__head"><div><span class="assumption__id">S12 · CRÍTICO</span><h3>Para varias decisiones productivas importa más la tendencia que un peso comercial exacto.</h3></div><span class="tag tag--open">Baja confianza</span></div>
+            <p>La estimación por visión podría servir para evolución, aun sin sustituir la balanza en venta o tratamiento.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd>Casos de suplementación, lotación y alerta.</dd></div><div><dt>Si fuera falso</dt><dd>La balanza física se vuelve obligatoria.</dd></div><div><dt>Pregunta</dt><dd><a href="preguntas.html#q07">Q07 · tolerancia por uso</a></dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s13">
+            <div class="assumption__head"><div><span class="assumption__id">S13</span><h3>Se podrá reunir una verdad de referencia representativa.</h3></div><span class="tag tag--vendor">Confianza media</span></div>
+            <p>Habrá acceso a balanza calibrada, lecturas electrónicas y animales de distintos subgrupos en tiempos comparables.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd>Necesidad metodológica.</dd></div><div><dt>Si fuera falso</dt><dd>No podremos evaluar transferibilidad ni sesgo.</dd></div><div><dt>Pregunta</dt><dd><a href="preguntas.html#q22">Q22 · acceso a piloto</a></dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s14">
+            <div class="assumption__head"><div><span class="assumption__id">S14</span><h3>El dron será una herramienta operable, no autónoma ni universal.</h3></div><span class="tag tag--vendor">Confianza media</span></div>
+            <p>Clima, piloto, permisos, batería y protocolo limitarán cuándo aporta valor.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd>Requisitos DINACIA y condiciones de captura publicadas.</dd></div><div><dt>Si fuera falso</dt><dd>La auditoría aérea podría ser más frecuente.</dd></div><div><dt>Pregunta</dt><dd><a href="preguntas.html#q14">Q14 · operación aérea</a></dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s15">
+            <div class="assumption__head"><div><span class="assumption__id">S15</span><h3>“Relación” puede comenzar como co-presencia/proximidad, claramente etiquetada.</h3></div><span class="tag tag--open">Baja confianza</span></div>
+            <p>No se inferirá amistad, dominancia, contagio o servicio sin una definición y validación específica.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd>Limitaciones de sensores de proximidad.</dd></div><div><dt>Si fuera falso</dt><dd>Habrá que diseñar una medición etológica más específica.</dd></div><div><dt>Pregunta</dt><dd><a href="preguntas.html#q15">Q15 · significado de relación</a></dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s16">
+            <div class="assumption__head"><div><span class="assumption__id">S16</span><h3>No se asumirá disposición a colocar un segundo dispositivo en cada animal.</h3></div><span class="tag tag--open">Baja confianza</span></div>
+            <p>Collares GNSS, tags activos o acelerómetros se evaluarán como alternativa de costo explícito o muestra centinela.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd>Costo y mantenimiento previsibles.</dd></div><div><dt>Si se acepta</dt><dd>Ubicación, actividad y proximidad se vuelven mucho más accesibles.</dd></div><div><dt>Pregunta</dt><dd><a href="preguntas.html#q16">Q16 · dispositivo adicional</a></dd></div></dl>
+          </article>
+        </section>
+
+        <section class="section" id="negocio">
+          <p class="eyebrow">D · Datos, despliegue y negocio</p>
+          <h2>Qué asumimos sobre adopción y sostenibilidad</h2>
+
+          <article class="assumption" id="s17">
+            <div class="assumption__head"><div><span class="assumption__id">S17</span><h3>El productor debe conservar acceso y portabilidad de sus datos.</h3></div><span class="tag tag--vendor">Principio propuesto</span></div>
+            <p>Identidades, eventos, archivos originales y correcciones deberían poder exportarse en formatos documentados.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd>Reduce lock-in y habilita auditoría.</dd></div><div><dt>Si se flexibiliza</dt><dd>Aumentan opciones SaaS, pero también dependencia.</dd></div><div><dt>Pregunta</dt><dd><a href="preguntas.html#q19">Q19 · propiedad y acceso</a></dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s18">
+            <div class="assumption__head"><div><span class="assumption__id">S18</span><h3>Una solución en nube es aceptable si la captura funciona offline.</h3></div><span class="tag tag--open">Baja confianza</span></div>
+            <p>Procesamiento diferido y consulta sincronizada podrían ser suficientes; no se exige IA completa en el borde desde el inicio.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd>Patrón visible en proveedores actuales.</dd></div><div><dt>Si fuera falso</dt><dd>Suben hardware, complejidad y costo local.</dd></div><div><dt>Pregunta</dt><dd><a href="preguntas.html#q20">Q20 · latencia y nube</a></dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s19">
+            <div class="assumption__head"><div><span class="assumption__id">S19 · REVISADO</span><h3>Un agente puede operar, pero no debe ser la raíz de confianza.</h3></div><span class="tag tag--verified">Dirección confirmada</span></div>
+            <p>La credibilidad debe provenir de evidencia capturada automáticamente por el aparato; el operador queda registrado, pero su declaración no sustituye los controles técnicos.</p>
+            <dl class="detail-grid"><div><dt>Evidencia</dt><dd>Respuestas Q03 y Q33.</dd></div><div><dt>Implicación</dt><dd>Separar identidad de operador, dispositivo y evento.</dd></div><div><dt>Pendiente</dt><dd><a href="preguntas.html#q37">Procedencia digital</a></dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s20">
+            <div class="assumption__head"><div><span class="assumption__id">S20</span><h3>Sin integración, los cambios del ciclo de vida podrán reconciliarse con un proceso explícito.</h3></div><span class="tag tag--open">Baja confianza</span></div>
+            <p>Altas, ventas, muertes, pérdidas de caravana y reidentificaciones no deberían dejar historias huérfanas o duplicadas.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd>Los instructivos SNIG contemplan esos eventos.</dd></div><div><dt>Si fuera falso</dt><dd>La integración o importación oficial se vuelve prioritaria antes.</dd></div><div><dt>Pregunta</dt><dd><a href="preguntas.html#q10">Q10 · ciclo de identidad</a></dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s21">
+            <div class="assumption__head"><div><span class="assumption__id">S21 · CRÍTICO · REVISADO</span><h3>La secuencia comercial es feedlot primero y auditoría financiera después.</h3></div><span class="tag tag--verified">Confirmado</span></div>
+            <p>El feedlot valida conteo, identidad y tendencia de peso en operación continua. Luego, esos componentes y su evidencia se adaptan a fondos y fideicomisos ganaderos.</p>
+            <dl class="detail-grid"><div><dt>Evidencia</dt><dd>Respuesta Q31 del 23 ago 2026.</dd></div><div><dt>Implicación</dt><dd>El primer piloto e investigación de campo ocurren en encierro.</dd></div><div><dt>Pendiente</dt><dd><a href="preguntas.html#q02">Escala y ritmo concretos</a></dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s22">
+            <div class="assumption__head"><div><span class="assumption__id">S22 · CRÍTICO</span><h3>La evidencia debe demostrar existencia, continuidad, peso y ubicación.</h3></div><span class="tag tag--verified">Dirección parcial</span></div>
+            <p>Fotos asociadas a identidad, evolución de peso dentro de márgenes explicables y pertenencia al potrero/corral declarado forman el núcleo probatorio.</p>
+            <dl class="detail-grid"><div><dt>Evidencia</dt><dd>Respuesta Q32.</dd></div><div><dt>Implicación</dt><dd>Conservar archivos y contexto longitudinal.</dd></div><div><dt>Pendiente</dt><dd>Validar fuerza probatoria con financiadores.</dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s23">
+            <div class="assumption__head"><div><span class="assumption__id">S23 · CRÍTICO · NUEVO</span><h3>No habrá una configuración universal para todas las escalas.</h3></div><span class="tag tag--verified">Dirección confirmada</span></div>
+            <p>Un feedlot de hasta miles de cabezas y una auditoría puntual de pocos animales pueden compartir datos y criterios, pero probablemente necesiten dispositivos y operaciones diferentes.</p>
+            <dl class="detail-grid"><div><dt>Evidencia</dt><dd>Respuesta Q02 del 23 ago 2026.</dd></div><div><dt>Implicación</dt><dd>Segmentar pruebas y costos por modalidad.</dd></div><div><dt>Pendiente</dt><dd><a href="preguntas.html#q02">Definir escala/ritmo por segmento</a></dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s24">
+            <div class="assumption__head"><div><span class="assumption__id">S24 · CRÍTICO</span><h3>En feedlot, la tendencia individual puede justificar monitoreo frecuente sin mover el ganado.</h3></div><span class="tag tag--verified">Prioridad confirmada</span></div>
+            <p>Conteo y evolución de peso por animal forman el primer escenario de valor, aunque aún falta definir error, frecuencia y punto de captura.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd>Respuestas Q03 y Q31.</dd></div><div><dt>Si fuera falso</dt><dd>El feedlot se limita a inventario por lote.</dd></div><div><dt>Preguntas</dt><dd><a href="preguntas.html#q07">Q07</a>, <a href="preguntas.html#q12">Q12</a></dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s25">
+            <div class="assumption__head"><div><span class="assumption__id">S25 · CRÍTICO · NUEVO</span><h3>La procedencia de la evidencia debe quedar anclada en el dispositivo.</h3></div><span class="tag tag--verified">Dirección confirmada</span></div>
+            <p>El aparato registra automáticamente ubicación, hora, identidad propia y archivo original; las modificaciones o correcciones deben dejar rastro.</p>
+            <dl class="detail-grid"><div><dt>Evidencia</dt><dd>Respuesta Q33.</dd></div><div><dt>Límite</dt><dd>Geolocalización sola puede editarse o falsificarse.</dd></div><div><dt>Pregunta</dt><dd><a href="preguntas.html#q37">Q37 · procedencia digital</a></dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s26">
+            <div class="assumption__head"><div><span class="assumption__id">S26 · CRÍTICO · NUEVO</span><h3>Foto y lectura RFID constituyen un único evento de identidad.</h3></div><span class="tag tag--verified">Confirmado</span></div>
+            <p>No se aceptará una foto suelta como prueba del animal: debe quedar asociada a la lectura electrónica de su caravana durante la captura.</p>
+            <dl class="detail-grid"><div><dt>Evidencia</dt><dd>Respuesta Q36 del 23 ago 2026.</dd></div><div><dt>Riesgo restante</dt><dd>Dos animales simultáneos pueden cruzar foto y lectura.</dd></div><div><dt>Validación</dt><dd>Correspondencia física en paso real.</dd></div></dl>
+          </article>
+
+          <article class="assumption" id="s27">
+            <div class="assumption__head"><div><span class="assumption__id">S27 · CRÍTICO · NUEVO</span><h3>La individualización mecánica es un subsistema común del concepto.</h3></div><span class="tag tag--verified">Dirección confirmada</span></div>
+            <p>El paso debe controlar ocupación y separación para que RFID, foto y peso correspondan al mismo animal, independientemente de si el peso se mide con load cells o se estima con visión 3D.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd>Respuestas Q05 y Q36.</dd></div><div><dt>Riesgo</dt><dd>Cuello de botella, estrés, retrocesos o atascos.</dd></div><div><dt>Preguntas</dt><dd><a href="preguntas.html#q40">Q40</a>, <a href="preguntas.html#q41">Q41</a></dd></div></dl>
+          </article>
+        </section>
+
+        <section class="section" id="cadena">
+          <p class="eyebrow">Trazabilidad del razonamiento</p>
+          <h2>De supuestos a conclusiones</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Conclusión provisional</th><th>Supuestos que la sostienen</th><th>Cómo podría caer</th></tr></thead>
+              <tbody>
+                <tr><td>Base propia vinculada a SNIG</td><td><a href="#s01">S01</a>, <a href="#s02">S02</a>, <a href="#s20">S20</a></td><td>Si el alta y ciclo de vida no pueden mantenerse sin integración.</td></tr>
+                <tr><td>Priorizar corredor instrumentado</td><td><a href="#s05">S05</a>, <a href="#s08">S08</a>, <a href="#s10">S10</a>, <a href="#s11">S11</a></td><td>Si no existen pasos naturales o la lectura RFID falla en movimiento.</td></tr>
+                <tr><td>Usar visión para tendencia</td><td><a href="#s04">S04</a>, <a href="#s07">S07</a>, <a href="#s12">S12</a>, <a href="#s13">S13</a></td><td>Si la decisión exige peso legal o el error por subgrupo es inestable.</td></tr>
+                <tr><td>Dron como capa de lote</td><td><a href="#s14">S14</a>, <a href="#s16">S16</a></td><td>Si se demuestra reidentificación individual confiable o la operación aérea no es viable.</td></tr>
+                <tr><td>Relaciones como módulo separado</td><td><a href="#s15">S15</a>, <a href="#s16">S16</a></td><td>Si basta la convivencia por lote/potrero o surge un caso de alto valor.</td></tr>
+                <tr><td>Offline con procesamiento diferido</td><td><a href="#s06">S06</a>, <a href="#s18">S18</a></td><td>Si se exige resultado inmediato sin conectividad o nube no aceptable.</td></tr>
+                <tr><td>Feedlot como primer producto</td><td><a href="#s21">S21</a>, <a href="#s23">S23</a>, <a href="#s24">S24</a></td><td>Si el flujo no alcanza cobertura individual o no mejora decisiones del encierro.</td></tr>
+                <tr><td>Confianza anclada en el aparato</td><td><a href="#s19">S19</a>, <a href="#s22">S22</a>, <a href="#s25">S25</a>, <a href="#s26">S26</a></td><td>Si la procedencia técnica no es aceptada o no resiste sustitución/replay.</td></tr>
+                <tr><td>Paso individual como núcleo físico</td><td><a href="#s08">S08</a>, <a href="#s26">S26</a>, <a href="#s27">S27</a></td><td>Si el caudal o bienestar requerido no puede alcanzarse a costo razonable.</td></tr>
+                <tr><td>Dos modalidades tecnológicas</td><td><a href="#s04">S04</a>, <a href="#s23">S23</a>, <a href="#s24">S24</a></td><td>Si un mismo flujo demuestra cubrir campaña puntual y monitoreo continuo con costo razonable.</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="section" id="cambios">
+          <p class="eyebrow">Historial</p>
+          <h2>Cambios del registro</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Fecha</th><th>Versión</th><th>Cambio</th><th>Motivo</th></tr></thead>
+              <tbody>
+                <tr><td>23 ago 2026</td><td>0.4</td><td>S08 confirmado; creación de S27.</td><td>Respuesta Q05.</td></tr>
+                <tr><td>23 ago 2026</td><td>0.3</td><td>S19, S21, S22 y S24 revisados; creación de S25–S26.</td><td>Respuestas Q31, Q32, Q33 y Q36.</td></tr>
+                <tr><td>23 ago 2026</td><td>0.2</td><td>S03, S04, S06, S11 y S19 actualizados; creación de S21–S24.</td><td>Respuestas Q01, Q02, Q03, Q06 y Q08.</td></tr>
+                <tr><td>23 ago 2026</td><td>0.1</td><td>Creación de S01–S20</td><td>Encuadre inicial y relevamiento público.</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout callout--warning"><strong>Siguiente revisión:</strong> precisar S24 y S27 con un feedlot real: caudal, paso voluntario o dirigido, espacio disponible, bienestar, mantenimiento y respuesta ante dos animales o retrocesos.</div>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">Documento 02 · Supuestos · versión 0.4 · <a href="preguntas.html">continuar con preguntas</a></footer>
+</body>
+</html>
