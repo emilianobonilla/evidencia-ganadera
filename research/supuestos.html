@@ -13,7 +13,7 @@
       <a class="brand" href="index.html"><span class="brand__mark">UY</span><span class="brand__text">Ganadería aumentada</span></a>
       <nav class="nav" aria-label="Documentos">
         <a href="mercado.html">Mercado</a>
-        <a href="analisis.html">Análisis</a>
+        <a href="analisis.html">Análisis</a><a href="tecnologia.html">Tecnología</a>
         <a href="supuestos.html" aria-current="page">Supuestos</a>
         <a href="preguntas.html">Preguntas</a>
       </nav>
@@ -29,9 +29,9 @@
       </div>
       <aside class="meta-card">
         <dl>
-          <dt>Versión</dt><dd>0.4</dd>
-          <dt>Supuestos</dt><dd>27</dd>
-          <dt>Críticos</dt><dd>15</dd>
+          <dt>Versión</dt><dd>0.5</dd>
+          <dt>Supuestos</dt><dd>28</dd>
+          <dt>Críticos</dt><dd>16</dd>
           <dt>Actualizados con respuestas</dt><dd>15</dd>
         </dl>
       </aside>
@@ -132,7 +132,8 @@
           <article class="assumption" id="s10">
             <div class="assumption__head"><div><span class="assumption__id">S10 · CRÍTICO</span><h3>La mayoría de los animales objetivo conserva una caravana electrónica legible.</h3></div><span class="tag tag--open">Baja confianza</span></div>
             <p>Pérdidas, daños, duplicidades operativas o errores de registro no dominarán el flujo.</p>
-            <dl class="detail-grid"><div><dt>Base</dt><dd>La identificación es obligatoria, pero la calidad en campo no fue medida.</dd></div><div><dt>Si fuera falso</dt><dd>Se necesita manejo explícito de identidad incierta y reidentificación.</dd></div><div><dt>Pregunta</dt><dd><a href="preguntas.html#q09">Q09 · calidad de lectura</a></dd></div></dl>
+            <p><strong>Precisión de la v0.5:</strong> Uruguay habilita dos tecnologías de caravana electrónica —HDX y FDX‑B, ambas bajo ISO 11784/11785—, de modo que un rodeo real puede mezclarlas según el año y el proveedor del tag. El lector propio debe soportar las dos, y la diligencia con proveedores no puede limitarse a preguntar por HDX.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd>La identificación es obligatoria, pero la calidad en campo no fue medida. <a href="https://ainfo.inia.uy/digital/bitstream/item/11293/1/Brito-G..pdf">INIA · identificación electrónica en Uruguay</a>.</dd></div><div><dt>Si fuera falso</dt><dd>Se necesita manejo explícito de identidad incierta y reidentificación.</dd></div><div><dt>Pregunta</dt><dd><a href="preguntas.html#q09">Q09 · calidad de lectura</a></dd></div></dl>
           </article>
 
           <article class="assumption" id="s11">
@@ -203,7 +204,8 @@
           <article class="assumption" id="s21">
             <div class="assumption__head"><div><span class="assumption__id">S21 · CRÍTICO · REVISADO</span><h3>La secuencia comercial es feedlot primero y auditoría financiera después.</h3></div><span class="tag tag--verified">Confirmado</span></div>
             <p>El feedlot valida conteo, identidad y tendencia de peso en operación continua. Luego, esos componentes y su evidencia se adaptan a fondos y fideicomisos ganaderos.</p>
-            <dl class="detail-grid"><div><dt>Evidencia</dt><dd>Respuesta Q31 del 23 ago 2026.</dd></div><div><dt>Implicación</dt><dd>El primer piloto e investigación de campo ocurren en encierro.</dd></div><div><dt>Pendiente</dt><dd><a href="preguntas.html#q02">Escala y ritmo concretos</a></dd></div></dl>
+            <p><strong>Tensión abierta en la v0.5:</strong> la secuencia se justificó por razones operativas, no comerciales. El diferencial defendible del producto —evidencia con procedencia— pesa más en la etapa 2 que en la etapa 1, y la demanda de la etapa 2 se manifestó antes de lo previsto (ver <a href="#s28">S28</a>). La secuencia no se revierte, pero las entrevistas de la etapa 2 dejan de ser “después” y pasan a ejecutarse en paralelo.</p>
+            <dl class="detail-grid"><div><dt>Evidencia</dt><dd>Respuesta Q31 del 23 ago 2026.</dd></div><div><dt>Implicación</dt><dd>El primer piloto e investigación de campo ocurren en encierro; la validación comercial de auditoría avanza en paralelo.</dd></div><div><dt>Pendiente</dt><dd><a href="preguntas.html#q02">Escala y ritmo concretos</a></dd></div></dl>
           </article>
 
           <article class="assumption" id="s22">
@@ -241,6 +243,13 @@
             <p>El paso debe controlar ocupación y separación para que RFID, foto y peso correspondan al mismo animal, independientemente de si el peso se mide con load cells o se estima con visión 3D.</p>
             <dl class="detail-grid"><div><dt>Base</dt><dd>Respuestas Q05 y Q36.</dd></div><div><dt>Riesgo</dt><dd>Cuello de botella, estrés, retrocesos o atascos.</dd></div><div><dt>Preguntas</dt><dd><a href="preguntas.html#q40">Q40</a>, <a href="preguntas.html#q41">Q41</a></dd></div></dl>
           </article>
+
+          <article class="assumption" id="s28">
+            <div class="assumption__head"><div><span class="assumption__id">S28 · CRÍTICO · NUEVO</span><h3>Existe un problema probado de verificación de existencias en la ganadería financiada uruguaya.</h3></div><span class="tag tag--verified">Hecho verificado; demanda aún no</span></div>
+            <p>El colapso de los fondos ganaderos uruguayos dejó un déficit de unos US$272 millones (pasivos por US$387 millones frente a activos por US$115 millones), cerca de 7.000 personas afectadas y, sobre todo, ganado declarado que no existía: en un caso, contratos por aproximadamente 28.000 animales frente a nueve vacunos hallados por el MGAP en el lugar declarado. El BCU advertía desde 2022 y en 2025 redactó cambios para ampliar la supervisión sobre la captación masiva de recursos.</p>
+            <p><strong>Cuidado con la lectura:</strong> esto prueba que el problema existe y es caro, no que alguien vaya a pagar por resolverlo. Confundir una cosa con la otra sería el error más costoso de esta versión.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd><a href="https://prensamercosur.org/2026/08/17/uruguay-la-estafa-ganadera-que-dejo-un-agujero-de-us272-millones-y-expuso-las-fallas-de-un-modelo-que-durante-anos-opero-fuera-del-control-financiero/">Prensa Mercosur</a>, <a href="https://www.infobae.com/america/america-latina/2025/01/27/crisis-de-los-fondos-de-inversion-ganadera-en-uruguay-hay-7-mil-personas-afectadas/">Infobae</a> y <a href="https://www.busqueda.com.uy/economia/ministerio-ganaderia-verificara-existencias-vacunos-del-grupo-larrarte-denunciado-estafa-n5393274">Búsqueda</a>.</dd></div><div><dt>Implicación</dt><dd>Diseñar el paquete probatorio contra este caso real: sustitución, omisión y declaración sin respaldo físico.</dd></div><div><dt>Preguntas</dt><dd><a href="preguntas.html#q42">Q42</a>, <a href="preguntas.html#q43">Q43</a> · <a href="supuestos-mercado.html#m04">M04</a>, <a href="supuestos-mercado.html#m13">M13</a></dd></div></dl>
+          </article>
         </section>
 
         <section class="section" id="cadena">
@@ -257,6 +266,7 @@
                 <tr><td>Relaciones como módulo separado</td><td><a href="#s15">S15</a>, <a href="#s16">S16</a></td><td>Si basta la convivencia por lote/potrero o surge un caso de alto valor.</td></tr>
                 <tr><td>Offline con procesamiento diferido</td><td><a href="#s06">S06</a>, <a href="#s18">S18</a></td><td>Si se exige resultado inmediato sin conectividad o nube no aceptable.</td></tr>
                 <tr><td>Feedlot como primer producto</td><td><a href="#s21">S21</a>, <a href="#s23">S23</a>, <a href="#s24">S24</a></td><td>Si el flujo no alcanza cobertura individual o no mejora decisiones del encierro.</td></tr>
+                <tr><td>Auditoría financiera como segunda etapa</td><td><a href="#s21">S21</a>, <a href="#s22">S22</a>, <a href="#s25">S25</a>, <a href="#s28">S28</a></td><td>Si nadie paga por la evidencia pese al problema probado, o si la regulación fija un mínimo que no la requiere.</td></tr>
                 <tr><td>Confianza anclada en el aparato</td><td><a href="#s19">S19</a>, <a href="#s22">S22</a>, <a href="#s25">S25</a>, <a href="#s26">S26</a></td><td>Si la procedencia técnica no es aceptada o no resiste sustitución/replay.</td></tr>
                 <tr><td>Paso individual como núcleo físico</td><td><a href="#s08">S08</a>, <a href="#s26">S26</a>, <a href="#s27">S27</a></td><td>Si el caudal o bienestar requerido no puede alcanzarse a costo razonable.</td></tr>
                 <tr><td>Dos modalidades tecnológicas</td><td><a href="#s04">S04</a>, <a href="#s23">S23</a>, <a href="#s24">S24</a></td><td>Si un mismo flujo demuestra cubrir campaña puntual y monitoreo continuo con costo razonable.</td></tr>
@@ -272,6 +282,7 @@
             <table>
               <thead><tr><th>Fecha</th><th>Versión</th><th>Cambio</th><th>Motivo</th></tr></thead>
               <tbody>
+                <tr><td>23 ago 2026</td><td>0.5</td><td>S10 precisado (HDX y FDX‑B); S21 con tensión de secuencia declarada; creación de S28.</td><td>Revisión externa con verificación independiente.</td></tr>
                 <tr><td>23 ago 2026</td><td>0.4</td><td>S08 confirmado; creación de S27.</td><td>Respuesta Q05.</td></tr>
                 <tr><td>23 ago 2026</td><td>0.3</td><td>S19, S21, S22 y S24 revisados; creación de S25–S26.</td><td>Respuestas Q31, Q32, Q33 y Q36.</td></tr>
                 <tr><td>23 ago 2026</td><td>0.2</td><td>S03, S04, S06, S11 y S19 actualizados; creación de S21–S24.</td><td>Respuestas Q01, Q02, Q03, Q06 y Q08.</td></tr>
@@ -279,12 +290,12 @@
               </tbody>
             </table>
           </div>
-          <div class="callout callout--warning"><strong>Siguiente revisión:</strong> precisar S24 y S27 con un feedlot real: caudal, paso voluntario o dirigido, espacio disponible, bienestar, mantenimiento y respuesta ante dos animales o retrocesos.</div>
+          <div class="callout callout--warning"><strong>Siguiente revisión:</strong> cerrar S28 con entrevistas a fiduciarios, bancos y al regulador, y precisar S24 y S27 con un feedlot real: caudal, paso voluntario o dirigido, espacio disponible, bienestar, mantenimiento y respuesta ante dos animales o retrocesos.</div>
         </section>
       </article>
     </div>
   </main>
 
-  <footer class="footer">Documento 02 · Supuestos · versión 0.4 · <a href="preguntas.html">continuar con preguntas</a></footer>
+  <footer class="footer">Documento 02 · Supuestos · versión 0.5 · <a href="preguntas.html">continuar con preguntas</a></footer>
 </body>
 </html>

@@ -13,7 +13,7 @@
       <a class="brand" href="index.html"><span class="brand__mark">UY</span><span class="brand__text">Ganadería aumentada</span></a>
       <nav class="nav" aria-label="Documentos">
         <a href="mercado.html">Mercado</a>
-        <a href="analisis.html">Análisis</a>
+        <a href="analisis.html">Análisis</a><a href="tecnologia.html">Tecnología</a>
         <a href="supuestos.html">Supuestos</a>
         <a href="preguntas.html" aria-current="page">Preguntas</a>
       </nav>
@@ -29,9 +29,9 @@
       </div>
       <aside class="meta-card">
         <dl>
-          <dt>Versión</dt><dd>0.4</dd>
-          <dt>Preguntas</dt><dd>41</dd>
-          <dt>Prioridad P0</dt><dd>18</dd>
+          <dt>Versión</dt><dd>0.5</dd>
+          <dt>Preguntas</dt><dd>43</dd>
+          <dt>Prioridad P0</dt><dd>19</dd>
           <dt>Respondidas</dt><dd>10</dd>
         </dl>
       </aside>
@@ -121,8 +121,8 @@
 
           <article class="question" id="q09">
             <div class="question__head"><div><span class="question__id">Q09 · IDENTIDAD</span><h3>¿Con qué frecuencia faltan, fallan o no se leen las caravanas electrónicas?</h3></div><span class="tag tag--open">P0</span></div>
-            <p>Incluir lectores actuales, orientación, distancia, animales juntos, caravanas perdidas y discrepancia visual/electrónica.</p>
-            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>La identidad es la columna vertebral del historial.</dd></div><div><dt>Cambia</dt><dd>Excepciones, reintentos y necesidad de biometría auxiliar.</dd></div><div><dt>Preguntar a</dt><dd>Operador de movimiento y personal de campo.</dd></div></dl>
+            <p>Incluir lectores actuales, orientación, distancia, animales juntos, caravanas perdidas y discrepancia visual/electrónica. <strong>Precisión v0.5:</strong> registrar también qué tecnología tiene cada tag —Uruguay habilita HDX y FDX‑B— y medir la tasa de lectura por separado para cada una.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>La identidad es la columna vertebral del historial.</dd></div><div><dt>Cambia</dt><dd>Excepciones, reintentos, elección de lector compatible con ambas tecnologías y necesidad de biometría auxiliar.</dd></div><div><dt>Preguntar a</dt><dd>Operador de movimiento y personal de campo.</dd></div></dl>
           </article>
 
           <article class="question" id="q10">
@@ -289,6 +289,18 @@
             <p>Definir salida segura, supervisión, límites de presión/tiempo, detección de ocupación y protocolo de liberación.</p>
             <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>La separación física introduce riesgos animales y humanos.</dd></div><div><dt>Cambia</dt><dd>Diseño mecánico, sensores auxiliares y operación.</dd></div><div><dt>Validar con</dt><dd>Veterinario, especialista en manejo y pruebas supervisadas.</dd></div></dl>
           </article>
+
+          <article class="question" id="q42">
+            <div class="question__head"><div><span class="question__id">Q42 · REGULACIÓN</span><h3>¿Qué verificación de existencias exigirá la nueva supervisión sobre los fondos ganaderos, y quién deberá firmarla?</h3></div><span class="tag tag--open">P0 · Nueva</span></div>
+            <p>El BCU advirtió desde 2022 sobre estos esquemas y redactó en 2025 cambios para ampliar el control sobre la captación masiva de recursos, incluso cuando se estructura como contratos privados. Preguntar qué constituirá evidencia válida de existencia, con qué periodicidad y bajo responsabilidad de quién.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Si el estándar probatorio lo fija la regulación, conviene estar en esa conversación antes de que se cierre. También define quién compra el informe: el fondo, el fiduciario, el banco o el propio regulador.</dd></div><div><dt>Cambia</dt><dd>Producto de auditoría, modelo comercial, interlocutores y urgencia de la secuencia.</dd></div><div><dt>Preguntar a</dt><dd>BCU, asesores legales, fiduciarios y auditores.</dd></div></dl>
+          </article>
+
+          <article class="question" id="q43">
+            <div class="question__head"><div><span class="question__id">Q43 · CASO REAL</span><h3>En el colapso de los fondos ganaderos, ¿qué control habría detectado el faltante y en qué momento del ciclo?</h3></div><span class="tag tag--vendor">P1 · Nueva</span></div>
+            <p>Reconstruir el caso con quienes lo vivieron: contratos por miles de animales frente a un puñado hallado en el lugar declarado, ganado sin registro a nombre del fondo, controles que llegaron tarde. Identificar en qué punto un evento con identidad, foto, ubicación y procedencia habría cambiado el resultado.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Convierte un fraude documentado en casos de prueba concretos y evita diseñar controles contra un adversario imaginario.</dd></div><div><dt>Cambia</dt><dd>Antifraude, periodicidad de la auditoría, alcance de la cobertura y contenido del informe.</dd></div><div><dt>Preguntar a</dt><dd>Síndicos, fiduciarios, auditores, abogados de damnificados y técnicos del MGAP.</dd></div></dl>
+          </article>
         </section>
 
         <section class="section" id="proveedores">
@@ -354,13 +366,14 @@
             <li><a href="#q37">¿Cómo prueba el aparato la procedencia de la captura?</a></li>
             <li><a href="#q38">¿Qué variación de peso es razonable?</a></li>
             <li><a href="#q39">¿Cómo se verifica el corral o potrero?</a></li>
+            <li><a href="#q42">¿Qué verificación de existencias exigirá el regulador?</a></li>
           </ol>
-          <div class="callout callout--warning"><strong>Resultado esperado:</strong> definir el primer piloto de feedlot y el evento indivisible <em>lectura RFID + foto + peso + ubicación + procedencia del dispositivo</em>.</div>
+          <div class="callout callout--warning"><strong>Resultado esperado:</strong> definir el primer piloto de feedlot y el evento indivisible <em>lectura RFID + foto + peso + ubicación + procedencia del dispositivo</em>. Agregado en la v0.5: abrir en paralelo las conversaciones de la etapa 2 —fiduciarios, bancos, auditores y regulador— porque su ventana está abierta ahora (<a href="#q42">Q42</a>, <a href="#q43">Q43</a>).</div>
         </section>
       </article>
     </div>
   </main>
 
-  <footer class="footer">Documento 03 · Preguntas · versión 0.4 · 10 respuestas registradas · <a href="analisis.html">volver al análisis</a></footer>
+  <footer class="footer">Documento 03 · Preguntas · versión 0.5 · 10 respuestas registradas · <a href="analisis.html">volver al análisis</a></footer>
 </body>
 </html>

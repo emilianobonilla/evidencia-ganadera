@@ -59,7 +59,7 @@ for (const [file, html] of cache) {
 }
 
 const itemFiles = files.filter(file => dirname(file) === join(root, "items"));
-if (itemFiles.length !== 15) errors.push(`Se esperaban 15 fichas; se encontraron ${itemFiles.length}`);
+if (itemFiles.length !== 17) errors.push(`Se esperaban 17 fichas; se encontraron ${itemFiles.length}`);
 
 if (errors.length) {
   console.error(errors.join("\n"));

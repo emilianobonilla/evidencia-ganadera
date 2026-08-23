@@ -1,0 +1,311 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Arquitectura tecnológica propuesta para Smart Weight: hardware, software, datos, seguridad y hoja de ruta de desarrollo.">
+  <title>Tecnología a usar y desarrollar · Ganadería aumentada</title>
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="topbar__inner">
+      <a class="brand" href="index.html"><span class="brand__mark">UY</span><span class="brand__text">Ganadería aumentada</span></a>
+      <nav class="nav" aria-label="Documentos">
+        <a href="mercado.html">Mercado</a>
+        <a href="analisis.html">Análisis</a>
+        <a href="tecnologia.html" aria-current="page">Tecnología</a>
+        <a href="supuestos.html">Supuestos</a>
+        <a href="preguntas.html">Preguntas</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Documento 05 · Arquitectura tecnológica</p>
+        <h1>Integrar lo estándar. Desarrollar la evidencia.</h1>
+        <p class="lede">Propuesta inicial de hardware y software para capturar un evento indivisible RFID–imagen–peso–ubicación, operar sin conexión y conservar procedencia verificable. Define una dirección de construcción; no sustituye la validación en feedlot.</p>
+      </div>
+      <aside class="meta-card" aria-label="Metadatos del documento">
+        <dl>
+          <dt>Versión</dt><dd>0.1</dd>
+          <dt>Estado</dt><dd>Arquitectura candidata</dd>
+          <dt>Prioridad</dt><dd>Piloto de feedlot</dd>
+          <dt>Principio</dt><dd>Offline primero</dd>
+          <dt>Corte</dt><dd>23 ago 2026</dd>
+        </dl>
+      </aside>
+    </section>
+
+    <div class="layout">
+      <aside class="toc">
+        <strong>Contenido</strong>
+        <a href="#decisiones">Decisiones rectoras</a>
+        <a href="#arquitectura">Arquitectura</a>
+        <a href="#hardware">Hardware a usar</a>
+        <a href="#hardware-propio">Hardware a desarrollar</a>
+        <a href="#software">Software a usar</a>
+        <a href="#software-propio">Software a desarrollar</a>
+        <a href="#evento">Contrato de evento</a>
+        <a href="#seguridad">Seguridad y procedencia</a>
+        <a href="#modalidades">Configuraciones</a>
+        <a href="#ruta">Hoja de ruta</a>
+        <a href="#criterios">Criterios de salida</a>
+        <a href="#abierto">Decisiones abiertas</a>
+      </aside>
+
+      <article class="content">
+        <section class="section" id="decisiones">
+          <p class="eyebrow">Respuesta ejecutiva</p>
+          <h2>Cinco decisiones rectoras</h2>
+          <div class="grid grid--2">
+            <div class="card card--strong"><span class="number">1</span><h3>La unidad del producto es el evento</h3><p>RFID, imagen, peso, tiempo, ubicación y dispositivo deben nacer juntos. La plataforma no debe ensamblarlos después por cercanía temporal sin poder demostrar correspondencia.</p></div>
+            <div class="card"><span class="number">2</span><h3>El equipo funciona sin nube</h3><p>Captura, valida, firma y almacena localmente. La conectividad sincroniza y permite soporte, pero una caída de red no interrumpe la operación ni borra la cola pendiente.</p></div>
+            <div class="card"><span class="number">3</span><h3>Comprar sensores; desarrollar coordinación</h3><p>RFID, cámaras, celdas de carga, GNSS y computadora serán componentes comerciales. La propiedad tecnológica estará en la geometría, la sincronización, las reglas de descarte y la procedencia.</p></div>
+            <div class="card card--warm"><span class="number">4</span><h3>Peso medido y estimado no se mezclan</h3><p>Cada evento declara método, calibración, modelo, incertidumbre y uso permitido. Una estimación visual nunca se presenta como lectura de balanza.</p></div>
+            <div class="card card--cool"><span class="number">5</span><h3>La IA asiste; las reglas protegen</h3><p>La visión puede detectar, seguir y estimar, pero el sistema determinístico decide si hubo un único animal, una única caravana y evidencia suficiente para aceptar el evento.</p></div>
+          </div>
+          <div class="callout callout--warning"><strong>Compromiso de alcance:</strong> no se desarrollará en la primera etapa otro ERP ganadero, una caravana propia, un lector RFID desde cero ni una balanza completa. Se construirán un dispositivo de captura integrable y una capa de evidencia exportable.</div>
+        </section>
+
+        <section class="section" id="arquitectura">
+          <p class="eyebrow">Vista de punta a punta</p>
+          <h2>Del animal al evento verificable</h2>
+          <p class="section-intro">La arquitectura separa captura, decisión local, sincronización y consumo. El establecimiento conserva capacidad operativa aun cuando la red o la nube no estén disponibles.</p>
+          <div class="architecture-flow" aria-label="Flujo de arquitectura">
+            <div class="architecture-node"><span>01 · Campo</span><strong>RFID + cámaras + peso + presencia</strong><small>Sensores comerciales sincronizados</small></div>
+            <div class="architecture-node"><span>02 · Borde</span><strong>Asociar, validar y firmar</strong><small>Computación local y cola offline</small></div>
+            <div class="architecture-node"><span>03 · Transporte</span><strong>Sincronizar por lotes</strong><small>Ethernet, Wi‑Fi o LTE; reintentos idempotentes</small></div>
+            <div class="architecture-node"><span>04 · Plataforma</span><strong>Conservar y auditar</strong><small>Eventos, originales, modelos y bitácora</small></div>
+            <div class="architecture-node"><span>05 · Consumo</span><strong>Revisar, exportar e integrar</strong><small>Panel, informes, API y webhooks</small></div>
+          </div>
+          <div class="grid grid--3" style="margin-top:1rem">
+            <div class="card"><h3>Plano de datos</h3><p>Eventos y archivos originales fluyen hacia almacenamiento durable sin perder el identificador local.</p></div>
+            <div class="card"><h3>Plano de control</h3><p>Configuración, calibración, salud, versiones y actualizaciones viajan por un canal separado y autenticado.</p></div>
+            <div class="card"><h3>Plano de confianza</h3><p>Firma del dispositivo, hash de archivos, secuencia y auditoría permiten detectar alteraciones o repeticiones.</p></div>
+          </div>
+        </section>
+
+        <section class="section" id="hardware">
+          <p class="eyebrow">Componentes comerciales</p>
+          <h2>Hardware a usar e integrar</h2>
+          <p class="section-intro">La selección definitiva dependerá de pruebas con caravanas SNIG, geometría real, barro, luz, caudal y energía. Las especificaciones siguientes son criterios de compra para el prototipo, no marcas adjudicadas.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Subsistema</th><th>Tecnología candidata</th><th>Función</th><th>Criterio mínimo de evaluación</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Identidad</strong></td><td>Lector EID compatible con ISO 11784/11785, HDX y FDX‑B; antena de paso</td><td>Leer la caravana oficial y reportar calidad/diagnóstico</td><td>Compatibilidad verificada con tags SNIG reales, zona de lectura controlable y salida por protocolo documentado</td></tr>
+                <tr><td><strong>Imagen visible</strong></td><td>Cámara RGB industrial, preferentemente obturador global, iluminación protegida</td><td>Evidencia visual, detección y seguimiento</td><td>Sin desenfoque relevante a la velocidad de paso; exposición estable; carcasa de campo</td></tr>
+                <tr><td><strong>Geometría</strong></td><td>Cámara de profundidad ToF o estéreo; LiDAR sólo si la prueba lo justifica</td><td>Volumen corporal y control de postura/distancia</td><td>Rendimiento exterior, datos crudos accesibles y calibración reproducible</td></tr>
+                <tr><td><strong>Peso</strong></td><td>Plataforma con celdas de carga e indicador/ADC comercial</td><td>Verdad de referencia y posible peso al paso</td><td>Estabilidad, tasa de muestreo, calibración trazable y salida digital; sin confundir lectura parcial con peso estabilizado</td></tr>
+                <tr><td><strong>Ocupación</strong></td><td>Barreras fotoeléctricas, ToF puntual o lazos de presencia</td><td>Detectar entrada, dirección, más de un animal y atasco</td><td>Latencia conocida y baja tasa de falsos disparos bajo polvo, lluvia y sol</td></tr>
+                <tr><td><strong>Tiempo y lugar</strong></td><td>GNSS, reloj en tiempo real y fuente de tiempo autenticada cuando haya red</td><td>Georreferenciar y ordenar capturas</td><td>Precisión reportada, detección de salto temporal y continuidad sin conexión</td></tr>
+                <tr><td><strong>Cómputo</strong></td><td>Computadora industrial ARM o x86 con acelerador de IA opcional, SSD y watchdog</td><td>Captura, inferencia y persistencia local</td><td>Capacidad con el modelo real, temperatura, disponibilidad y ciclo de vida; margen de almacenamiento sin red</td></tr>
+                <tr><td><strong>Identidad del equipo</strong></td><td>TPM 2.0 o elemento seguro equivalente</td><td>Proteger claves y firmar manifiestos</td><td>Clave privada no exportable, aprovisionamiento repetible y reemplazo revocable</td></tr>
+                <tr><td><strong>Conectividad</strong></td><td>Ethernet, Wi‑Fi y LTE dual‑SIM según sitio</td><td>Sincronización, diagnóstico y soporte</td><td>Antenas externas, telemetría de señal y recuperación automática; las imágenes no dependen de LoRa</td></tr>
+                <tr><td><strong>Energía</strong></td><td>Entrada 12/24 V, batería/UPS, solar o red; protección de sobretensión</td><td>Operación continua o campaña transportable</td><td>Presupuesto energético medido, apagado seguro, autonomía objetivo y protección frente a rayos/transitorios</td></tr>
+                <tr><td><strong>Protección</strong></td><td>Gabinete sellado, conectores industriales y estructura galvanizada</td><td>Resistir intemperie, barro, golpes y lavado</td><td>Grado IP objetivo validado en conjunto, ventilación, drenaje, mantenibilidad y seguridad animal</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <p class="muted small">“Industrial” no se aceptará como garantía suficiente: cada componente deberá probarse en el conjunto montado y bajo el protocolo de limpieza, energía y paso real.</p>
+        </section>
+
+        <section class="section" id="hardware-propio">
+          <p class="eyebrow">Propiedad física a construir</p>
+          <h2>Hardware y mecánica a desarrollar</h2>
+          <div class="grid grid--2">
+            <div class="card card--strong"><h3>Módulo de paso instrumentado</h3><p>Estructura modular que fija distancias y ángulos, protege sensores y reduce la posibilidad de que dos animales ocupen simultáneamente la zona válida. Debe fallar de forma segura, sin encerrar ni lastimar.</p></div>
+            <div class="card"><h3>Arnés sincronizado de captura</h3><p>Controlador y cableado que convierten barreras, RFID, balanza y cámaras en una única ventana temporal. Incluye watchdog, disparo, diagnóstico y marcas de tiempo coherentes.</p></div>
+            <div class="card"><h3>Gabinete y energía de campo</h3><p>Distribución eléctrica, protección, batería, apagado seguro, acceso de servicio y telemetría de consumo. Se diseñarán versiones fija y transportable sobre la misma interfaz eléctrica.</p></div>
+            <div class="card"><h3>Patrones de calibración</h3><p>Útiles para cámara/profundidad, chequeo de plataforma y verificación de montaje. El equipo debe poder demostrar cuándo fue calibrado y detectar desplazamientos.</p></div>
+            <div class="card card--warm"><h3>Integración de confianza</h3><p>Aprovisionamiento del elemento seguro, identidad serial, sello físico y procedimiento de reemplazo. No se necesita fabricar el chip: se desarrolla su integración y ciclo de vida.</p></div>
+            <div class="card card--cool"><h3>Diseño para mantenimiento</h3><p>Módulos sustituibles, conectores inequívocos, autodiagnóstico y puntos de limpieza accesibles. El tiempo de recuperación será un requisito de ingeniería, no una tarea posterior.</p></div>
+          </div>
+          <div class="callout"><strong>Frontera construir/comprar:</strong> se compran sensores y electrónica probada; se desarrolla la forma en que se montan, disparan, verifican y protegen. Una placa electrónica propia sólo se justifica después de estabilizar interfaces, volumen y costo.</div>
+        </section>
+
+        <section class="section" id="software">
+          <p class="eyebrow">Base tecnológica reutilizable</p>
+          <h2>Software a usar</h2>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Capa</th><th>Tecnología candidata</th><th>Uso propuesto</th><th>Condición de elección</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Sistema de borde</strong></td><td>Linux LTS, servicios administrados por systemd, almacenamiento cifrado</td><td>Ejecutar captura e inferencia con arranque y recuperación previsibles</td><td>Imagen reproducible, soporte de hardware y actualización atómica o con rollback</td></tr>
+                <tr><td><strong>Visión e inferencia</strong></td><td>Python, OpenCV y ONNX Runtime; aceleración del fabricante encapsulada</td><td>Prototipar y desplegar detección, seguimiento, calidad y peso estimado</td><td>Modelo portable, pruebas reproducibles y camino de optimización sin reescribir el contrato de evento</td></tr>
+                <tr><td><strong>Persistencia local</strong></td><td>SQLite y sistema de archivos con estructura direccionada por contenido</td><td>Estado transaccional, cola offline, manifiestos y originales</td><td>Recuperación ante corte de energía, migraciones y capacidad de exportación</td></tr>
+                <tr><td><strong>API y servicios</strong></td><td>Python/FastAPI u opción equivalente con OpenAPI</td><td>Ingesta, revisión, consultas e integraciones</td><td>Contrato versionado, idempotencia, pruebas automáticas y observabilidad</td></tr>
+                <tr><td><strong>Datos centrales</strong></td><td>PostgreSQL y almacenamiento de objetos compatible con S3</td><td>Eventos/relaciones por un lado; imágenes y video originales por otro</td><td>Copias, retención, bloqueo de objetos cuando aplique y exportación sin dependencia de proveedor</td></tr>
+                <tr><td><strong>Aplicación</strong></td><td>TypeScript, React y PWA con caché/local storage controlado</td><td>Operación de campo, revisión de excepciones y consulta de historia</td><td>Funciona en móvil/tablet, tolera cortes y hace visibles sincronización y confianza</td></tr>
+                <tr><td><strong>Entrega y operación</strong></td><td>Git, CI, artefactos firmados, infraestructura como código y telemetría estándar</td><td>Construcción repetible, pruebas, actualizaciones y soporte</td><td>Ambientes separados, rollback, inventario de versiones y secretos fuera del código</td></tr>
+                <tr><td><strong>Interoperabilidad</strong></td><td>JSON/OpenAPI, webhooks, CSV documentado y exportación de medios</td><td>Entregar eventos a plataformas ganaderas o auditorías</td><td>Identificadores estables, unidades explícitas, versionado y sin encerrar al cliente</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout callout--warning"><strong>No es una adjudicación de stack:</strong> estas herramientas reducen tiempo de prototipo y conservan portabilidad. Podrán sustituirse por equivalentes si una prueba de carga, seguridad, soporte o hardware lo exige.</div>
+        </section>
+
+        <section class="section" id="software-propio">
+          <p class="eyebrow">Capacidades diferenciales</p>
+          <h2>Software a desarrollar</h2>
+          <div class="grid grid--3">
+            <div class="card card--strong"><h3>Motor de captura</h3><p>Máquina de estados que abre y cierra el paso, sincroniza sensores y determina si el evento es válido, incompleto, rechazado o requiere revisión.</p></div>
+            <div class="card"><h3>Asociación RFID–imagen</h3><p>Ventanas temporales, dirección, ocupación y seguimiento visual. Nunca elige silenciosamente entre dos caravanas o dos animales.</p></div>
+            <div class="card"><h3>Calidad automática</h3><p>Control de enfoque, luz, postura, oclusión, estabilidad del peso, cobertura y salud del sensor antes de aceptar una medición.</p></div>
+            <div class="card"><h3>Estimación y confianza</h3><p>Pipeline de visión 2D/3D, versionado de modelos, calibración de incertidumbre y métricas por raza, categoría, rango y ambiente.</p></div>
+            <div class="card"><h3>Paquete de evidencia</h3><p>Manifiesto canónico, hashes, firma del dispositivo, secuencia, originales y trazabilidad de cualquier interpretación posterior.</p></div>
+            <div class="card"><h3>Sincronización offline</h3><p>Cola persistente, reanudación, deduplicación e ingesta idempotente. El usuario ve qué está sólo en el equipo y qué ya fue confirmado.</p></div>
+            <div class="card"><h3>Gestión del dispositivo</h3><p>Alta, revocación, configuración, calibración, salud, logs, firmware/software firmado y actualización con rollback.</p></div>
+            <div class="card"><h3>Revisión de excepciones</h3><p>Interfaz para comparar RFID, imágenes y señales, solicitar repetición o anular una interpretación sin borrar el evento original.</p></div>
+            <div class="card card--cool"><h3>Exportación auditable</h3><p>Informe y API con cobertura, descartes, método, incertidumbre, archivos verificables y límites de uso del dato.</p></div>
+          </div>
+        </section>
+
+        <section class="section" id="evento">
+          <p class="eyebrow">Contrato común</p>
+          <h2>El evento conserva hecho, método y evidencia</h2>
+          <p class="section-intro">El esquema exacto se versionará, pero estas familias de campos son obligatorias desde el primer prototipo para no crear datos huérfanos.</p>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Bloque</th><th>Campos mínimos</th><th>Regla</th></tr></thead>
+              <tbody>
+                <tr><td><strong>Identidad</strong></td><td>ID de evento, RFID bruto/normalizado, lectura visual si existe</td><td>El valor original no se reemplaza por el normalizado</td></tr>
+                <tr><td><strong>Captura</strong></td><td>Inicio/fin, secuencia, dirección, ocupación, dispositivo y versión</td><td>Un identificador local único sobrevive a reintentos de sincronización</td></tr>
+                <tr><td><strong>Medición</strong></td><td>Peso, unidad, método medido/estimado, muestras, incertidumbre y uso permitido</td><td>Nunca se omite el método ni se transforma estimación en medición</td></tr>
+                <tr><td><strong>Contexto</strong></td><td>Hora del dispositivo, fuente de tiempo, GNSS, establecimiento y punto de paso</td><td>Se conserva precisión y calidad, no sólo coordenadas</td></tr>
+                <tr><td><strong>Evidencia</strong></td><td>Referencias a originales, tipo, tamaño, hash y firma del manifiesto</td><td>Los derivados apuntan al original y declaran algoritmo/modelo</td></tr>
+                <tr><td><strong>Calidad</strong></td><td>Estado, razones de descarte, confianza, sensores ausentes y alertas</td><td>“Sin dato” es distinto de cero y distinto de animal ausente</td></tr>
+                <tr><td><strong>Historia</strong></td><td>Creación, recepción, revisión, corrección y evento supersedido</td><td>No hay actualización destructiva; una corrección crea una nueva afirmación</td></tr>
+              </tbody>
+            </table>
+          </div>
+          <div class="callout"><strong>Estados propuestos:</strong> <em>válido</em>, <em>incompleto</em>, <em>rechazado</em>, <em>en revisión</em> y <em>supersedido</em>. El usuario puede corregir una interpretación; no puede reescribir el archivo ni la lectura original.</div>
+        </section>
+
+        <section class="section" id="seguridad">
+          <p class="eyebrow">Confianza técnica</p>
+          <h2>Procedencia sin prometer inmutabilidad absoluta</h2>
+          <div class="grid grid--2">
+            <div>
+              <h3>Controles desde el prototipo</h3>
+              <ul>
+                <li>Identidad única de cada dispositivo y claves no exportables en elemento seguro.</li>
+                <li>Hash de cada original y firma de un manifiesto canónico con número de secuencia.</li>
+                <li>Comunicación autenticada y cifrada; enrolamiento y revocación de equipos.</li>
+                <li>Disco cifrado, usuarios con roles y bitácora separada de las observaciones productivas.</li>
+                <li>Actualizaciones firmadas, versión registrada por evento y capacidad de rollback.</li>
+                <li>Detección de saltos de reloj, reinicios, pérdida de GNSS y reutilización de identificadores.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Ataques a ensayar</h3>
+              <ul>
+                <li>Reenviar el mismo evento o reutilizar una imagen anterior.</li>
+                <li>Modificar una foto, metadatos, peso o coordenadas luego de capturar.</li>
+                <li>Capturar fuera del lugar y simular ubicación o tiempo.</li>
+                <li>Presentar dos animales a una única lectura RFID, o dos tags a una imagen.</li>
+                <li>Desconectar sensores, reiniciar durante captura o reemplazar el dispositivo.</li>
+                <li>Corregir manualmente una interpretación sin autorización o sin dejar rastro.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="callout callout--risk"><strong>Límite explícito:</strong> GPS, blockchain o un hash aislado no prueban que el animal correcto estuvo frente al aparato. La confianza surge de geometría controlada, sensores sincronizados, identidad del equipo, originales preservados y un proceso independiente de revisión.</div>
+        </section>
+
+        <section class="section" id="modalidades">
+          <p class="eyebrow">Dos despliegues, un contrato</p>
+          <h2>Configuraciones previstas</h2>
+          <div class="grid grid--2">
+            <div class="card card--strong">
+              <span class="tag tag--verified">Primera configuración</span>
+              <h3 style="margin-top:1rem">Feedlot fijo o semipermanente</h3>
+              <ul>
+                <li>Corredor en agua, alimento u otro paso de frecuencia suficiente.</li>
+                <li>RFID, presencia, RGB y balanza de paso; profundidad como rama comparativa.</li>
+                <li>Energía de red o solar dimensionada; almacenamiento para varias semanas.</li>
+                <li>Salida: cobertura, conteo de pasajes, tendencia de peso y excepciones.</li>
+                <li>Optimización principal: caudal, repetición, mantenimiento y sesgo de cobertura.</li>
+              </ul>
+            </div>
+            <div class="card card--warm">
+              <span class="tag tag--vendor">Segunda configuración</span>
+              <h3 style="margin-top:1rem">Auditoría transportable</h3>
+              <ul>
+                <li>Estructura armable con RFID, RGB/profundidad y peso según decisión.</li>
+                <li>Baterías, GNSS, sellos y comprobación previa/posterior del equipo.</li>
+                <li>Captura guiada, inventario del conjunto y cadena de custodia reforzada.</li>
+                <li>Salida: paquete firmado, cobertura, originales, descartes e informe.</li>
+                <li>Optimización principal: portabilidad, independencia y fuerza probatoria.</li>
+              </ul>
+            </div>
+          </div>
+          <p>Ambas configuraciones comparten IDs, manifiesto, sincronización, plataforma, revisión e integraciones. No se fuerza una carcasa ni una lógica de operación única.</p>
+        </section>
+
+        <section class="section" id="ruta">
+          <p class="eyebrow">Desarrollo por evidencia</p>
+          <h2>Hoja de ruta y puertas de decisión</h2>
+          <div class="steps">
+            <div class="step"><div><h3>0 · Banco de integración</h3><p>Conectar RFID, cámara, presencia, balanza, GNSS y almacenamiento; producir un evento local reproducible. <strong>Salida:</strong> interfaces y tiempos medidos, no una demo visual.</p></div></div>
+            <div class="step"><div><h3>1 · Paso instrumentado mínimo</h3><p>Montar geometría, máquina de estados y reglas de ocupación. <strong>Puerta:</strong> demostrar RFID–imagen correcto con dobles, vueltas atrás, tag ausente y cortes de energía.</p></div></div>
+            <div class="step"><div><h3>2 · Peso de referencia y visión</h3><p>Capturar balanza e imagen sincronizadas; crear dataset y comparar RGB, profundidad y peso al paso. <strong>Puerta:</strong> error y descarte por subgrupo, no sólo promedio global.</p></div></div>
+            <div class="step"><div><h3>3 · Edge offline y sincronización</h3><p>Agregar cola persistente, firma, panel de estado e ingesta idempotente. <strong>Puerta:</strong> operar varios días, perder red/energía y recuperar sin duplicar ni perder originales.</p></div></div>
+            <div class="step"><div><h3>4 · Piloto continuo de feedlot</h3><p>El personal opera el sistema durante un período representativo. <strong>Puerta:</strong> cobertura útil, caudal, tendencia, mantenimiento y soporte dentro de umbrales acordados.</p></div></div>
+            <div class="step"><div><h3>5 · Industrialización</h3><p>Congelar interfaces, revisar seguridad, ambiente, manufactura y servicio; recién entonces evaluar placa propia. <strong>Puerta:</strong> costo total, confiabilidad y capacidad de mantener una flota.</p></div></div>
+            <div class="step"><div><h3>6 · Variante de auditoría</h3><p>Validar con financiadores el informe y los ataques relevantes; adaptar hardware transportable y controles. <strong>Puerta:</strong> aceptación del paquete probatorio por el tercero objetivo.</p></div></div>
+          </div>
+        </section>
+
+        <section class="section" id="criterios">
+          <p class="eyebrow">Calidad verificable</p>
+          <h2>Criterios antes de llamar “producto” al prototipo</h2>
+          <div class="grid grid--3">
+            <div class="card"><h3>Correspondencia</h3><p>Tasa de RFID–imagen correcto, eventos ambiguos bloqueados y reintentos exitosos, reportados por escenario.</p></div>
+            <div class="card"><h3>Medición</h3><p>Error, sesgo, repetibilidad y cobertura por raza, categoría, peso, luz, barro, postura y velocidad.</p></div>
+            <div class="card"><h3>Operación</h3><p>Animales/hora, atascos, estrés observado, disponibilidad, autonomía, limpieza y tiempo medio de reparación.</p></div>
+            <div class="card"><h3>Offline</h3><p>Horas/días sin red, capacidad local, recuperación tras corte y reconciliación sin pérdida ni duplicados.</p></div>
+            <div class="card"><h3>Procedencia</h3><p>Porcentaje de paquetes verificables, detección de manipulación/replay y trazabilidad de correcciones.</p></div>
+            <div class="card"><h3>Portabilidad</h3><p>Exportación completa de eventos y originales, API versionada y posibilidad real de cambiar nube o plataforma receptora.</p></div>
+          </div>
+          <div class="callout"><strong>Los umbrales numéricos permanecen abiertos.</strong> Deben fijarse con el feedlot y según la decisión concreta. El documento define qué medir para decidir, no inventa porcentajes de aceptación sin campo.</div>
+        </section>
+
+        <section class="section" id="abierto">
+          <p class="eyebrow">Antes de congelar arquitectura</p>
+          <h2>Decisiones técnicas todavía abiertas</h2>
+          <div class="grid grid--2">
+            <div>
+              <h3>Resolver en visita y banco</h3>
+              <ul>
+                <li>HDX/FDX‑B presentes, lectores utilizados y geometría RFID viable.</li>
+                <li>Punto natural, velocidad, ancho, retrocesos y frecuencia por animal.</li>
+                <li>RGB solo, RGB + profundidad, load cells o combinación por modalidad.</li>
+                <li>Energía, cobertura por operador, autonomía y días de almacenamiento.</li>
+                <li>Ambiente térmico, barro, polvo, lavado, rayos, vandalismo y mantenimiento.</li>
+              </ul>
+            </div>
+            <div>
+              <h3>Resolver con usuarios y terceros</h3>
+              <ul>
+                <li>Error tolerable y uso permitido para cada decisión de peso.</li>
+                <li>Cobertura mínima y antigüedad máxima de una observación.</li>
+                <li>Quién revisa conflictos, quién puede corregir y qué necesita ver.</li>
+                <li>Retención de originales, propiedad del dato y acceso del cliente.</li>
+                <li>Evidencia aceptable para fondo, fiduciario, banco o auditor.</li>
+              </ul>
+            </div>
+          </div>
+          <div class="callout callout--warning"><strong>Próximo paso recomendado:</strong> una jornada de observación en feedlot seguida por un banco de integración de bajo costo. Comprar o diseñar para producción antes de medir paso, señal RFID, luz, energía y mantenimiento fijaría la arquitectura con evidencia insuficiente.</div>
+          <p>Este documento convierte el <a href="analisis.html">análisis de alternativas</a> en una dirección técnica y debe revisarse junto con los <a href="supuestos.html">supuestos</a>, las <a href="preguntas.html">preguntas abiertas</a> y el <a href="mercado.html">mapa competitivo</a>.</p>
+        </section>
+      </article>
+    </div>
+  </main>
+
+  <footer class="footer">Dossier vivo · tecnología v0.1 · corte 23 ago 2026 · arquitectura candidata sujeta a piloto de campo.</footer>
+</body>
+</html>
