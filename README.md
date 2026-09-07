@@ -4,12 +4,17 @@ Dossier de investigación sobre conteo, identificación, estimación de peso, ub
 
 El proyecto explora dos aplicaciones: la verificación de existencias para fondos y fideicomisos ganaderos, y el monitoreo productivo en feedlots. Este repositorio contiene el sitio estático de investigación, sus fuentes y scripts de generación de páginas.
 
+## Sitio publicado
+
+El dossier público está disponible en [GitHub Pages](https://emilianobonilla.github.io/evidencia-ganadera/).
+
 ## Contenido
 
 - **Fondos y feedlot:** casos de uso, prioridades y preguntas de negocio.
 - **Mercado:** comparación de soluciones y fichas de productos y proveedores.
 - **Tecnología:** arquitectura propuesta y análisis técnico.
 - **Supuestos y preguntas:** hipótesis pendientes y temas para validar en campo.
+- **POC con DJI Mini 4K:** [lista de especificaciones](specs/README.md) para contar bovinos en corral o grupo reunido y validar el resultado, estructuradas siguiendo spec-kit.
 
 ## Estructura
 
@@ -21,6 +26,8 @@ research/                  Sitio público HTML y CSS
   _generar-*.mjs           Generadores de páginas
   _validar-mercado.mjs     Validador del sitio público
 research-tech/             Documentación técnica adicional
+specs/                     Especificaciones del POC de conteo con DJI Mini 4K
+.specify/memory/            Principios propuestos para el POC
 .github/workflows/         Publicación en GitHub Pages
 AGENTS.md                  Guía de contribución
 ```
