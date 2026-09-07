@@ -23,18 +23,19 @@
   </header>
 
   <main>
+    <div class="callout"><strong>POC Mini 4K · 7 sep 2026:</strong> electricidad permanente e internet por Starlink garantizados. Se recomienda procesamiento en nube; las alternativas offline de este dossier corresponden a otros despliegues. <a href="supuestos.html#s06">Ver supuesto actualizado</a>.</div>
     <section class="hero">
       <div>
         <p class="eyebrow">Documento 05 · Arquitectura tecnológica</p>
         <h1>Integrar lo estándar. Desarrollar la evidencia.</h1>
-        <p class="lede">Propuesta inicial de hardware y software para capturar un evento indivisible RFID–imagen–peso–ubicación, operar sin conexión y conservar procedencia verificable. Define una dirección de construcción; no sustituye la validación en campo.</p>
+        <p class="lede">Propuesta inicial de hardware y software para capturar un evento indivisible RFID–imagen–peso–ubicación, admitir distintos despliegues y conservar procedencia verificable. Define una dirección de construcción; no sustituye la validación en campo.</p>
       </div>
       <aside class="meta-card" aria-label="Metadatos del documento">
         <dl>
           <dt>Versión</dt><dd>0.1</dd>
           <dt>Estado</dt><dd>Arquitectura candidata</dd>
           <dt>Prioridad</dt><dd>Dos vías, un contrato</dd>
-          <dt>Principio</dt><dd>Offline primero</dd>
+          <dt>Principio</dt><dd>Persistencia según despliegue</dd>
           <dt>Corte</dt><dd>23 ago 2026</dd>
         </dl>
       </aside>
@@ -63,7 +64,7 @@
           <h2>Cinco decisiones rectoras</h2>
           <div class="grid grid--2">
             <div class="card card--strong"><span class="number">1</span><h3>La unidad del producto es el evento</h3><p>RFID, imagen, peso, tiempo, ubicación y dispositivo deben nacer juntos. La plataforma no debe ensamblarlos después por cercanía temporal sin poder demostrar correspondencia.</p></div>
-            <div class="card"><span class="number">2</span><h3>El equipo funciona sin nube</h3><p>Captura, valida, firma y almacena localmente. La conectividad sincroniza y permite soporte, pero una caída de red no interrumpe la operación ni borra la cola pendiente.</p></div>
+            <div class="card"><span class="number">2</span><h3>Autonomía local para despliegues que la necesiten</h3><p>Captura, valida, firma y almacena localmente. La conectividad sincroniza y permite soporte, pero una caída de red no interrumpe la operación ni borra la cola pendiente.</p></div>
             <div class="card"><span class="number">3</span><h3>Comprar sensores; desarrollar coordinación</h3><p>RFID, cámaras, celdas de carga, GNSS y computadora serán componentes comerciales. La propiedad tecnológica estará en la geometría, la sincronización, las reglas de descarte y la procedencia.</p></div>
             <div class="card card--warm"><span class="number">4</span><h3>Peso medido y estimado no se mezclan</h3><p>Cada evento declara método, calibración, modelo, incertidumbre y uso permitido. Una estimación visual nunca se presenta como lectura de balanza.</p></div>
             <div class="card card--cool"><span class="number">5</span><h3>La IA asiste; las reglas protegen</h3><p>La visión puede detectar, seguir y estimar, pero el sistema determinístico decide si hubo un único animal, una única caravana y evidencia suficiente para aceptar el evento.</p></div>
@@ -158,7 +159,7 @@
             <div class="card"><h3>Calidad automática</h3><p>Control de enfoque, luz, postura, oclusión, estabilidad del peso, cobertura y salud del sensor antes de aceptar una medición.</p></div>
             <div class="card"><h3>Estimación y confianza</h3><p>Pipeline de visión 2D/3D, versionado de modelos, calibración de incertidumbre y métricas por raza, categoría, rango y ambiente.</p></div>
             <div class="card"><h3>Paquete de evidencia</h3><p>Manifiesto canónico, hashes, firma del dispositivo, secuencia, originales y trazabilidad de cualquier interpretación posterior.</p></div>
-            <div class="card"><h3>Sincronización offline</h3><p>Cola persistente, reanudación, deduplicación e ingesta idempotente. El usuario ve qué está sólo en el equipo y qué ya fue confirmado.</p></div>
+            <div class="card"><h3>Sincronización offline opcional</h3><p>Cola persistente, reanudación, deduplicación e ingesta idempotente. El usuario ve qué está sólo en el equipo y qué ya fue confirmado.</p></div>
             <div class="card"><h3>Gestión del dispositivo</h3><p>Alta, revocación, configuración, calibración, salud, logs, firmware/software firmado y actualización con rollback.</p></div>
             <div class="card"><h3>Revisión de excepciones</h3><p>Interfaz para comparar RFID, imágenes y señales, solicitar repetición o anular una interpretación sin borrar el evento original.</p></div>
             <div class="card card--cool"><h3>Exportación auditable</h3><p>Informe y API con cobertura, descartes, método, incertidumbre, archivos verificables y límites de uso del dato.</p></div>
@@ -253,7 +254,7 @@
             <div class="step"><div><h3>0 · Banco de integración</h3><p>Conectar RFID, cámara, presencia, balanza, GNSS y almacenamiento; producir un evento local reproducible. <strong>Salida:</strong> interfaces y tiempos medidos, no una demo visual.</p></div></div>
             <div class="step"><div><h3>1 · Paso instrumentado mínimo</h3><p>Montar geometría, máquina de estados y reglas de ocupación. <strong>Puerta:</strong> demostrar RFID–imagen correcto con dobles, vueltas atrás, tag ausente y cortes de energía.</p></div></div>
             <div class="step"><div><h3>2 · Peso de referencia y visión</h3><p>Capturar balanza e imagen sincronizadas; crear dataset y comparar RGB, profundidad y peso al paso. <strong>Puerta:</strong> error y descarte por subgrupo, no sólo promedio global.</p></div></div>
-            <div class="step"><div><h3>3 · Edge offline y sincronización</h3><p>Agregar cola persistente, firma, panel de estado e ingesta idempotente. <strong>Puerta:</strong> operar varios días, perder red/energía y recuperar sin duplicar ni perder originales.</p></div></div>
+            <div class="step"><div><h3>3 · Edge offline para despliegues sin conectividad garantizada</h3><p>Agregar cola persistente, firma, panel de estado e ingesta idempotente. <strong>Puerta:</strong> operar varios días, perder red/energía y recuperar sin duplicar ni perder originales.</p></div></div>
             <div class="step"><div><h3>4 · Piloto continuo de feedlot</h3><p>El personal opera el sistema durante un período representativo. <strong>Puerta:</strong> cobertura útil, caudal, tendencia, mantenimiento y soporte dentro de umbrales acordados.</p></div></div>
             <div class="step"><div><h3>5 · Industrialización</h3><p>Congelar interfaces, revisar seguridad, ambiente, manufactura y servicio; recién entonces evaluar placa propia. <strong>Puerta:</strong> costo total, confiabilidad y capacidad de mantener una flota.</p></div></div>
             <div class="step"><div><h3>6 · Equipo de auditoría en campo</h3><p>Congelar el hardware transportable y sus controles contra los ataques relevantes. La validación comercial con financiadores no espera a esta etapa: corre en paralelo desde el inicio. <strong>Puerta:</strong> aceptación del paquete probatorio por el tercero objetivo.</p></div></div>
@@ -267,7 +268,7 @@
             <div class="card"><h3>Correspondencia</h3><p>Tasa de RFID–imagen correcto, eventos ambiguos bloqueados y reintentos exitosos, reportados por escenario.</p></div>
             <div class="card"><h3>Medición</h3><p>Error, sesgo, repetibilidad y cobertura por raza, categoría, peso, luz, barro, postura y velocidad.</p></div>
             <div class="card"><h3>Operación</h3><p>Animales/hora, atascos, estrés observado, disponibilidad, autonomía, limpieza y tiempo medio de reparación.</p></div>
-            <div class="card"><h3>Offline</h3><p>Horas/días sin red, capacidad local, recuperación tras corte y reconciliación sin pérdida ni duplicados.</p></div>
+            <div class="card"><h3>Offline en otros despliegues</h3><p>Horas/días sin red, capacidad local, recuperación tras corte y reconciliación sin pérdida ni duplicados.</p></div>
             <div class="card"><h3>Procedencia</h3><p>Porcentaje de paquetes verificables, detección de manipulación/replay y trazabilidad de correcciones.</p></div>
             <div class="card"><h3>Portabilidad</h3><p>Exportación completa de eventos y originales, API versionada y posibilidad real de cambiar nube o plataforma receptora.</p></div>
           </div>

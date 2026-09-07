@@ -1,7 +1,7 @@
 # Spec 002: importar originales y evaluar su calidad
 
-**Feature:** `002-importacion-calidad` · **Creada:** 2026-09-06 · **Versión:** 0.2.0 · **Estado:** borrador.
-**Entrada:** transformar una captura del Mini 4K en evidencia local utilizable.
+**Feature:** `002-importacion-calidad` · **Creada:** 2026-09-06 · **Actualizada:** 2026-09-07 · **Versión:** 0.3.0 · **Estado:** borrador.
+**Entrada:** transformar una captura del Mini 4K en evidencia utilizable y conservada íntegramente.
 **Dependencias:** [001](../001-captura-campana/spec.md). Aplican la [constitución](../../.specify/memory/constitution.md) y el [contexto común](../contexto-mini-4k.md).
 
 ## Objetivo y alcance
@@ -42,8 +42,8 @@ Como revisor, quiero ver imágenes candidatas y problemas de calidad para elegir
 - **FR-004:** DEBE permitir seleccionar intervalos e imágenes a resolución original. Cada imagen derivada conserva su localizador temporal y la configuración de extracción. Las vistas reducidas no sustituyen la entrada de análisis.
 - **FR-005:** DEBE conservar acceso a la secuencia original como contexto de revisión y para la eventual extensión 005, aunque el conteo P1 use una única imagen; el muestreo no debe destruir el resto de la evidencia.
 - **FR-006:** DEBE mostrar banderas revisables de desenfoque, exposición o tamaño insuficiente del animal y permitir confirmarlas/corregirlas. Los umbrales se calibran con 003 y quedan versionados antes de la prueba.
-- **FR-007:** DEBE gestionar importación interrumpida, archivo corrupto y espacio insuficiente sin presentar trabajos parciales como completos; permitir reintentar de forma idempotente.
-- **FR-008:** DEBE funcionar sin conexión con los componentes ya preparados y sin enviar originales o ubicaciones a servicios externos.
+- **FR-007:** DEBE gestionar importación interrumpida, archivo corrupto y espacio o cuota insuficiente sin presentar trabajos parciales como completos; permitir reintentar de forma idempotente y reanudar archivos grandes sin repetir las partes confirmadas. Verificar integridad de extremo a extremo antes de habilitar el original para análisis.
+- **FR-008:** DEBE permitir importación a almacenamiento remoto privado y acceso autenticado del operador bajo el supuesto de electricidad e internet garantizados. Las credenciales de infraestructura no estarán expuestas al cliente. El alojamiento y procesamiento contratados no implican publicar originales ni compartirlos con otros usuarios.
 - **FR-009:** DEBE registrar la imagen de referencia seleccionada por nitidez, cobertura y visibilidad individual antes de consultar predicciones o total físico, conforme al contexto común. Cambiarla genera una nueva ejecución con motivo y conserva las anteriores; no seleccionarla por máximo conteo ni cercanía al inventario esperado.
 
 ## Entidades principales
@@ -62,7 +62,9 @@ Mismo nombre con distinto contenido; distinto nombre con igual contenido; fragme
 - **SC-002:** una segunda importación del mismo conjunto agrega cero copias de contenido y conserva todas sus asociaciones válidas.
 - **SC-003:** en pruebas con corrupción, falta de espacio e interrupción, 100% de los archivos afectados presentan estado y motivo verificables, y ningún original resulta alterado.
 - **SC-004:** cada conteo P1 queda asociado a exactamente una imagen de referencia; al cambiarla se crea una nueva ejecución y no se mezclan sus detecciones con las anteriores.
+- **SC-005:** una carga grande interrumpida se reanuda conservando partes confirmadas, termina con huella verificada y crea un solo original. Un archivo incompleto o con huella discordante nunca habilita detección.
+- **SC-006:** solicitudes sin sesión o sin permiso no permiten leer, modificar ni descargar campañas y originales ajenos; las descargas temporales caducadas se rechazan.
 
 ## Supuestos y decisiones por aclarar
 
-Hay un lector o método de copia de microSD y espacio local suficiente. El equipo de proceso, los límites por campaña y los umbrales de calidad se fijarán en el plan y se probarán con archivos reales antes de la evaluación final. DNG queda fuera de la entrada mínima.
+Hay un dispositivo con navegador y lector o método de copia de microSD. Se dimensionarán espacio temporal del cliente, almacenamiento remoto, límites por campaña y umbrales de calidad con archivos reales. La disponibilidad de electricidad e internet está confirmada; falta medir velocidad de subida y fijar el presupuesto de transferencia. Para P1 se propone priorizar fotografías JPEG originales del grupo completo; si se elige un fotograma, se conserva también su video original. DNG queda fuera de la entrada mínima.

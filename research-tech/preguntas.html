@@ -20,6 +20,7 @@
   </header>
 
   <main>
+    <div class="callout"><strong>POC Mini 4K · 7 sep 2026:</strong> electricidad permanente e internet por Starlink garantizados. Se recomienda procesamiento en nube; las alternativas offline de este dossier corresponden a otros despliegues. <a href="../research/supuestos.html#s06">Ver supuesto actualizado</a>.</div>
     <section class="hero hero--compact">
       <div>
         <p class="breadcrumbs"><a href="analisis.html">Análisis técnico</a> · Preguntas</p>
@@ -212,10 +213,10 @@
 
           <div class="question">
             <div class="question__head"><span class="question__id">P-14</span><span class="prio prio--1">Prioridad 1</span></div>
-            <h3>¿Hay energía eléctrica de red en ese punto, o hay que ir a solar?</h3>
+            <h3>¿Qué potencia suministrar a los equipos, con electricidad ya garantizada para el POC?</h3>
             <dl class="detail-grid">
               <div><dt>Por qué importa</dt><dd>Cambia el presupuesto energético completo y por lo tanto qué sensor y qué cómputo son viables.</dd></div>
-              <div><dt>Qué cambia</dt><dd>Con red, un LiDAR y un módulo de inferencia potente son triviales. Sin red, todo se dimensiona alrededor de ~75 W medios.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Para el POC hay baterías, generador o red; se dimensiona la carga real, incluido Starlink. La referencia de ~75 W pertenece a otro despliegue solar.</dd></div>
               <div><dt>Cómo obtenerla</dt><dd>Relevamiento eléctrico del punto candidato.</dd></div>
             </dl>
           </div>
@@ -232,11 +233,11 @@
 
           <div class="question">
             <div class="question__head"><span class="question__id">P-16</span><span class="prio prio--2">Prioridad 2</span></div>
-            <h3>¿Qué cobertura celular hay realmente en el punto, medida y no supuesta?</h3>
+            <h3>¿Qué velocidad de subida ofrece Starlink con archivos del POC?</h3>
             <dl class="detail-grid">
-              <div><dt>Por qué importa</dt><dd>Determina si la sincronización es continua, diaria o manual por visita.</dd></div>
-              <div><dt>Qué cambia</dt><dd>Sin cobertura, hay que dimensionar almacenamiento local para semanas y definir un procedimiento de descarga.</dd></div>
-              <div><dt>Cómo obtenerla</dt><dd>Medición con módem en el lugar exacto, a la altura de instalación.</dd></div>
+              <div><dt>Por qué importa</dt><dd>Internet está garantizado para el POC; medir la subida permite estimar cuándo estará disponible el resultado.</dd></div>
+              <div><dt>Qué cambia</dt><dd>Determina el presupuesto de transferencia, selección de JPEG o video y tiempo total del trabajo remoto.</dd></div>
+              <div><dt>Cómo obtenerla</dt><dd>Carga de originales reales mediante Starlink y registro de bytes y duración.</dd></div>
             </dl>
           </div>
 

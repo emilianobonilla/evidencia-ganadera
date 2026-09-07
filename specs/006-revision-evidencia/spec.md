@@ -1,12 +1,12 @@
 # Spec 006: revisar el conteo y exportar evidencia
 
-**Feature:** `006-revision-evidencia` · **Creada:** 2026-09-06 · **Versión:** 0.2.0 · **Estado:** borrador.
+**Feature:** `006-revision-evidencia` · **Creada:** 2026-09-06 · **Actualizada:** 2026-09-07 · **Versión:** 0.3.0 · **Estado:** borrador.
 **Entrada:** convertir propuestas automáticas en resultados entendibles y corregibles.
 **Dependencias P1:** [001](../001-captura-campana/spec.md), [002](../002-importacion-calidad/spec.md), [004](../004-deteccion-bovinos/spec.md). [005](../005-conteo-sin-duplicados/spec.md) se requiere únicamente para la extensión P2 entre vistas. Ambas historias se implementan en P1 sobre una sola imagen. Aplican la [constitución](../../.specify/memory/constitution.md) y el [contexto común](../contexto-mini-4k.md).
 
 ## Objetivo y alcance
 
-Dar a una persona la posibilidad de revisar el conteo, resolver dudas y compartir un paquete local de resultados con evidencia. El POC tiene un operador local, sin cuentas ni colaboración simultánea.
+Dar a una persona la posibilidad de revisar el conteo, resolver dudas y descargar un paquete de resultados con evidencia. El POC tiene un operador con acceso autenticado desde navegador, sin colaboración simultánea. El procesamiento y la persistencia pueden residir en nube.
 
 ## Historias de usuario y pruebas
 
@@ -37,18 +37,18 @@ Como responsable del lote, quiero un reporte que explique el número, su alcance
 ## Requisitos funcionales
 
 - **FR-001:** la interfaz DEBE estar en español y permitir navegar por campaña, sector, imagen e instante original, con ampliación y marcas visibles.
-- **FR-002:** DEBE permitir agregar/quitar/corregir detecciones sobre la imagen de referencia, con deshacer, persistencia al reabrir e historial de autor declarado, fecha y motivo. Unir/separar observaciones entre imágenes solo es requisito de P2.
+- **FR-002:** DEBE permitir agregar/quitar/corregir detecciones sobre la imagen de referencia, con deshacer, persistencia al reabrir e historial de cuenta autorizada, fecha y motivo. Unir/separar observaciones entre imágenes solo es requisito de P2.
 - **FR-003:** DEBE mostrar conteo automático y revisado, dudas pendientes, cobertura y alcance temporal/espacial sin confundir el conteo visible con el total del lote.
 - **FR-004:** DEBE impedir cerrar un total revisado si incumple las condiciones de cierre del [contexto común](../contexto-mini-4k.md): grupo completo, individuos distinguibles, movimientos reconciliados y dudas resueltas. En P2 se aplica además FR-006 de 005. Permitir exportar el trabajo parcial con motivos explícitos.
 - **FR-005:** DEBE generar un reporte legible sin la aplicación y una tabla CSV de resultados/correcciones. El paquete incluye imágenes anotadas, manifiesto de archivos con huellas y localizadores al origen, modelo/configuración, tiempos, estados y versiones.
 - **FR-006:** el paquete DEBE incluir la evidencia original necesaria para reconstruir el resultado cerrado, con rutas relativas; si el usuario exporta solo un resumen sin originales, debe rotularlo como resumen sin evidencia completa.
 - **FR-007:** DEBE separar ubicación/hora declaradas de metadatos observados y explicar que la huella de integridad no autentica el momento o lugar del vuelo.
-- **FR-008:** DEBE guardar nuevas revisiones como versiones y funcionar sin conexión; ninguna exportación se publica o se envía automáticamente a terceros.
+- **FR-008:** DEBE guardar nuevas revisiones como versiones en almacenamiento persistente y confirmar su guardado al operador. Reabrir el navegador recupera la última revisión confirmada. La infraestructura remota mantiene los datos privados; ninguna exportación se publica o comparte automáticamente con destinatarios externos.
 - **FR-009:** en P1, todas las marcas incluidas DEBEN pertenecer a la misma imagen de referencia. Las vistas adicionales sirven como contexto, no para añadir individuos visibles solo en otros instantes ni para completar el número esperado. La duda persistente exige resultado parcial o nueva captura; cambiar de imagen inicia otra ejecución.
 
 ## Entidades principales
 
-- **Corrección:** acción reversible, objetos afectados, motivo y autor declarado.
+- **Corrección:** acción reversible, objetos afectados, motivo y cuenta autorizada.
 - **Revisión:** versión, resultado antes/después, dudas y estado de cierre.
 - **Paquete de evidencia:** reporte, tabla, imágenes, originales y manifiesto verificable.
 
@@ -65,4 +65,4 @@ Corral completo en cuadro pero animales ocultos bajo techo; terneros solapados; 
 
 ## Supuestos y decisiones por aclarar
 
-La revisión se hace en computadora y puede usar nombre de revisor declarado. No se exige autenticación criptográfica del operador ni cadena de custodia certificada. El formato concreto del reporte se elige en el plan, manteniendo lectura independiente y exportación local.
+La revisión se hace desde un navegador de escritorio con una cuenta autorizada; las correcciones registran esa identidad. No se exige firma digital personal ni cadena de custodia certificada. El formato concreto del reporte se elige en el plan, manteniendo descarga y lectura independiente. SC-002 exige portabilidad del paquete descargado, no operación sin conexión de la aplicación.

@@ -1,6 +1,6 @@
 # Spec 003: construir el dataset y la referencia independiente
 
-**Feature:** `003-dataset-referencia` · **Creada:** 2026-09-06 · **Versión:** 0.2.0 · **Estado:** borrador.
+**Feature:** `003-dataset-referencia` · **Creada:** 2026-09-06 · **Actualizada:** 2026-09-07 · **Versión:** 0.3.0 · **Estado:** borrador.
 **Entrada:** medir detección y conteo de bovinos con evidencia local.
 **Dependencias:** [001](../001-captura-campana/spec.md), [002](../002-importacion-calidad/spec.md). Aplican la [constitución](../../.specify/memory/constitution.md) y el [contexto común](../contexto-mini-4k.md).
 

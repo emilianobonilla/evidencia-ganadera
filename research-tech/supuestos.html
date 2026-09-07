@@ -20,6 +20,7 @@
   </header>
 
   <main>
+    <div class="callout"><strong>POC Mini 4K · 7 sep 2026:</strong> electricidad permanente e internet por Starlink garantizados. Se recomienda procesamiento en nube; las alternativas offline de este dossier corresponden a otros despliegues. <a href="../research/supuestos.html#s06">Ver supuesto actualizado</a>.</div>
     <section class="hero hero--compact">
       <div>
         <p class="breadcrumbs"><a href="analisis.html">Análisis técnico</a> · Supuestos</p>
@@ -302,19 +303,19 @@
 
           <div class="assumption">
             <div class="assumption__head"><span class="assumption__id">S-20</span><span class="tag tag--vendor">Confianza media</span></div>
-            <h3>El equipo debe operar sin conectividad durante días</h3>
-            <p>Se asume cobertura celular ausente o intermitente y ausencia de red eléctrica en la mayoría de los puntos de instalación.</p>
+            <h3>El POC dispone de energía e internet; autonomía offline es otro escenario</h3>
+            <p>El usuario garantiza electricidad mediante baterías, generador o red e internet mediante Starlink (7 sep 2026). El supuesto anterior de operación aislada no aplica al POC Mini 4K.</p>
             <dl class="detail-grid">
-              <div><dt>Base</dt><dd>Condición habitual del campo uruguayo y argentino; los despliegues de referencia publicados asumen lo mismo.</dd></div>
-              <div><dt>Si es falso</dt><dd>Con conectividad estable se podría inferir en la nube, bajando el costo del equipo de campo de forma sustancial.</dd></div>
-              <div><dt>Cómo verificarlo</dt><dd>Medición de señal y de energía disponible en los puntos candidatos concretos.</dd></div>
+              <div><dt>Base</dt><dd>Aclaración expresa del usuario para el POC; no se extrapola a otros establecimientos.</dd></div>
+              <div><dt>Si es falso</dt><dd>Se recomienda inferir en nube y usar un cliente de carga/revisión sin GPU dedicada; el costo total debe medirse.</dd></div>
+              <div><dt>Cómo verificarlo</dt><dd>Medir subida, tiempo total y costo con archivos reales; la disponibilidad ya está confirmada.</dd></div>
             </dl>
           </div>
 
           <div class="assumption">
             <div class="assumption__head"><span class="assumption__id">S-21</span><span class="tag tag--vendor">Confianza media</span></div>
-            <h3>Un presupuesto energético del orden de 75 W medios es suficiente y solar-viable</h3>
-            <p>Con del orden de 900 W de panel y 1,6 kWh de batería se sostiene operación continua con margen.</p>
+            <h3>Para una instalación solar independiente, evaluar un presupuesto del orden de 75 W medios</h3>
+            <p>La referencia de del orden de 900 W de panel y 1,6 kWh de batería pertenece al escenario solar estudiado; no dimensiona Starlink ni los equipos del POC con suministro garantizado. Su suficiencia requiere cálculo del sitio y de las cargas.</p>
             <dl class="detail-grid">
               <div><dt>Base</dt><dd>Despliegue publicado y validado en campo con Jetson Orin NX y cámara 8 MP.</dd></div>
               <div><dt>Si es falso</dt><dd>Un invierno con baja radiación en el sur de Uruguay podría requerir sobredimensionar el arreglo, cambiando el costo por punto.</dd></div>

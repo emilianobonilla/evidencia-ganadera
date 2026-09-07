@@ -20,6 +20,7 @@
   </header>
 
   <main>
+    <div class="callout"><strong>POC Mini 4K · 7 sep 2026:</strong> electricidad permanente e internet por Starlink garantizados. Se recomienda procesamiento en nube; las alternativas offline de este dossier corresponden a otros despliegues. <a href="../research/supuestos.html#s06">Ver supuesto actualizado</a>.</div>
     <section class="hero">
       <div>
         <p class="eyebrow">Análisis tecnológico · Uruguay y Argentina</p>
@@ -516,7 +517,7 @@
             <li><strong>Origen del tiempo:</strong> un solo reloj para lector RFID y cámara. En un equipo embebido, el mismo host que lee el puerto serie del lector debe sellar los cuadros.</li>
             <li><strong>Latencia del lector:</strong> los lectores LF entregan la lectura por serie o Ethernet con jitter de decenas a cientos de milisegundos. Debe medirse en banco, no suponerse.</li>
             <li><strong>Ventana τ:</strong> debe calibrarse empíricamente con animales reales. Demasiado corta pierde asociaciones; demasiado larga las cruza. Un valor inicial razonable a validar está en el orden de 1–3 s en paso a paso.</li>
-            <li><strong>Sin conexión:</strong> el equipo debe funcionar sin red y sin NTP. Reloj de tiempo real con batería y detección de salto temporal; cualquier discontinuidad debe marcar los eventos afectados en lugar de descartarlos silenciosamente.</li>
+            <li><strong>Despliegues sin conexión, fuera del POC actual:</strong> el equipo debe funcionar sin red y sin NTP. Reloj de tiempo real con batería y detección de salto temporal; cualquier discontinuidad debe marcar los eventos afectados en lugar de descartarlos silenciosamente.</li>
           </ul>
 
           <h3>Tres estrategias de asociación, de más a menos determinista</h3>
@@ -590,7 +591,7 @@
         <!-- 11 -->
         <section class="section" id="edge">
           <p class="eyebrow">11 · Infraestructura</p>
-          <h2>Cómputo en el borde, energía solar y una red que no está</h2>
+          <h2>Alternativa para sitios sin suministro o conectividad garantizados</h2>
           <p class="section-intro">Un despliegue de referencia publicado y validado en campo da el orden de magnitud de lo que hace falta para operar fuera de la red.</p>
 
           <div class="kpi-row">
@@ -602,7 +603,7 @@
 
           <h3>Decisiones de infraestructura</h3>
           <ul class="clean">
-            <li><strong>Inferencia en el borde, no en la nube.</strong> Un flujo continuo de 8 MP requiere 8–15 Mbps sostenidos: inviable sobre 4G rural. Se transmiten metadatos y recortes, no video.</li>
+            <li><strong>Inferencia en el borde para el escenario rural aislado.</strong> Un flujo continuo de 8 MP requiere 8–15 Mbps sostenidos: inviable sobre 4G rural. Se transmiten metadatos y recortes, no video.</li>
             <li><strong>El switch PoE puede consumir más que el acelerador.</strong> En el despliegue de referencia fue el mayor consumidor individual, por encima del propio módulo de inferencia. La optimización energética empieza por la red, no por el modelo.</li>
             <li><strong>Almacenar y reenviar es obligatorio.</strong> El sistema debe operar días sin enlace y reconciliar después, con detección de duplicados por identificador de evento.</li>
             <li><strong>Conservar el original.</strong> Para poder recalibrar modelos hacia atrás y para auditoría, hay que guardar la captura cruda o una versión con pérdida controlada, no solo el kilo resultante. Esto define el dimensionamiento de almacenamiento local.</li>

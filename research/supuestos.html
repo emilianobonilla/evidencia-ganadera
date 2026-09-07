@@ -21,6 +21,7 @@
   </header>
 
   <main>
+    <div class="callout"><strong>POC Mini 4K · 7 sep 2026:</strong> electricidad permanente e internet por Starlink garantizados. Se recomienda procesamiento en nube; las alternativas offline de este dossier corresponden a otros despliegues. <a href="supuestos.html#s06">Ver supuesto actualizado</a>.</div>
     <section class="hero">
       <div>
         <p class="eyebrow">Documento 02 · Registro de supuestos</p>
@@ -29,7 +30,7 @@
       </div>
       <aside class="meta-card">
         <dl>
-          <dt>Versión</dt><dd>0.6</dd>
+          <dt>Versión</dt><dd>0.7</dd>
           <dt>Supuestos</dt><dd>28</dd>
           <dt>Críticos</dt><dd>16</dd>
           <dt>Actualizados con respuestas</dt><dd>15</dd>
@@ -101,9 +102,9 @@
           </article>
 
           <article class="assumption" id="s06">
-            <div class="assumption__head"><div><span class="assumption__id">S06 · CRÍTICO</span><h3>La captura debe funcionar sin internet ni corriente de red.</h3></div><span class="tag tag--verified">Dirección confirmada</span></div>
-            <p>En operaciones puntuales se acepta llevar baterías con inversor o generador; la sincronización puede ocurrir después.</p>
-            <dl class="detail-grid"><div><dt>Evidencia</dt><dd>Respuesta Q06 del 23 ago 2026.</dd></div><div><dt>Implicación</dt><dd>Confirmación y almacenamiento local obligatorios.</dd></div><div><dt>Pendiente</dt><dd>Medir autonomía y potencia por equipo.</dd></div></dl>
+            <div class="assumption__head"><div><span class="assumption__id">S06 · CRÍTICO</span><h3>El POC dispone siempre de electricidad e internet mediante Starlink.</h3></div><span class="tag tag--verified">Dirección confirmada</span></div>
+            <p>El usuario garantiza electricidad mediante baterías, generador o red y conectividad mediante Starlink. Esta definición del 7 sep 2026 sustituye el supuesto anterior para el POC con Mini 4K.</p>
+            <dl class="detail-grid"><div><dt>Evidencia</dt><dd>Actualización del usuario del 7 sep 2026; ver Q06.</dd></div><div><dt>Implicación</dt><dd>Procesamiento y almacenamiento en nube viables; operación offline no obligatoria.</dd></div><div><dt>Pendiente</dt><dd>Dimensionar potencia suministrada y medir subida, tiempo total y costo; la disponibilidad está confirmada.</dd></div></dl>
           </article>
 
           <article class="assumption" id="s07">
@@ -184,9 +185,9 @@
           </article>
 
           <article class="assumption" id="s18">
-            <div class="assumption__head"><div><span class="assumption__id">S18</span><h3>Una solución en nube es aceptable si la captura funciona offline.</h3></div><span class="tag tag--open">Baja confianza</span></div>
-            <p>Procesamiento diferido y consulta sincronizada podrían ser suficientes; no se exige IA completa en el borde desde el inicio.</p>
-            <dl class="detail-grid"><div><dt>Base</dt><dd>Patrón visible en proveedores actuales.</dd></div><div><dt>Si fuera falso</dt><dd>Suben hardware, complejidad y costo local.</dd></div><div><dt>Pregunta</dt><dd><a href="preguntas.html#q20">Q20 · latencia y nube</a></dd></div></dl>
+            <div class="assumption__head"><div><span class="assumption__id">S18</span><h3>El procesamiento principal del POC puede ejecutarse en nube.</h3></div><span class="tag tag--open">Recomendación revisada</span></div>
+            <p>Se recomienda una aplicación web con carga de originales, trabajos de visión asíncronos y revisión humana. No hace falta comprar una computadora con GPU para ejecutar el detector.</p>
+            <dl class="detail-grid"><div><dt>Base</dt><dd>S06 actualizado: energía e internet garantizados. Arquitectura propuesta, aún sin piloto.</dd></div><div><dt>Pendiente</dt><dd>Validar costo por campaña, tiempos de transferencia y resultado, y entorno remoto.</dd></div><div><dt>Pregunta</dt><dd><a href="preguntas.html#q20">Q20 · latencia y nube</a></dd></div></dl>
           </article>
 
           <article class="assumption" id="s19">
@@ -264,7 +265,7 @@
                 <tr><td>Usar visión para tendencia</td><td><a href="#s04">S04</a>, <a href="#s07">S07</a>, <a href="#s12">S12</a>, <a href="#s13">S13</a></td><td>Si la decisión exige peso legal o el error por subgrupo es inestable.</td></tr>
                 <tr><td>Dron como capa de lote</td><td><a href="#s14">S14</a>, <a href="#s16">S16</a></td><td>Si se demuestra reidentificación individual confiable o la operación aérea no es viable.</td></tr>
                 <tr><td>Relaciones como módulo separado</td><td><a href="#s15">S15</a>, <a href="#s16">S16</a></td><td>Si basta la convivencia por lote/potrero o surge un caso de alto valor.</td></tr>
-                <tr><td>Offline con procesamiento diferido</td><td><a href="#s06">S06</a>, <a href="#s18">S18</a></td><td>Si se exige resultado inmediato sin conectividad o nube no aceptable.</td></tr>
+                <tr><td>Nube con energía e internet garantizados</td><td><a href="#s06">S06</a>, <a href="#s18">S18</a></td><td>Si el tiempo total o el costo por campaña no cumplen los límites acordados.</td></tr>
                 <tr><td>Feedlot como vía de sostén y banco de pruebas</td><td><a href="#s21">S21</a>, <a href="#s23">S23</a>, <a href="#s24">S24</a></td><td>Si el flujo no alcanza cobertura individual o no mejora decisiones del encierro.</td></tr>
                 <tr><td>Fondos ganaderos como vía principal</td><td><a href="#s21">S21</a>, <a href="#s22">S22</a>, <a href="#s25">S25</a>, <a href="#s28">S28</a></td><td>Si nadie paga por la evidencia pese al problema probado, o si la regulación fija un mínimo que no la requiere.</td></tr>
                 <tr><td>Confianza anclada en el aparato</td><td><a href="#s19">S19</a>, <a href="#s22">S22</a>, <a href="#s25">S25</a>, <a href="#s26">S26</a></td><td>Si la procedencia técnica no es aceptada o no resiste sustitución/replay.</td></tr>
@@ -282,6 +283,7 @@
             <table>
               <thead><tr><th>Fecha</th><th>Versión</th><th>Cambio</th><th>Motivo</th></tr></thead>
               <tbody>
+                <tr><td>7 sep 2026</td><td>0.7</td><td>S06 sustituido y S18 revisado: energía e internet garantizados; nube recomendada para el POC Mini 4K.</td><td>Aclaración expresa del usuario.</td></tr>
                 <tr><td>23 ago 2026</td><td>0.6</td><td>S02 y S21 reescritos: la prioridad comercial pasa a la vía de fondos ganaderos y el feedlot queda como sostén y banco de pruebas.</td><td>Separación de los dos enfoques en documentos propios.</td></tr>
             <tr><td>23 ago 2026</td><td>0.5</td><td>S10 precisado (HDX y FDX‑B); S21 con tensión de secuencia declarada; creación de S28.</td><td>Revisión externa con verificación independiente.</td></tr>
                 <tr><td>23 ago 2026</td><td>0.4</td><td>S08 confirmado; creación de S27.</td><td>Respuesta Q05.</td></tr>
@@ -297,6 +299,6 @@
     </div>
   </main>
 
-  <footer class="footer">Documento 02 · Supuestos · versión 0.6 · <a href="preguntas.html">continuar con preguntas</a></footer>
+  <footer class="footer">Documento 02 · Supuestos · versión 0.7 · <a href="preguntas.html">continuar con preguntas</a></footer>
 </body>
 </html>

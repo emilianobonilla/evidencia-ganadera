@@ -1,6 +1,6 @@
 # Spec 005: contar por campaña sin duplicar observaciones
 
-**Feature:** `005-conteo-sin-duplicados` · **Creada:** 2026-09-06 · **Versión:** 0.2.0 · **Estado:** borrador.
+**Feature:** `005-conteo-sin-duplicados` · **Creada:** 2026-09-06 · **Actualizada:** 2026-09-07 · **Versión:** 0.3.0 · **Estado:** borrador.
 **Entrada:** convertir detecciones repetidas en una propuesta de conteo del área observada.
 **Dependencias:** [001](../001-captura-campana/spec.md), [002](../002-importacion-calidad/spec.md), [004](../004-deteccion-bovinos/spec.md). Aplican la [constitución](../../.specify/memory/constitution.md) y el [contexto común](../contexto-mini-4k.md).
 

@@ -1,6 +1,6 @@
 # Spec 001: capturar una campaña de conteo
 
-**Feature:** `001-captura-campana` · **Creada:** 2026-09-06 · **Versión:** 0.2.0 · **Estado:** borrador.
+**Feature:** `001-captura-campana` · **Creada:** 2026-09-06 · **Actualizada:** 2026-09-07 · **Versión:** 0.3.0 · **Estado:** borrador.
 **Entrada:** contar ganado con el DJI Mini 4K disponible.
 **Dependencias:** ninguna. Aplican la [constitución](../../.specify/memory/constitution.md) y el [contexto común](../contexto-mini-4k.md).
 
@@ -37,7 +37,7 @@ Como operador, quiero reconocer si hay animales fuera de cuadro u ocultos para r
 ## Requisitos funcionales
 
 - **FR-001:** el procedimiento DEBE registrar identificador de campaña, corral/grupo objetivo, límites, ventana temporal y responsable. En P1 el grupo completo se representa como un solo sector.
-- **FR-002:** el operador DEBE poder preparar el protocolo y completar el registro sin conexión durante la jornada, una vez preparado el equipo.
+- **FR-002:** el operador DEBE poder preparar el protocolo y completar el registro durante la jornada con electricidad e internet disponibles. El registro puede residir en nube; el vuelo sigue siendo manual y no requiere integración de control con nuestra aplicación.
 - **FR-003:** el protocolo DEBE usar captura manual y originales compatibles con el [contexto común](../contexto-mini-4k.md), incluyendo una muestra de calibración de nitidez y tamaño visible del animal.
 - **FR-004:** el grupo DEBE vincularse a archivos/intervalos y a cobertura completa, incompleta o desconocida, con motivo para las dos últimas. Registrar por separado encuadre completo e individuos distinguibles en la imagen de referencia.
 - **FR-005:** el registro DEBE incluir cortes, giros, repeticiones, cambios de batería, movimientos de entrada/salida y áreas o individuos ocultos observados por el operador. No agregar automáticamente conteos de distintas capturas.

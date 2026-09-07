@@ -1,6 +1,6 @@
 # Constitución del POC de conteo bovino con DJI Mini 4K
 
-**Versión:** 0.2.0 · **Creada / actualizada:** 2026-09-06
+**Versión:** 0.3.0 · **Creada:** 2026-09-06 · **Actualizada:** 2026-09-07
 **Estado:** propuesta inicial para el POC; pendiente de validación operativa.
 **Alcance:** las especificaciones en `specs/` y su futura implementación. Se mantienen las reglas de investigación y publicación de `AGENTS.md`.
 
@@ -20,9 +20,9 @@ El resultado debe permitir volver al archivo y al instante o imagen de origen. L
 
 Las metas se fijarán antes de abrir el conjunto de prueba. Se separarán campañas de desarrollo, validación y prueba; fotogramas cercanos no se repartirán entre particiones. Se reportarán error automático, error revisado, cobertura, rechazos y tiempo humano por separado. La referencia no se construirá mirando las predicciones que luego se evalúan.
 
-## V. Mantener un POC acotado y usable sin conexión
+## V. Aprovechar energía e internet garantizados
 
-Un operador debe poder importar, procesar, revisar y exportar localmente después de la preparación inicial del entorno. La experiencia estará en español. Pesaje, identidad SNIG, lectura de caravanas, vuelos autónomos y certificación de existencias quedan fuera del POC.
+El usuario confirma electricidad permanente mediante baterías, generador o red, e internet mediante Starlink (2026-09-07). El POC puede depender de servicios en nube para importar, procesar, revisar y exportar; no se exige procesamiento sin conexión. Debe conservar progreso y evidencia, permitir reintentos sin duplicación y ofrecer un paquete descargable legible sin la aplicación. Los archivos en nube serán privados y el acceso autenticado. La experiencia estará en español. Pesaje, identidad SNIG, lectura de caravanas, vuelos autónomos y certificación de existencias quedan fuera del POC. La electricidad en tierra no modifica la autonomía de cada batería de vuelo.
 
 ## VI. Especificar resultados antes de elegir herramientas
 

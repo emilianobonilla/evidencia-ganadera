@@ -1,6 +1,6 @@
 # Contexto común y restricciones del DJI Mini 4K
 
-**Versión:** 0.2.0 · **Fecha de consulta:** 2026-09-06.
+**Versión:** 0.3.0 · **Fecha de consulta:** 2026-09-07.
 
 **Aclaración del usuario (2026-09-06):** el escenario del POC es corral o grupo reunido. El conteo principal usa una imagen de referencia con el grupo completo; la reconciliación entre vistas queda como extensión P2.
 
@@ -25,7 +25,8 @@ La [matriz oficial de compatibilidad SDK](https://repair.dji.com/help/content?cu
 ## Decisiones propuestas para el POC
 
 - Captura manual en DJI Fly con video original 4K a 30 fps o fotografías JPEG originales. Se elige una única imagen de referencia para cada conteo; el video conserva contexto y permite seleccionar un fotograma. No se exige DNG para la primera entrega.
-- Procesamiento posterior local. Preparar previamente aplicaciones, dependencias y modelo; el recorrido de importación a exportación debe funcionar sin internet.
+- Electricidad permanente mediante baterías, generador o red, e internet garantizado mediante Starlink, confirmados por el usuario el 2026-09-07. Se elimina el requisito de operación sin conexión y se recomienda procesamiento posterior en nube, con acceso privado y exportación descargable. La velocidad de subida y el tiempo total se medirán; la disponibilidad de internet queda resuelta.
+- El Mini 4K conserva su autonomía por batería: disponer de corriente en tierra permite recargar y sostener los equipos, pero no elimina cambios de batería ni convierte el vuelo en continuo.
 - Vista aproximadamente cenital y sin zoom digital. Calibrar altura, velocidad y exposición con imágenes del lugar antes de congelar el protocolo; no fijar una altura universal para todos los rodeos.
 - Encuadrar el corral o grupo completo, incluyendo sus límites, sin cortar animales. En el POC principal, el grupo constituye un único sector; los recortes para analizar la imagen son divisiones del mismo instante, no pasadas adicionales. Registrar giros, cortes y cambios de batería sin sumar sus conteos.
 - Registrar reserva de batería, duración operativa y condiciones reales con el piloto. Las decisiones de vuelo corresponden al piloto y al procedimiento aplicable al lugar; el software documenta la campaña.

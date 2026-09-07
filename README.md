@@ -14,7 +14,7 @@ El dossier público está disponible en [GitHub Pages](https://emilianobonilla.g
 - **Mercado:** comparación de soluciones y fichas de productos y proveedores.
 - **Tecnología:** arquitectura propuesta y análisis técnico.
 - **Supuestos y preguntas:** hipótesis pendientes y temas para validar en campo.
-- **POC con DJI Mini 4K:** [lista de especificaciones](specs/README.md) para contar bovinos en corral o grupo reunido y validar el resultado, estructuradas siguiendo spec-kit.
+- **POC con DJI Mini 4K:** [lista de especificaciones](specs/README.md) para contar bovinos en corral o grupo reunido y validar el resultado, estructuradas siguiendo spec-kit. Electricidad e internet por Starlink garantizados (7 sep 2026); consultar [arquitectura en nube y Mac mini](specs/arquitectura-recomendada.md) y [revisión documental](specs/revision-documental.md).
 
 ## Estructura
 

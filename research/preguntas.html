@@ -21,6 +21,7 @@
   </header>
 
   <main>
+    <div class="callout"><strong>POC Mini 4K · 7 sep 2026:</strong> electricidad permanente e internet por Starlink garantizados. Se recomienda procesamiento en nube; las alternativas offline de este dossier corresponden a otros despliegues. <a href="supuestos.html#s06">Ver supuesto actualizado</a>.</div>
     <section class="hero">
       <div>
         <p class="eyebrow">Documento 03 · Preguntas de investigación</p>
@@ -29,7 +30,7 @@
       </div>
       <aside class="meta-card">
         <dl>
-          <dt>Versión</dt><dd>0.6</dd>
+          <dt>Versión</dt><dd>0.7</dd>
           <dt>Preguntas</dt><dd>43</dd>
           <dt>Prioridad P0</dt><dd>19</dd>
           <dt>Respondidas</dt><dd>10</dd>
@@ -100,10 +101,10 @@
           </article>
 
           <article class="question" id="q06">
-            <div class="question__head"><div><span class="question__id">Q06 · CONTEXTO</span><h3>¿Qué conectividad y energía existen realmente en esos puntos?</h3></div><span class="tag tag--vendor">Parcial</span></div>
-            <p>Medir cobertura por operador, no responder sólo “hay señal”. Incluir 220 V, solar, sombra, seguridad y acceso vehicular.</p>
-            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Determina offline, sincronización y autonomía.</dd></div><div><dt>Cambia</dt><dd>Nube, edge, energía y mantenimiento.</dd></div><div><dt>Preguntar a</dt><dd>Operario; validar con medición.</dd></div></dl>
-            <div class="response"><div class="response__meta">Respuesta parcial · definición del proyecto · 23 ago 2026</div><p>Puede no existir internet ni corriente eléctrica. Para operaciones puntuales se podrían usar baterías con inversor o generadores.</p><p><strong>Lectura actual:</strong> la captura no puede depender de conexión; la energía transportable es aceptable para campañas puntuales, pero falta medir autonomía y logística por modalidad.</p></div>
+            <div class="question__head"><div><span class="question__id">Q06 · CONTEXTO</span><h3>¿Qué conectividad y energía están garantizadas?</h3></div><span class="tag tag--verified">Respondida para el POC</span></div>
+            <p>La disponibilidad está resuelta; medir velocidad efectiva de subida y dimensionar potencia suministrada para los equipos elegidos.</p>
+            <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Permite procesamiento remoto y simplifica el equipo de campo.</dd></div><div><dt>Cambia</dt><dd>Nube, almacenamiento y presupuesto por campaña.</dd></div><div><dt>Pendiente</dt><dd>Tiempo total aceptable y costo de servicio.</dd></div></dl>
+            <div class="response"><div class="response__meta">Respuesta actualizada · usuario · 7 sep 2026</div><p>Habrá corriente eléctrica siempre mediante baterías, generador o red. Internet estará garantizado mediante Starlink.</p><p><strong>Decisión derivada:</strong> se recomienda procesar en nube; la aplicación no tiene que funcionar sin conexión. El supuesto del 23 ago 2026 de posible ausencia de internet y corriente queda sustituido para este POC.</p></div>
           </article>
 
           <article class="question" id="q07">
@@ -234,6 +235,7 @@
             <div class="question__head"><div><span class="question__id">Q20 · LATENCIA</span><h3>¿Cuánto se puede esperar entre captura y resultado?</h3></div><span class="tag tag--vendor">P1</span></div>
             <p>Segundos para decidir una apartada; minutos para repetir una toma; horas o días para gestión.</p>
             <dl class="detail-grid"><div><dt>Por qué importa</dt><dd>Define nube vs. procesamiento local.</dd></div><div><dt>Cambia</dt><dd>Hardware, conectividad y experiencia.</dd></div><div><dt>Preguntar a</dt><dd>Responsable de cada caso de uso.</dd></div></dl>
+          <div class="response"><div class="response__meta">Actualización POC · 7 sep 2026</div><p>La nube es viable por S06. Queda por fijar el tiempo total aceptable, separando subida, cola, arranque, cómputo y revisión; no se reabre la disponibilidad de internet.</p></div>
           </article>
 
           <article class="question" id="q21">
@@ -374,6 +376,6 @@
     </div>
   </main>
 
-  <footer class="footer">Documento 03 · Preguntas · versión 0.6 · 10 respuestas registradas · <a href="analisis.html">volver al análisis</a></footer>
+  <footer class="footer">Documento 03 · Preguntas · versión 0.7 · 10 respuestas registradas · <a href="analisis.html">volver al análisis</a></footer>
 </body>
 </html>

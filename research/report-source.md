@@ -1,7 +1,7 @@
 # Mapa competitivo para Ganadería aumentada
 
 **Audiencia:** equipo fundador y de producto  
-**Versión:** 0.6 — dos vías separadas: fondos ganaderos y feedlot  
+**Versión:** 0.7 — actualización operativa del POC, 7 sep 2026; se conserva el corte de investigación de mercado
 **Fecha de corte:** 23 de agosto de 2026  
 **Geografía primaria:** Uruguay  
 **Geografía secundaria:** América Latina y soluciones globales aplicables a bovinos de carne/feedlot  
@@ -9,7 +9,7 @@
 
 ## Alcance tomado del proyecto
 
-Este informe usa como fuente de verdad interna `index.html`, `analisis.html`, `tecnologia.html`, `supuestos.html` y `preguntas.html`. El producto investigado no es una balanza aislada: busca unir conteo, identificación oficial, tendencia de peso, ubicación y evidencia visual en un evento auditable. El proyecto se organiza en dos vías documentadas por separado en `fondos.html` y `feedlot.html`: la verificación de existencias para fondos y fideicomisos es la prioridad comercial, y el feedlot aporta ingreso recurrente y el banco de pruebas técnico. La captura debe tolerar baja conectividad y la confianza debe quedar anclada en el dispositivo, no en la declaración del operador.
+Este informe usa como fuente de verdad interna `index.html`, `analisis.html`, `tecnologia.html`, `supuestos.html` y `preguntas.html`. El producto investigado no es una balanza aislada: busca unir conteo, identificación oficial, tendencia de peso, ubicación y evidencia visual en un evento auditable. El proyecto se organiza en dos vías documentadas por separado en `fondos.html` y `feedlot.html`: la verificación de existencias para fondos y fideicomisos es la prioridad comercial, y el feedlot aporta ingreso recurrente y el banco de pruebas técnico. Para el POC de conteo con Mini 4K, el usuario garantiza electricidad mediante baterías, generador o red e internet mediante Starlink (7 sep 2026): se recomienda procesamiento en nube y no se exige operación offline. Los escenarios de baja conectividad se conservan como alternativas para otros despliegues. La investigación de procedencia ligada al dispositivo corresponde al producto más amplio; el POC no certifica existencias ni autentica el origen mediante un hash.
 
 ## Supuestos de investigación
 

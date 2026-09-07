@@ -1,12 +1,14 @@
 # Especificaciones del POC: contar ganado con DJI Mini 4K
 
-**Versión:** 0.2.0 · **Fecha:** 2026-09-06 · **Estado:** escenario confirmado; especificaciones propuestas, sin implementación ni validación de campo.
+**Versión:** 0.3.0 · **Fecha:** 2026-09-07 · **Estado:** escenario confirmado; especificaciones propuestas, sin implementación ni validación de campo.
 
 ## Objetivo
 
 Comprobar si el DJI Mini 4K disponible permite obtener un conteo de bovinos útil y revisable en un **corral o grupo reunido**: captura manual, selección de una imagen que abarque el grupo, detección, revisión y exportación de evidencia. Se medirá por separado el conteo automático y el resultado corregido por una persona.
 
-**Escenario confirmado por el usuario:** «Corral o grupo reunido» (2026-09-06). Se propone captura de día, con el grupo completo en una misma imagen y los individuos distinguibles. El video permite elegir una imagen de referencia y revisar su contexto; sus conteos no se acumulan. Como escala exploratoria se mantienen 20–100 bovinos por campaña, pendiente de confirmar junto con la computadora y los responsables de la referencia independiente.
+**Escenario confirmado por el usuario:** «Corral o grupo reunido» (2026-09-06). Se propone captura de día, con el grupo completo en una misma imagen y los individuos distinguibles. El video permite elegir una imagen de referencia y revisar su contexto; sus conteos no se acumulan. Como escala exploratoria se mantienen 20–100 bovinos por campaña, pendiente de confirmar junto con el dispositivo cliente y los responsables de la referencia independiente.
+
+**Actualización del 2026-09-07:** electricidad e internet por Starlink garantizados. Se recomienda procesamiento en nube y se retira la exigencia de procesamiento local sin conexión. Ver [arquitectura, Mac mini y costos](arquitectura-recomendada.md) y [revisión de todos los documentos](revision-documental.md).
 
 ## Lista de specs y orden propuesto
 
@@ -44,7 +46,7 @@ Se sigue la [guía oficial](https://github.github.com/spec-kit/quickstart.html) 
 
 La [constitución](../.specify/memory/constitution.md), estas siete `spec.md` y sus checklists cubren la definición inicial. Para cada feature: aclarar sus supuestos (`speckit.clarify`), generar el diseño (`speckit.plan`), desglosar tareas (`speckit.tasks`), revisar consistencia (`speckit.analyze`) e implementar (`speckit.implement`). El plan debe incorporar las pruebas funcionales y de campo exigidas por la spec.
 
-**Estado de herramientas:** estos documentos fueron redactados siguiendo la guía; no se ejecutó la CLI ni se instalaron comandos, plantillas o skills de spec-kit. Los nombres anteriores describen el flujo posterior, no comandos disponibles en este checkout. La integración de Codex determina la forma de invocarlos. No hay `plan.md` ni `tasks.md` porque este entregable es la lista desarrollada de especificaciones, previa a elegir arquitectura.
+**Estado de herramientas:** estos documentos fueron redactados siguiendo la guía; no se ejecutó la CLI ni se instalaron comandos, plantillas o skills de spec-kit. Los nombres anteriores describen el flujo posterior, no comandos disponibles en este checkout. La integración de Codex determina la forma de invocarlos. No hay `plan.md` ni `tasks.md` porque este entregable es la lista desarrollada de especificaciones, con una recomendación de arquitectura separada que deberá concretarse en esos planes.
 
 ## Decisiones pendientes y supuestos
 
@@ -52,8 +54,10 @@ La [constitución](../.specify/memory/constitution.md), estas siete `spec.md` y 
 |---|---|---|
 | Escenario | Corral o grupo reunido, confirmado por el usuario | Resuelto el 2026-09-06 |
 | Escala y encuadre | 20–100 bovinos como hipótesis; grupo completo en una imagen con individuos distinguibles | Al preparar la primera campaña |
-| Equipo de proceso | Una computadora local; hardware y sistema operativo por registrar | Antes del plan de 002 y 004 |
+| Electricidad | Permanente mediante baterías, generador o red | Confirmado por el usuario el 2026-09-07 |
+| Internet | Garantizado mediante Starlink | Confirmado por el usuario el 2026-09-07; medir velocidad de subida |
+| Equipo de proceso | Nube recomendada; cliente con navegador y acceso a microSD | Fijar entorno y presupuesto en los planes de 002 y 004 |
 | Referencia | Conteo físico independiente en ventana de movimiento controlado | Antes de capturar la prueba de 003 |
-| Rendimiento esperado | Procesar hasta 10 minutos de material en hasta 30 minutos | Medir en 004 sobre el equipo registrado |
+| Rendimiento esperado | Hasta 30 minutos de cómputo para hasta 10 minutos de video; subida, cola y arranque separados | Medir en 004; fijar además tiempo total y costo máximos en 007 |
 
 La [revisión documental](checklists/consistencia.md) distingue integridad de las specs de la futura validación del producto. Las [restricciones y fuentes](contexto-mini-4k.md) son compartidas por las siete specs.
